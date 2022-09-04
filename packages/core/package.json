@@ -1,0 +1,30 @@
+{
+  "name": "@gazer/core",
+  "private": true,
+  "version": "0.0.1",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/gazer.umd.cjs",
+  "module": "./dist/gazer.js",
+  "types": "./index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/gazer.js",
+      "require": "./dist/gazer.umd.cjs"
+    },
+    "./umd": "./dist/gazer.umd.cjs"
+  },
+  "scripts": {
+    "start": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "typescript": "^4.6.4",
+    "vite": "^3.1.0",
+    "vite-tsconfig-paths": "^3.5.0"
+  }
+}

@@ -1,0 +1,23 @@
+body{
+  margin:0;
+}
+.section{
+  border: solid 1px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 100vh;
+  flex-direction: column;
+  overflow: auto;
+  box-sizing: border-box;
+}
+.eyes {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  border: solid 2px #000;
+  width: 60px;
+  height: 100px;
+  border-radius: 50%;
+}
