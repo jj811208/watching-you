@@ -155,19 +155,20 @@ class Gazer {
   private checkObserverDomVisibility = (): boolean => {
     if (!this.observerDom) return false;
     const rect = this.observerDom.getBoundingClientRect();
-    const translate = getDomTranslateProp(this.observerDom);
-    const top = rect.top - translate.y;
-    const left = rect.left - translate.x;
-    const bottom = rect.bottom - translate.y;
-    const right = rect.right - translate.x;
+    const boundaryY = this.powerY * 2;
+    const boundaryX = this.powerX * 2;
+    const top = rect.top - boundaryY;
+    const left = rect.left - boundaryX;
+    const bottom = rect.bottom + boundaryY;
+    const right = rect.right + boundaryX;
     return (
-      top - this.powerY <=
+      top <=
         (window.innerHeight ||
           document.documentElement.clientHeight) &&
-      left - this.powerX <=
+      left <=
         (window.innerWidth || document.documentElement.clientWidth) &&
-      bottom + this.powerY >= 0 &&
-      right + this.powerX >= 0
+      bottom >= 0 &&
+      right >= 0
     );
   };
 
