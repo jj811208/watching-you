@@ -28,57 +28,6 @@ interface GazerProps {
   render?: GazerRender;
 }
 
-// Don't trust the parameters given by the user
-// function checkDomParameterValid(
-//   selectorOrDom: unknown,
-//   target: string,
-// ) {
-//   if (isHtmlElement(selectorOrDom)) return;
-//   if (selectorOrDom === undefined) {
-//     log(`The ${target} parameter is require.`, 'error');
-//     return;
-//   }
-//   if (typeof selectorOrDom !== 'string') {
-//     log(
-//       `The ${target} must be a html element or a selector.`,
-//       'error',
-//     );
-//     return;
-//   }
-//   const dom = document.querySelector<HTMLElement>(selectorOrDom);
-//   if (!dom) log(`The ${target} is not found.`, 'error');
-// }
-// function checkObservedValid(observedProps: {
-//   observed?: unknown;
-//   observedType?: unknown;
-// }) {
-//   const { observedType, observed } = observedProps;
-//   if (observedType === 'mouse') {
-//     if (observed)
-//       log(
-//         `If the observedType parameter is mouse, then the observed parameter is not necessary.`,
-//         'warn',
-//       );
-//     return;
-//   }
-//   if (observedType === 'input') {
-//     if (!observed)
-//       log(
-//         `If the observedType parameter is input, then the observed parameter is require.`,
-//         'error',
-//       );
-//     return;
-//   }
-//   if (observedType === 'dom' || observedType === undefined) {
-//     if (!observed)
-//       log(
-//         `If the observedType parameter is dom or empty, then the observed parameter is require.`,
-//         'error',
-//       );
-//     return;
-//   }
-// }
-
 function isObservedMouse(observedProps?: {
   observed?: unknown;
   observedType?: unknown;
@@ -126,10 +75,8 @@ class Gazer {
   private rafId: number | null = null;
 
   constructor(props: GazerProps) {
+    // TODO: Don't trust the parameters given by the user
     const { observer, power, render, ...observedProps } = props;
-    // checkDomParameterValid(observer, 'observer');
-    // checkObservedValid(observedProps);
-
     this.setCustomRender(render);
     this.setObserver(observer);
     this.setObserved(observedProps);
