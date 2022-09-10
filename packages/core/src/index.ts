@@ -295,6 +295,7 @@ class Gazer {
   };
 
   public start = (): void => {
+    this.cancel();
     if (this.observedType === 'mouse') {
       window.addEventListener(
         'mousemove',
