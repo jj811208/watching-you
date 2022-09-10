@@ -11,6 +11,7 @@
   "scripts": {
     "prepare": "husky install",
     "pre-commit": "lint-staged",
+    "build": "yarn workspaces foreach run build",
     "format": "prettier --write '**/**.{ts,tsx,js,cjs,mjs}'",
     "tsc": "tsc --noEmit",
     "lint": "eslint '**/*.{ts,tsx,js,cjs,mjs}' --max-warnings=0"
