@@ -45,7 +45,7 @@ function App() {
     >
       <Section>
         <Title>跟著滑鼠跑</Title>
-        {new Array(5).fill('').map((_, i) => (
+        {new Array(4).fill('').map((_, i) => (
           <div
             key={i}
             style={{
@@ -53,10 +53,10 @@ function App() {
               gap: '12px',
             }}
           >
-            {new Array(10).fill('').map((__, j) => (
+            {new Array(5).fill('').map((__, j) => (
               <div key={j} style={commonCss}>
                 <Gazer power={commonPower}>
-                  <div style={{ color: '#000' }}>O</div>
+                  <div>O</div>
                 </Gazer>
               </div>
             ))}
@@ -71,7 +71,7 @@ function App() {
             observed=".hot-girl"
             observedType="dom"
           >
-            <div style={{ color: '#000' }}>O</div>
+            <div>O</div>
           </Gazer>
         </div>
         <div className="hot-girl">引人注意</div>
@@ -84,7 +84,7 @@ function App() {
             observed=".hot-girl2"
             observedType="dom"
           >
-            <div style={{ color: '#000' }}>O</div>
+            <div>O</div>
           </Gazer>
         </div>
         <div className="hot-girl2">引人注意</div>
@@ -97,7 +97,7 @@ function App() {
             observed=".hello-input"
             observedType="input"
           >
-            <div style={{ color: '#000' }}>O</div>
+            <div style={{ transition: 'transform .1s' }}>O</div>
           </Gazer>
         </div>
         <input className="hello-input" />
