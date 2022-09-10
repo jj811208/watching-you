@@ -201,6 +201,25 @@ class Gazer {
     document.querySelector('body')?.append(this.fakeInputDom); //XXX: Maybe we should let the users decide?
   };
 
+  private checkObserverDomVisibility = (): boolean => {
+    if (!this.observerDom) return false;
+    const rect = this.observerDom.getBoundingClientRect();
+    const translate = getDomTranslateProp(this.observerDom);
+    const top = rect.top - translate.y;
+    const left = rect.left - translate.x;
+    const bottom = rect.bottom - translate.y;
+    const right = rect.right - translate.x;
+    return (
+      top - this.powerY <=
+        (window.innerHeight ||
+          document.documentElement.clientHeight) &&
+      left - this.powerX <=
+        (window.innerWidth || document.documentElement.clientWidth) &&
+      bottom + this.powerY >= 0 &&
+      right + this.powerX >= 0
+    );
+  };
+
   private calculateDelta = (): Coordinate => {
     if (!this.observerPosition) return { x: 0, y: 0 };
     if (!this.observedPosition) return { x: 0, y: 0 };
@@ -332,14 +351,16 @@ class Gazer {
       );
     }
     const nextRaf = () => {
-      this.updateObserverPosition();
-      if (this.observedType === 'dom') {
-        this.updateObservedPositionViaDom();
+      if (this.checkObserverDomVisibility()) {
+        this.updateObserverPosition();
+        if (this.observedType === 'dom') {
+          this.updateObservedPositionViaDom();
+        }
+        if (this.observedType === 'input') {
+          this.updateObservedPositionViaInput();
+        }
+        this.render();
       }
-      if (this.observedType === 'input') {
-        this.updateObservedPositionViaInput();
-      }
-      this.render();
       this.rafId = requestAnimationFrame(nextRaf);
     };
     nextRaf();
