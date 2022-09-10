@@ -1,7 +1,7 @@
 {
   "name": "@gazer/react",
   "version": "0.0.1",
-  "license": "MIT",
+  "license": "ISC",
   "type": "module",
   "main": "./dist/react-gazer.umd.cjs",
   "module": "./dist/react-gazer.js",
@@ -41,5 +41,9 @@
   "peerDependencies": {
     "react": "^16.8.0 || ^17 || ^18",
     "react-dom": "^16.8.0 || ^17 || ^18"
-  }
+  },
+  "repository": "https://github.com/jj811208/gazer",
+  "homepage": "https://github.com/jj811208/gazer",
+  "bugs": "https://github.com/jj811208/gazer/issues",
+  "author": "Ryan Chu <jj811208@gmail.com> (https://github.com/jj811208)"
 }

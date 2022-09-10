@@ -1,7 +1,7 @@
 {
   "name": "@gazer/core",
   "version": "0.0.1",
-  "license": "MIT",
+  "license": "ISC",
   "type": "module",
   "main": "./dist/gazer.umd.cjs",
   "module": "./dist/gazer.js",
@@ -30,5 +30,9 @@
     "vite": "^3.1.0",
     "vite-plugin-dts": "^1.4.1",
     "vite-tsconfig-paths": "^3.5.0"
-  }
+  },
+  "repository": "https://github.com/jj811208/gazer",
+  "homepage": "https://github.com/jj811208/gazer",
+  "bugs": "https://github.com/jj811208/gazer/issues",
+  "author": "Ryan Chu <jj811208@gmail.com> (https://github.com/jj811208)"
 }

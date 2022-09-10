@@ -2,12 +2,10 @@
   "name": "@gazer/monorepo",
   "version": "0.0.1",
   "private": true,
-  "license": "MIT",
-  "workspaces": {
-    "packages": [
-      "packages/*"
-    ]
-  },
+  "license": "ISC",
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
     "prepare": "husky install",
     "pre-commit": "lint-staged",
@@ -32,5 +30,9 @@
       "prettier --write"
     ]
   },
+  "repository": "https://github.com/jj811208/gazer",
+  "homepage": "https://github.com/jj811208/gazer",
+  "bugs": "https://github.com/jj811208/gazer/issues",
+  "author": "Ryan Chu <jj811208@gmail.com> (https://github.com/jj811208)",
   "packageManager": "yarn@3.2.3"
 }
