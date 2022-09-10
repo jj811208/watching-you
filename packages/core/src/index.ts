@@ -1,6 +1,7 @@
 import { Coordinate } from './type/Coordinate';
 import getDomTranslateProp from './util/getDomTranslateProp';
 import log from './util/log';
+import { round } from './util/math';
 import { isHtmlElement } from './util/type';
 
 interface GazerObservedMouse {
@@ -87,21 +88,24 @@ class Gazer {
     if (this.observerDom === null) return;
     const rect = this.observerDom.getBoundingClientRect();
     const translate = getDomTranslateProp(this.observerDom);
-    const x = rect.left - translate.x + rect.width / 2;
-    const y = rect.top - translate.y + rect.height / 2;
+    const x = round(rect.left - translate.x + rect.width / 2);
+    const y = round(rect.top - translate.y + rect.height / 2);
     this.observerPosition = { x, y };
   };
 
   private updateObservedPositionViaMouse = (e: MouseEvent): void => {
-    this.observedPosition = { x: e.clientX, y: e.clientY };
+    this.observedPosition = {
+      x: round(e.clientX),
+      y: round(e.clientY),
+    };
   };
 
   private updateObservedPositionViaDom = (): void => {
     if (!this.observedDom) return;
     const rect = this.observedDom.getBoundingClientRect();
     // XXX: Only return the center position of the dom now
-    const x = rect.left + rect.width / 2;
-    const y = rect.top + rect.height / 2;
+    const x = round(rect.left + rect.width / 2);
+    const y = round(rect.top + rect.height / 2);
     this.observedPosition = { x, y };
   };
 
@@ -122,8 +126,8 @@ class Gazer {
 
     const inputRect = this.observedDom.getBoundingClientRect();
     const fakeInputRect = this.fakeInputDom.getBoundingClientRect();
-    const x = inputRect.left + fakeInputRect.width;
-    const y = inputRect.top + fakeInputRect.height;
+    const x = round(inputRect.left + fakeInputRect.width);
+    const y = round(inputRect.top + fakeInputRect.height);
     this.observedPosition = { x, y };
   };
 
@@ -191,8 +195,8 @@ class Gazer {
         ),
       ) * symbolY;
     return {
-      x: resultX,
-      y: resultY,
+      x: round(resultX),
+      y: round(resultY),
     };
   };
 
