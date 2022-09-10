@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# github page
+!packages/website/dist 
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -37,5 +40,4 @@ dist-ssr
 /packages/vue/*
 /packages/test-cra/*
 /packages/test-vite/*
-/packages/website/*
 /ignore-folder/*
