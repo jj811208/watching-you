@@ -117,6 +117,8 @@ class Gazer {
   private observedDom: HTMLElement | null = null;
   private observerPosition: Coordinate | null = null;
   private observedPosition: Coordinate | null = null;
+  private lastRenderingObserverPosition: Coordinate | null = null;
+  private lastRenderingObservedPosition: Coordinate | null = null;
   private observedType: GazerObservedType = DEFAULT_OBSERVED_TYPE;
   private powerX = DEFAULT_POWER;
   private powerY = DEFAULT_POWER;
@@ -233,13 +235,40 @@ class Gazer {
     this.observerDom.style.transform = `translate(${delta.x}px,${delta.y}px)`;
   };
 
+  private needRender = (): boolean => {
+    if (
+      this.lastRenderingObserverPosition?.x !==
+      this.observerPosition?.x
+    )
+      return true;
+    if (
+      this.lastRenderingObserverPosition?.y !==
+      this.observerPosition?.y
+    )
+      return true;
+    if (
+      this.lastRenderingObservedPosition?.x !==
+      this.observedPosition?.x
+    )
+      return true;
+    if (
+      this.lastRenderingObservedPosition?.y !==
+      this.observedPosition?.y
+    )
+      return true;
+    return false;
+  };
+
   private render = (): void => {
+    if (!this.needRender()) return;
     const delta = this.calculateDelta();
     if (this.customRender) {
       this.customRender(delta);
     } else {
       this.defaultRender(delta);
     }
+    this.lastRenderingObserverPosition = this.observerPosition;
+    this.lastRenderingObservedPosition = this.observedPosition;
   };
 
   public setObserver = (observer?: GazerObserver): void => {
