@@ -324,6 +324,10 @@ class Gazer {
       'mousemove',
       this.updateObservedPositionViaMouse,
     );
+    if (this.fakeInputDom) {
+      this.fakeInputDom.remove();
+      this.fakeInputDom = null;
+    }
   };
 }
 
