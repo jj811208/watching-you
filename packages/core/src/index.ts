@@ -134,7 +134,7 @@ class Gazer {
   private createFakeInput = (): void => {
     if (!this.observedDom) return;
     this.fakeInputDom = document.createElement('div');
-    const { font, letterSpacing, padding } = getComputedStyle(
+    const { font, letterSpacing, padding, width } = getComputedStyle(
       this.observedDom,
     );
     this.fakeInputDom.setAttribute(
@@ -145,6 +145,7 @@ class Gazer {
           pointer-events: none;
           display: inline-block;
           font: ${font};
+          max-width: ${width};
           letter-spacing: ${letterSpacing};
           padding: ${padding};
         `,
