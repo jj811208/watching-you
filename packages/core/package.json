@@ -1,22 +1,22 @@
 {
-  "name": "gazer",
-  "version": "0.0.1",
+  "name": "watching-you",
+  "version": "0.0.3",
   "license": "ISC",
   "type": "module",
-  "main": "./dist/gazer.umd.cjs",
-  "module": "./dist/gazer.js",
+  "main": "./dist/watching-you.umd.cjs",
+  "module": "./dist/watching-you.js",
   "types": "./dist/index.d.ts",
   "files": [
     "dist"
   ],
   "exports": {
     ".": {
-      "import": "./dist/gazer.js",
-      "require": "./dist/gazer.umd.cjs"
+      "import": "./dist/watching-you.js",
+      "require": "./dist/watching-you.umd.cjs"
     }
   },
   "keywords": [
-    "gazer",
+    "watching-you",
     "javascript",
     "animation"
   ],
@@ -31,8 +31,8 @@
     "vite-plugin-dts": "^1.4.1",
     "vite-tsconfig-paths": "^3.5.0"
   },
-  "repository": "https://github.com/jj811208/gazer",
-  "homepage": "https://github.com/jj811208/gazer",
-  "bugs": "https://github.com/jj811208/gazer/issues",
+  "repository": "https://github.com/jj811208/watching-you",
+  "homepage": "https://github.com/jj811208/watching-you",
+  "bugs": "https://github.com/jj811208/watching-you/issues",
   "author": "Ryan Chu <jj811208@gmail.com> (https://github.com/jj811208)"
 }

@@ -10,8 +10,8 @@ export default defineConfig({
   build: {
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
-      name: 'react-gazer',
-      fileName: 'react-gazer',
+      name: 'react-watching-you',
+      fileName: 'react-watching-you',
     },
     rollupOptions: {
       external: ['react', 'react-dom'],

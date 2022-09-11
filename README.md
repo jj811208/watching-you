@@ -1,12 +1,12 @@
-# Gazer
+# Watching-you
 
-Gazer is a javascript library for building animations that track anything on DOM.
+Watching-you is a javascript library for building animations that track anything on DOM.
 
 <!-- [![demo](https://xxx.gif)](xxxs) -->
 
 ## Demos
 
-<a href="https://jj811208.github.io/gazer" target="_blank">Simple Demo Site</a>
+<a href="https://jj811208.github.io/watching-you" target="_blank">Simple Demo Site</a>
 
 ## Quickstart
 
@@ -38,4 +38,4 @@ If anyone wants to contribute, please open a issue and let me know, I'd be happy
 
 ## License
 
-[ISC](https://github.com/jj811208/gazer/blob/main/LICENSE.md)
+[ISC](https://github.com/jj811208/watching-you/blob/main/LICENSE.md)

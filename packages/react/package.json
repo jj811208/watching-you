@@ -1,22 +1,22 @@
 {
-  "name": "react-gazer",
+  "name": "react-watching-you",
   "version": "0.0.1",
   "license": "ISC",
   "type": "module",
-  "main": "./dist/react-gazer.umd.cjs",
-  "module": "./dist/react-gazer.js",
+  "main": "./dist/react-watching-you.umd.cjs",
+  "module": "./dist/react-watching-you.js",
   "types": "./dist/react/src/index.d.ts",
   "files": [
     "dist"
   ],
   "exports": {
     ".": {
-      "import": "./dist/react-gazer.js",
-      "require": "./dist/react-gazer.umd.cjs"
+      "import": "./dist/react-watching-you.js",
+      "require": "./dist/react-watching-you.umd.cjs"
     }
   },
   "keywords": [
-    "gazer",
+    "watching-you",
     "javascript",
     "animation",
     "react",
@@ -42,8 +42,8 @@
     "react": "^16.8.0 || ^17 || ^18",
     "react-dom": "^16.8.0 || ^17 || ^18"
   },
-  "repository": "https://github.com/jj811208/gazer",
-  "homepage": "https://github.com/jj811208/gazer",
-  "bugs": "https://github.com/jj811208/gazer/issues",
+  "repository": "https://github.com/jj811208/watching-you",
+  "homepage": "https://github.com/jj811208/watching-you",
+  "bugs": "https://github.com/jj811208/watching-you/issues",
   "author": "Ryan Chu <jj811208@gmail.com> (https://github.com/jj811208)"
 }

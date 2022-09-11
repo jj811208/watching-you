@@ -3594,32 +3594,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"gazer-repo@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "gazer-repo@workspace:."
-  dependencies:
-    "@types/node": ^18.7.16
-    eslint: ^8.23.0
-    eslint-config-react-app: ^7.0.1
-    eslint-plugin-import: ^2.26.0
-    eslint-plugin-react: ^7.31.4
-    husky: 8.0.1
-    lint-staged: 13.0.3
-    prettier: ^2.2.1
-  languageName: unknown
-  linkType: soft
-
-"gazer@workspace:packages/core":
-  version: 0.0.0-use.local
-  resolution: "gazer@workspace:packages/core"
-  dependencies:
-    typescript: ^4.6.4
-    vite: ^3.1.0
-    vite-plugin-dts: ^1.4.1
-    vite-tsconfig-paths: ^3.5.0
-  languageName: unknown
-  linkType: soft
-
 "gensync@npm:^1.0.0-beta.2":
   version: 1.0.0-beta.2
   resolution: "gensync@npm:1.0.0-beta.2"
@@ -5022,9 +4996,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-gazer@workspace:packages/react":
+"react-is@npm:^16.13.1":
+  version: 16.13.1
+  resolution: "react-is@npm:16.13.1"
+  checksum: f7a19ac3496de32ca9ae12aa030f00f14a3d45374f1ceca0af707c831b2a6098ef0d6bdae51bd437b0a306d7f01d4677fcc8de7c0d331eb47ad0f46130e53c5f
+  languageName: node
+  linkType: hard
+
+"react-refresh@npm:^0.14.0":
+  version: 0.14.0
+  resolution: "react-refresh@npm:0.14.0"
+  checksum: dc69fa8c993df512f42dd0f1b604978ae89bd747c0ed5ec595c0cc50d535fb2696619ccd98ae28775cc01d0a7c146a532f0f7fb81dc22e1977c242a4912312f4
+  languageName: node
+  linkType: hard
+
+"react-watching-you@workspace:packages/react":
   version: 0.0.0-use.local
-  resolution: "react-gazer@workspace:packages/react"
+  resolution: "react-watching-you@workspace:packages/react"
   dependencies:
     "@types/react": ^18.0.17
     "@types/react-dom": ^18.0.6
@@ -5040,20 +5028,6 @@ __metadata:
     react-dom: ^16.8.0 || ^17 || ^18
   languageName: unknown
   linkType: soft
-
-"react-is@npm:^16.13.1":
-  version: 16.13.1
-  resolution: "react-is@npm:16.13.1"
-  checksum: f7a19ac3496de32ca9ae12aa030f00f14a3d45374f1ceca0af707c831b2a6098ef0d6bdae51bd437b0a306d7f01d4677fcc8de7c0d331eb47ad0f46130e53c5f
-  languageName: node
-  linkType: hard
-
-"react-refresh@npm:^0.14.0":
-  version: 0.14.0
-  resolution: "react-refresh@npm:0.14.0"
-  checksum: dc69fa8c993df512f42dd0f1b604978ae89bd747c0ed5ec595c0cc50d535fb2696619ccd98ae28775cc01d0a7c146a532f0f7fb81dc22e1977c242a4912312f4
-  languageName: node
-  linkType: hard
 
 "react@npm:^18.2.0":
   version: 18.2.0
@@ -6031,9 +6005,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"website-gazer@workspace:packages/website":
+"watching-you-repo@workspace:.":
   version: 0.0.0-use.local
-  resolution: "website-gazer@workspace:packages/website"
+  resolution: "watching-you-repo@workspace:."
+  dependencies:
+    "@types/node": ^18.7.16
+    eslint: ^8.23.0
+    eslint-config-react-app: ^7.0.1
+    eslint-plugin-import: ^2.26.0
+    eslint-plugin-react: ^7.31.4
+    husky: 8.0.1
+    lint-staged: 13.0.3
+    prettier: ^2.2.1
+  languageName: unknown
+  linkType: soft
+
+"watching-you-website@workspace:packages/website":
+  version: 0.0.0-use.local
+  resolution: "watching-you-website@workspace:packages/website"
   dependencies:
     "@types/react": ^18.0.17
     "@types/react-dom": ^18.0.6
@@ -6042,6 +6031,17 @@ __metadata:
     react-dom: ^18.2.0
     typescript: ^4.6.4
     vite: ^3.1.0
+    vite-tsconfig-paths: ^3.5.0
+  languageName: unknown
+  linkType: soft
+
+"watching-you@workspace:packages/core":
+  version: 0.0.0-use.local
+  resolution: "watching-you@workspace:packages/core"
+  dependencies:
+    typescript: ^4.6.4
+    vite: ^3.1.0
+    vite-plugin-dts: ^1.4.1
     vite-tsconfig-paths: ^3.5.0
   languageName: unknown
   linkType: soft
