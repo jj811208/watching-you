@@ -1,5 +1,5 @@
 {
-  "name": "@gazer/react",
+  "name": "react-gazer",
   "version": "0.0.1",
   "license": "ISC",
   "type": "module",
