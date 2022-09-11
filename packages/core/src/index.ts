@@ -140,15 +140,15 @@ class Gazer {
     this.fakeInputDom.setAttribute(
       'style',
       `
-          position: absolute;
-          opacity: 0;
-          pointer-events: none;
-          display: inline-block;
-          font: ${font};
-          max-width: ${width};
-          letter-spacing: ${letterSpacing};
-          padding: ${padding};
-        `,
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+        display: inline-block;
+        font: ${font};
+        max-width: ${width};
+        letter-spacing: ${letterSpacing};
+        padding: ${padding};
+      `,
     );
     document.querySelector('body')?.append(this.fakeInputDom); //XXX: Maybe we should let the users decide?
   };
