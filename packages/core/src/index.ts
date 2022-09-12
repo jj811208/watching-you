@@ -16,7 +16,14 @@ interface GazerObservedInput {
   observedType: 'input';
   observed: string | HTMLElement;
 }
-type GazerRender = (delta: Coordinate) => void;
+interface GazerRenderTransform {
+  translate: {
+    x: number;
+    y: number;
+  };
+  rotate: number;
+}
+type GazerRender = (transform: GazerRenderTransform) => void;
 type GazerObserver = string | HTMLElement;
 type GazerObserved = string | HTMLElement;
 type GazerObservedType = 'mouse' | 'dom' | 'input';
@@ -27,6 +34,8 @@ interface GazerProps {
   observedType?: GazerObservedType;
   power?: GazerPower;
   render?: GazerRender;
+  rotatable?: boolean;
+  movable?: boolean;
 }
 
 function isObservedMouse(observedProps?: {
@@ -60,6 +69,10 @@ function isObservedInput(observedProps?: {
 
 const DEFAULT_POWER = 50;
 const DEFAULT_OBSERVED_TYPE = 'mouse';
+const ORIGIN_TRANSFORM = {
+  translate: { x: 0, y: 0 },
+  rotate: 0,
+};
 
 class Gazer {
   private customRender: GazerRender | null = null;
@@ -69,6 +82,8 @@ class Gazer {
   private observedPosition: Coordinate | null = null;
   private lastRenderingObserverPosition: Coordinate | null = null;
   private lastRenderingObservedPosition: Coordinate | null = null;
+  private rotatable: boolean = true;
+  private movable: boolean = true;
   private observedType: GazerObservedType = DEFAULT_OBSERVED_TYPE;
   private powerX = DEFAULT_POWER;
   private powerY = DEFAULT_POWER;
@@ -77,11 +92,20 @@ class Gazer {
 
   constructor(props: GazerProps) {
     // TODO: Don't trust the parameters given by the user
-    const { observer, power, render, ...observedProps } = props;
+    const {
+      observer,
+      power,
+      rotatable,
+      movable,
+      render,
+      ...observedProps
+    } = props;
     this.setCustomRender(render);
     this.setObserver(observer);
     this.setObserved(observedProps);
     this.setPower(power);
+    this.setRotatable(rotatable);
+    this.setMovable(movable);
   }
 
   private updateObserverPosition = (): void => {
@@ -173,38 +197,41 @@ class Gazer {
     );
   };
 
-  private calculateDelta = (): Coordinate => {
-    if (!this.observerPosition) return { x: 0, y: 0 };
-    if (!this.observedPosition) return { x: 0, y: 0 };
+  private calculateTransform = (): Parameters<GazerRender>[0] => {
+    const result: Parameters<GazerRender>[0] = {
+      translate: { x: 0, y: 0 },
+      rotate: 0,
+    };
+    if (!this.observerPosition) return result;
+    if (!this.observedPosition) return result;
+    if (!this.movable && !this.rotatable) return result;
     const deltaX = this.observedPosition.x - this.observerPosition.x;
     const deltaY = this.observedPosition.y - this.observerPosition.y;
     const symbolX = deltaX >= 0 ? 1 : -1;
     const symbolY = deltaY >= 0 ? 1 : -1;
-    const distanceX = Math.abs(deltaX);
-    const distanceY = Math.abs(deltaY);
-    const resultX =
-      Math.min(
-        distanceX,
-        Math.abs(
-          Math.cos(Math.atan2(distanceY, distanceX)) * this.powerX,
-        ),
-      ) * symbolX;
-    const resultY =
-      Math.min(
-        distanceY,
-        Math.abs(
-          Math.sin(Math.atan2(distanceY, distanceX)) * this.powerY,
-        ),
-      ) * symbolY;
-    return {
-      x: round(resultX),
-      y: round(resultY),
-    };
+    if (this.movable) {
+      const distanceX = Math.abs(deltaX);
+      const distanceY = Math.abs(deltaY);
+      const radians = Math.atan2(distanceY, distanceX);
+      const translateX =
+        Math.min(distanceX, Math.cos(radians) * this.powerX) *
+        symbolX;
+      const translateY =
+        Math.min(distanceY, Math.sin(radians) * this.powerY) *
+        symbolY;
+      result.translate.x = round(translateX);
+      result.translate.y = round(translateY);
+    }
+    if (this.rotatable) {
+      const degrees = (Math.atan2(deltaY, deltaX) * 180) / Math.PI;
+      result.rotate = round(degrees + 90);
+    }
+    return result;
   };
 
-  private defaultRender: GazerRender = (delta) => {
+  private defaultRender: GazerRender = (transform) => {
     if (!this.observerDom) return;
-    this.observerDom.style.transform = `translate(${delta.x}px,${delta.y}px)`;
+    this.observerDom.style.transform = `translate(${transform.translate.x}px,${transform.translate.y}px) rotate(${transform.rotate}deg)`;
   };
 
   private needRender = (): boolean => {
@@ -233,11 +260,11 @@ class Gazer {
 
   private render = (): void => {
     if (!this.needRender()) return;
-    const delta = this.calculateDelta();
+    const transform = this.calculateTransform();
     if (this.customRender) {
-      this.customRender(delta);
+      this.customRender(transform);
     } else {
-      this.defaultRender(delta);
+      this.defaultRender(transform);
     }
     this.lastRenderingObserverPosition = this.observerPosition;
     this.lastRenderingObservedPosition = this.observedPosition;
@@ -249,6 +276,14 @@ class Gazer {
         ? observer
         : document.querySelector(observer);
     }
+  };
+
+  public setRotatable = (rotatable: boolean = true): void => {
+    this.rotatable = !!rotatable;
+  };
+
+  public setMovable = (movable: boolean = true): void => {
+    this.movable = !!movable;
   };
 
   public setObserved = (observedProps?: {
@@ -337,6 +372,7 @@ export type {
   GazerObservedMouse,
   GazerObservedDom,
   GazerObservedInput,
+  GazerRenderTransform,
   GazerRender,
   GazerObserver,
   GazerObserved,
