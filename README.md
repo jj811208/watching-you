@@ -36,7 +36,8 @@ Watching-you is a javascript library for building animations that watch anything
 
 - [Vanilla.js](https://github.com/jj811208/watching-you/tree/main/packages/core)
 - [React](https://github.com/jj811208/watching-you/tree/main/packages/react)
-- [Vue](https://github.com/jj811208/watching-you/blob/main/packages/vue)
+- Vue (Todo)
+<!-- - [Vue](https://github.com/jj811208/watching-you/blob/main/packages/vue) -->
 
 ## Contributions
 
