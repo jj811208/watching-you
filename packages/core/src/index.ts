@@ -360,7 +360,7 @@ class Gazer {
       'mousemove',
       this.updateObservedPositionViaMouse,
     );
-    if (this.observerDom) {
+    if (this.observerDom) { 
       if (this.customRender) {
         this.customRender(ORIGIN_TRANSFORM);
       } else {

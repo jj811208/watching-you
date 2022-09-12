@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect, useMemo } from 'react';
 import GazerBase, {
-  GazerCoordinate,
+  GazerRenderTransform,
   GazerProps as GazerPropsBase,
 } from '../../core/src/index';
 import { concatObject } from './util';
@@ -14,14 +14,17 @@ interface GazerReactHocProps extends GazerReactHookProps {
 }
 
 const useGazer = (props: GazerReactHookProps) => {
-  const { observed, observedType, power } = props;
+  const { observed, observedType, power, rotatable, movable } = props;
   const observerRef = useRef<any>(null);
-  const [delta, setDelta] = useState<GazerCoordinate>({ x: 0, y: 0 });
+  const [transform, setTransform] = useState<GazerRenderTransform>({
+    translate: { x: 0, y: 0 },
+    rotate: 0,
+  });
   const gazerRef = useRef(
     new GazerBase({
       ...props,
-      render: (delta) => {
-        setDelta(delta);
+      render: (newTransform) => {
+        setTransform(newTransform);
       },
     }),
   );
@@ -31,6 +34,12 @@ const useGazer = (props: GazerReactHookProps) => {
   useEffect(() => {
     gazerRef.current.setPower(power);
   }, [power]);
+  useEffect(() => {
+    gazerRef.current.setRotatable(rotatable);
+  }, [rotatable]);
+  useEffect(() => {
+    gazerRef.current.setMovable(movable);
+  }, [movable]);
   useEffect(() => {
     gazerRef.current.setObserver(observerRef.current || undefined);
   }, [gazerRef]);
@@ -42,11 +51,14 @@ const useGazer = (props: GazerReactHookProps) => {
     return {
       ref: observerRef,
       style: {
-        transform: `translate(${delta.x}px,${delta.y}px)`,
+        transform: `translate(${transform.translate.x}px,${transform.translate.y}px) rotate(${transform.rotate}deg)`,
       },
     };
-  }, [delta.x, delta.y]);
-
+  }, [
+    transform.translate.x,
+    transform.translate.y,
+    transform.rotate,
+  ]);
   return gazerObserverProps;
 };
 const Gazer: React.FC<GazerReactHocProps> = (props) => {
