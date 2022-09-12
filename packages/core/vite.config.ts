@@ -1,16 +1,17 @@
-import { defineConfig } from 'vite';
+import { defineConfig, mergeConfig } from 'vite';
 import { resolve } from 'path';
-import tsconfigPaths from 'vite-tsconfig-paths';
-import dts from 'vite-plugin-dts';
+import rootViteConfig from '../../vite.config';
 
 // https://vitejs.dev/config/
-export default defineConfig({
-  plugins: [tsconfigPaths(), dts()],
-  build: {
-    lib: {
-      entry: resolve(__dirname, 'src/index.ts'),
-      name: 'watching-you',
-      fileName: 'watching-you',
+export default mergeConfig(
+  rootViteConfig,
+  defineConfig({
+    build: {
+      lib: {
+        entry: resolve(__dirname, 'src/index.ts'),
+        name: 'watching-you',
+        fileName: 'watching-you',
+      },
     },
-  },
-});
+  }),
+);
