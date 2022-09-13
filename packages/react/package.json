@@ -32,7 +32,11 @@
     "@types/react-dom": "^18.0.6",
     "@vitejs/plugin-react": "^2.0.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "typescript": "^4.6.4",
+    "vite": "^3.1.0",
+    "vite-plugin-dts": "^1.4.1",
+    "vite-tsconfig-paths": "^3.5.0"
   },
   "peerDependencies": {
     "react": "^16.8.0 || ^17 || ^18",
