@@ -90,7 +90,7 @@ class Gazer {
   private fakeInputDom: HTMLElement | null = null;
   private rafId: number | null = null;
 
-  constructor(props: GazerProps) {
+  constructor(props: GazerProps = {}) {
     // TODO: Don't trust the parameters given by the user
     const {
       observer,
@@ -360,7 +360,7 @@ class Gazer {
       'mousemove',
       this.updateObservedPositionViaMouse,
     );
-    if (this.observerDom) { 
+    if (this.observerDom) {
       if (this.customRender) {
         this.customRender(ORIGIN_TRANSFORM);
       } else {
