@@ -77,11 +77,11 @@ const useGazer = (props: GazerReactHookProps) => {
     transform.translate.y,
     transform.rotate,
   ]);
-  return gazerObserverProps;
+  return [gazerObserverProps, gazerRef.current] as const;
 };
 const Gazer: React.FC<GazerReactHocProps> = (props) => {
   const { children, ...gazerProps } = props;
-  const gazerObserverProps = useGazer(gazerProps);
+  const [gazerObserverProps] = useGazer(gazerProps);
   if (!React.isValidElement(children)) return null;
   return React.cloneElement(
     children,
