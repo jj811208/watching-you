@@ -1,5 +1,5 @@
 import './App.css';
-import Gazer from '../../react/src/index';
+import WatchingYou from '../../react/src/index';
 
 const commonPower = {
   x: 22,
@@ -10,7 +10,7 @@ function App() {
   return (
     <div className="container">
       <div className="section">
-        <h2>Gaze your mouse</h2>
+        <h2>Watching your mouse</h2>
         <div className="section_content">
           {new Array(4).fill('').map((_, i) => (
             <div
@@ -22,9 +22,9 @@ function App() {
             >
               {new Array(5).fill('').map((__, j) => (
                 <div key={j} className="eye">
-                  <Gazer power={commonPower}>
-                    <div>O</div>
-                  </Gazer>
+                  <WatchingYou power={commonPower}>
+                    <div>1</div>
+                  </WatchingYou>
                 </div>
               ))}
             </div>
@@ -32,16 +32,16 @@ function App() {
         </div>
       </div>
       <div className="section">
-        <h2>Gaze a dom</h2>
+        <h2>Watching a dom</h2>
         <div className="section_content">
           <div className="eye">
-            <Gazer
+            <WatchingYou
               power={commonPower}
-              observed=".eye-catching"
-              observedType="dom"
+              target=".eye-catching"
+              targetType="dom"
             >
-              <div>O</div>
-            </Gazer>
+              <div>1</div>
+            </WatchingYou>
           </div>
           <div className="eye-catching">eye-catching</div>
         </div>
@@ -50,28 +50,28 @@ function App() {
         <h2>Everything is moving</h2>
         <div className="section_content">
           <div className="running-gazer eye">
-            <Gazer
+            <WatchingYou
               power={commonPower}
-              observed=".eye-catching2"
-              observedType="dom"
+              target=".eye-catching2"
+              targetType="dom"
             >
-              <div>O</div>
-            </Gazer>
+              <div>1</div>
+            </WatchingYou>
           </div>
           <div className="eye-catching2">eye-catching</div>
         </div>
       </div>
       <div className="section">
-        <h2>Gaze the input value</h2>
+        <h2>Watching the input value</h2>
         <div className="section_content">
           <div className="eye">
-            <Gazer
+            <WatchingYou
               power={commonPower}
-              observed=".hello-input"
-              observedType="input"
+              target=".hello-input"
+              targetType="input"
             >
-              <div className="transition">O</div>
-            </Gazer>
+              <div className="transition">1</div>
+            </WatchingYou>
           </div>
           <input className="hello-input" />
         </div>
