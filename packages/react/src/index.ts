@@ -1,36 +1,35 @@
 import React, { useRef, useState, useEffect, useMemo } from 'react';
-import GazerBase, {
-  GazerRenderTransform,
-  GazerProps as GazerPropsBase,
+import WatchingYouBase, {
+  WatchingYouRenderTransform,
+  WatchingYouOptions,
 } from '../../core/src/index';
 import { concatObject } from './util';
 
-type GazerReactHookProps = Omit<
-  GazerPropsBase,
-  'observer' | 'render'
-> & {
+interface WatchingYouReactHookProps
+  extends Omit<WatchingYouOptions, 'render'> {
   active?: boolean;
-};
-interface GazerReactHocProps extends GazerReactHookProps {
+}
+interface WatchingYouReactHocProps extends WatchingYouReactHookProps {
   children: React.ReactNode;
 }
 
-const useGazer = (props: GazerReactHookProps) => {
+const useWatchingYou = (props: WatchingYouReactHookProps) => {
   const {
-    observed,
-    observedType,
+    target,
+    targetType,
     power,
     rotatable,
     movable,
     active = true,
   } = props;
-  const observerRef = useRef<any>(null);
-  const [transform, setTransform] = useState<GazerRenderTransform>({
-    translate: { x: 0, y: 0 },
-    rotate: 0,
-  });
-  const gazerRef = useRef(
-    new GazerBase({
+  const watcherRef = useRef<any>(null);
+  const [transform, setTransform] =
+    useState<WatchingYouRenderTransform>({
+      translate: { x: 0, y: 0 },
+      rotate: 0,
+    });
+  const watchingYouRef = useRef(
+    new WatchingYouBase('', {
       ...props,
       render: (newTransform) => {
         setTransform(newTransform);
@@ -38,36 +37,39 @@ const useGazer = (props: GazerReactHookProps) => {
     }),
   );
   useEffect(() => {
-    gazerRef.current.setObserved({ observed, observedType });
-  }, [observed, observedType]);
+    watchingYouRef.current.setTarget({
+      target,
+      targetType,
+    });
+  }, [target, targetType]);
   useEffect(() => {
-    gazerRef.current.setPower(power);
+    watchingYouRef.current.setPower(power);
   }, [power]);
   useEffect(() => {
-    gazerRef.current.setRotatable(rotatable);
+    watchingYouRef.current.setRotatable(rotatable);
   }, [rotatable]);
   useEffect(() => {
-    gazerRef.current.setMovable(movable);
+    watchingYouRef.current.setMovable(movable);
   }, [movable]);
   useEffect(() => {
-    gazerRef.current.setObserver(observerRef.current || undefined);
-  }, [gazerRef]);
+    watchingYouRef.current.setWatcher(watcherRef.current || undefined);
+  }, [watchingYouRef]);
   useEffect(() => {
     if (active) {
-      gazerRef.current.start();
-      return gazerRef.current.cancel;
+      watchingYouRef.current.start();
+      return watchingYouRef.current.cancel;
     } else {
-      gazerRef.current.cancel();
+      watchingYouRef.current.cancel();
       return;
     }
   }, [active]);
   useEffect(() => {
-    gazerRef.current.start();
-    return gazerRef.current.cancel;
+    watchingYouRef.current.start();
+    return watchingYouRef.current.cancel;
   }, []);
-  const gazerObserverProps = useMemo(() => {
+  const watchingYouWatcherProps = useMemo(() => {
     return {
-      ref: observerRef,
+      ref: watcherRef,
       style: {
         transform: `translate(${transform.translate.x}px,${transform.translate.y}px) rotate(${transform.rotate}deg)`,
       },
@@ -77,23 +79,23 @@ const useGazer = (props: GazerReactHookProps) => {
     transform.translate.y,
     transform.rotate,
   ]);
-  return [gazerObserverProps, gazerRef.current] as const;
+  return [watchingYouWatcherProps, watchingYouRef.current] as const;
 };
-const Gazer: React.FC<GazerReactHocProps> = (props) => {
-  const { children, ...gazerProps } = props;
-  const [gazerObserverProps] = useGazer(gazerProps);
+const WatchingYou: React.FC<WatchingYouReactHocProps> = (props) => {
+  const { children, ...watchingYouProps } = props;
+  const [watchingYouWatcherProps] = useWatchingYou(watchingYouProps);
   if (!React.isValidElement(children)) return null;
   return React.cloneElement(
     children,
     concatObject(children.props, {
-      ref: gazerObserverProps.ref,
+      ref: watchingYouWatcherProps.ref,
       style: concatObject(
         children?.props?.style,
-        gazerObserverProps.style,
+        watchingYouWatcherProps.style,
       ),
     }),
   );
 };
 
-export default React.memo(Gazer);
-export { useGazer };
+export default React.memo(WatchingYou);
+export { useWatchingYou };
