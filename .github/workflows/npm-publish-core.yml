@@ -7,19 +7,18 @@ on:
   workflow_dispatch:
 
 jobs:
-  #  build:
-  #    runs-on: ubuntu-latest
-  #    steps:
-  #      - uses: actions/checkout@v3
-  #      - uses: actions/setup-node@v3
-  #        with:
-  #          node-version: 16
-  #      - run: cd packages/core
-  #      - run: yarn install --immutables
-  #      - run: yarn test
+   test:
+     runs-on: ubuntu-latest
+     steps:
+       - uses: actions/checkout@v3
+       - uses: actions/setup-node@v3
+         with:
+           node-version: 16
+       - run: yarn install --immutables
+       - run: yarn test
 
   publish:
-    #    needs: build
+    needs: build
     runs-on: ubuntu-latest
     permissions:
       contents: read
