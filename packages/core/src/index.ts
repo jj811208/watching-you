@@ -2,71 +2,35 @@ import { Coordinate } from './type/Coordinate';
 import getDomTranslateProp from './util/getDomTranslateProp';
 import log from './util/log';
 import { round } from './util/math';
+import {
+  isTargetDom,
+  isTargetInput,
+  isTargetMouse,
+} from './util/target';
 import { isHtmlElement } from './util/type';
 
-interface GazerObservedMouse {
-  observedType?: 'mouse';
-  observed?: undefined;
-}
-interface GazerObservedDom {
-  observedType?: 'dom';
-  observed: string | HTMLElement;
-}
-interface GazerObservedInput {
-  observedType: 'input';
-  observed: string | HTMLElement;
-}
-interface GazerRenderTransform {
+interface WatchingYouRenderTransform {
   translate: {
     x: number;
     y: number;
   };
   rotate: number;
 }
-type GazerRender = (transform: GazerRenderTransform) => void;
-type GazerObserver = string | HTMLElement;
-type GazerObserved = string | HTMLElement;
-type GazerObservedType = 'mouse' | 'dom' | 'input';
-type GazerPower = number | { x?: number; y?: number };
-interface GazerProps {
-  observer?: GazerObserver;
-  observed?: GazerObserved;
-  observedType?: GazerObservedType;
-  power?: GazerPower;
-  render?: GazerRender;
+type WatchingYouRender = (
+  transform: WatchingYouRenderTransform,
+) => void;
+type WatchingYouWatcher = string | HTMLElement;
+type WatchingYouTarget = string | HTMLElement;
+type WatchingYouTargetType = 'mouse' | 'dom' | 'input';
+type WatchingYouPower = number | { x?: number; y?: number };
+interface WatchingYouOptions {
+  target?: WatchingYouTarget;
+  targetType?: WatchingYouTargetType;
+  power?: WatchingYouPower;
+  render?: WatchingYouRender;
   rotatable?: boolean;
   movable?: boolean;
 }
-
-function isObservedMouse(observedProps?: {
-  observed?: unknown;
-  observedType?: unknown;
-}): observedProps is GazerObservedMouse {
-  return (
-    !observedProps ||
-    observedProps.observedType === 'mouse' ||
-    (!observedProps.observedType && !observedProps.observed)
-  );
-}
-function isObservedDom(observedProps?: {
-  observed?: unknown;
-  observedType?: unknown;
-}): observedProps is GazerObservedDom {
-  if (!observedProps) return false;
-  return (
-    observedProps.observedType === 'dom' ||
-    (!observedProps.observedType && !!observedProps.observed)
-  );
-}
-function isObservedInput(observedProps?: {
-  observed?: unknown;
-  observedType?: unknown;
-}): observedProps is GazerObservedInput {
-  if (!observedProps) return false;
-  // if(!observed) log(`If the observedType parameter is input, then the observed must be a input`,'warn');
-  return observedProps.observedType === 'input';
-}
-
 const DEFAULT_POWER = 50;
 const DEFAULT_OBSERVED_TYPE = 'mouse';
 const ORIGIN_TRANSFORM = {
@@ -74,92 +38,89 @@ const ORIGIN_TRANSFORM = {
   rotate: 0,
 };
 
-class Gazer {
-  #customRender: GazerRender | null = null;
-  #observerDom: HTMLElement | null = null;
-  #observedDom: HTMLElement | null = null;
-  #observerPosition: Coordinate | null = null;
-  #observedPosition: Coordinate | null = null;
-  #lastRenderingObserverPosition: Coordinate | null = null;
-  #lastRenderingObservedPosition: Coordinate | null = null;
+class WatchingYou {
+  #customRender: WatchingYouRender | null = null;
+  #watcherDom: HTMLElement | null = null;
+  #targetDom: HTMLElement | null = null;
+  #watcherPosition: Coordinate | null = null;
+  #targetPosition: Coordinate | null = null;
+  #lastRenderingWatcherPosition: Coordinate | null = null;
+  #lastRenderingTargetPosition: Coordinate | null = null;
   #rotatable: boolean = true;
   #movable: boolean = true;
-  #observedType: GazerObservedType = DEFAULT_OBSERVED_TYPE;
+  #targetType: WatchingYouTargetType = DEFAULT_OBSERVED_TYPE;
   #powerX = DEFAULT_POWER;
   #powerY = DEFAULT_POWER;
   #fakeInputDom: HTMLElement | null = null;
   #rafId: number | null = null;
 
-  constructor(props: GazerProps = {}) {
+  constructor(
+    watcher?: WatchingYouWatcher,
+    options: WatchingYouOptions = {},
+  ) {
     // TODO: Don't trust the parameters given by the user
-    const {
-      observer,
-      power,
-      rotatable,
-      movable,
-      render,
-      ...observedProps
-    } = props;
+    const { power, rotatable, movable, render, ...targetProps } =
+      options;
     this.setCustomRender(render);
-    this.setObserver(observer);
-    this.setObserved(observedProps);
+    this.setWatcher(watcher);
+    this.setTarget(targetProps);
     this.setPower(power);
     this.setRotatable(rotatable);
     this.setMovable(movable);
   }
 
-  #updateObserverPosition = (): void => {
-    if (this.#observerDom === null) return;
-    const rect = this.#observerDom.getBoundingClientRect();
-    const translate = getDomTranslateProp(this.#observerDom);
+  #updateWatcherPosition = (): void => {
+    if (this.#watcherDom === null) return;
+    const rect = this.#watcherDom.getBoundingClientRect();
+    const translate = getDomTranslateProp(this.#watcherDom);
     const x = round(rect.left - translate.x + rect.width / 2);
     const y = round(rect.top - translate.y + rect.height / 2);
-    this.#observerPosition = { x, y };
+    this.#watcherPosition = { x, y };
   };
 
-  #updateObservedPositionViaMouse = (e: MouseEvent): void => {
-    this.#observedPosition = {
+  #updateWatchPositionViaMouse = (e: MouseEvent): void => {
+    this.#targetPosition = {
       x: round(e.clientX),
       y: round(e.clientY),
     };
   };
 
-  #updateObservedPositionViaDom = (): void => {
-    if (!this.#observedDom) return;
-    const rect = this.#observedDom.getBoundingClientRect();
+  #updateWatchPositionViaDom = (): void => {
+    if (!this.#targetDom) return;
+    const rect = this.#targetDom.getBoundingClientRect();
     // XXX: Only return the center position of the dom now
     const x = round(rect.left + rect.width / 2);
     const y = round(rect.top + rect.height / 2);
-    this.#observedPosition = { x, y };
+    this.#targetPosition = { x, y };
   };
 
-  #updateObservedPositionViaInput = (): void => {
-    if (!this.#observedDom) return;
+  #updateWatchPositionViaInput = (): void => {
+    if (!this.#targetDom) return;
     if (!this.#fakeInputDom) {
       this.#createFakeInput();
       return;
     }
-    const thisObservedDom = this.#observedDom as HTMLInputElement;
-    if (this.#fakeInputDom.innerText !== thisObservedDom.value)
-      this.#fakeInputDom.innerText = thisObservedDom.value;
+    const thisWatchDom = this.#targetDom as HTMLInputElement;
+    if (this.#fakeInputDom.innerText !== thisWatchDom.value)
+      this.#fakeInputDom.innerText = thisWatchDom.value;
 
-    if (thisObservedDom.value === '') {
-      this.#observedPosition = null;
+    if (thisWatchDom.value === '') {
+      this.#targetPosition = null;
       return;
     }
 
-    const inputRect = this.#observedDom.getBoundingClientRect();
+    const inputRect = this.#targetDom.getBoundingClientRect();
     const fakeInputRect = this.#fakeInputDom.getBoundingClientRect();
     const x = round(inputRect.left + fakeInputRect.width);
     const y = round(inputRect.top + fakeInputRect.height);
-    this.#observedPosition = { x, y };
+    this.#targetPosition = { x, y };
   };
 
   #createFakeInput = (): void => {
-    if (!this.#observedDom) return;
+    if (!this.#targetDom) return;
     this.#fakeInputDom = document.createElement('div');
     const { font, letterSpacing, padding, width } = getComputedStyle(
-      this.#observedDom,
+      this.#targetDom,
     );
     this.#fakeInputDom.setAttribute(
       'style',
@@ -177,9 +138,9 @@ class Gazer {
     document.querySelector('body')?.append(this.#fakeInputDom); //XXX: Maybe we should let the users decide?
   };
 
-  #checkObserverDomVisibility = (): boolean => {
-    if (!this.#observerDom) return false;
-    const rect = this.#observerDom.getBoundingClientRect();
+  #checkWatcherDomVisibility = (): boolean => {
+    if (!this.#watcherDom) return false;
+    const rect = this.#watcherDom.getBoundingClientRect();
     const boundaryY = this.#powerY * 2;
     const boundaryX = this.#powerX * 2;
     const top = rect.top - boundaryY;
@@ -197,18 +158,16 @@ class Gazer {
     );
   };
 
-  #calculateTransform = (): Parameters<GazerRender>[0] => {
-    const result: Parameters<GazerRender>[0] = {
+  #calculateTransform = (): Parameters<WatchingYouRender>[0] => {
+    const result: Parameters<WatchingYouRender>[0] = {
       translate: { x: 0, y: 0 },
       rotate: 0,
     };
-    if (!this.#observerPosition) return result;
-    if (!this.#observedPosition) return result;
+    if (!this.#watcherPosition) return result;
+    if (!this.#targetPosition) return result;
     if (!this.#movable && !this.#rotatable) return result;
-    const deltaX =
-      this.#observedPosition.x - this.#observerPosition.x;
-    const deltaY =
-      this.#observedPosition.y - this.#observerPosition.y;
+    const deltaX = this.#targetPosition.x - this.#watcherPosition.x;
+    const deltaY = this.#targetPosition.y - this.#watcherPosition.y;
 
     const symbolX = deltaX >= 0 ? 1 : -1;
     const symbolY = deltaY >= 0 ? 1 : -1;
@@ -232,30 +191,28 @@ class Gazer {
     return result;
   };
 
-  #defaultRender: GazerRender = (transform) => {
-    if (!this.#observerDom) return;
-    this.#observerDom.style.transform = `translate(${transform.translate.x}px,${transform.translate.y}px) rotate(${transform.rotate}deg)`;
+  #defaultRender: WatchingYouRender = (transform) => {
+    if (!this.#watcherDom) return;
+    this.#watcherDom.style.transform = `translate(${transform.translate.x}px,${transform.translate.y}px) rotate(${transform.rotate}deg)`;
   };
 
   #needRender = (): boolean => {
     if (
-      this.#lastRenderingObserverPosition?.x !==
-      this.#observerPosition?.x
+      this.#lastRenderingWatcherPosition?.x !==
+      this.#watcherPosition?.x
     )
       return true;
     if (
-      this.#lastRenderingObserverPosition?.y !==
-      this.#observerPosition?.y
+      this.#lastRenderingWatcherPosition?.y !==
+      this.#watcherPosition?.y
     )
       return true;
     if (
-      this.#lastRenderingObservedPosition?.x !==
-      this.#observedPosition?.x
+      this.#lastRenderingTargetPosition?.x !== this.#targetPosition?.x
     )
       return true;
     if (
-      this.#lastRenderingObservedPosition?.y !==
-      this.#observedPosition?.y
+      this.#lastRenderingTargetPosition?.y !== this.#targetPosition?.y
     )
       return true;
     return false;
@@ -269,15 +226,15 @@ class Gazer {
     } else {
       this.#defaultRender(transform);
     }
-    this.#lastRenderingObserverPosition = this.#observerPosition;
-    this.#lastRenderingObservedPosition = this.#observedPosition;
+    this.#lastRenderingWatcherPosition = this.#watcherPosition;
+    this.#lastRenderingTargetPosition = this.#targetPosition;
   };
 
-  setObserver = (observer?: GazerObserver): void => {
-    if (observer) {
-      this.#observerDom = isHtmlElement(observer)
-        ? observer
-        : document.querySelector(observer);
+  setWatcher = (watcher?: WatchingYouWatcher): void => {
+    if (watcher) {
+      this.#watcherDom = isHtmlElement(watcher)
+        ? watcher
+        : document.querySelector(watcher);
     }
   };
 
@@ -289,39 +246,39 @@ class Gazer {
     this.#movable = !!movable;
   };
 
-  setObserved = (observedProps?: {
-    observed?: GazerObserved;
-    observedType?: GazerObservedType;
+  setTarget = (targetProps?: {
+    target?: WatchingYouTarget;
+    targetType?: WatchingYouTargetType;
   }): void => {
-    if (isObservedMouse(observedProps)) {
-      this.#observedType = 'mouse';
-      this.#observedDom = null;
-    } else if (isObservedDom(observedProps)) {
-      const { observed } = observedProps;
-      this.#observedType = 'dom';
-      this.#observedDom = isHtmlElement(observed)
-        ? observed
-        : document.querySelector(observed);
-    } else if (isObservedInput(observedProps)) {
-      const { observed } = observedProps;
-      this.#observedType = 'input';
-      this.#observedDom = isHtmlElement(observed)
-        ? observed
-        : document.querySelector(observed);
+    if (isTargetMouse(targetProps)) {
+      this.#targetType = 'mouse';
+      this.#targetDom = null;
+    } else if (isTargetDom(targetProps)) {
+      const { target } = targetProps;
+      this.#targetType = 'dom';
+      this.#targetDom = isHtmlElement(target)
+        ? target
+        : document.querySelector(target);
+    } else if (isTargetInput(targetProps)) {
+      const { target } = targetProps;
+      this.#targetType = 'input';
+      this.#targetDom = isHtmlElement(target)
+        ? target
+        : document.querySelector(target);
     } else {
       // @ts-ignore: static type checking, prevent human error
-      const x: never = observedProps;
-      log(`Unexpected observed: ${JSON.stringify(x)}`, 'error');
+      const x: never = targetProps;
+      log(`Unexpected target: ${JSON.stringify(x)}`, 'error');
     }
   };
 
-  setCustomRender = (render?: GazerRender): void => {
+  setCustomRender = (render?: WatchingYouRender): void => {
     if (render) {
       this.#customRender = render;
     }
   };
 
-  setPower = (power?: GazerPower) => {
+  setPower = (power?: WatchingYouPower) => {
     if (power !== undefined) {
       if (typeof power === 'number') {
         this.#powerX = power;
@@ -335,20 +292,20 @@ class Gazer {
 
   start = (): void => {
     this.cancel();
-    if (this.#observedType === 'mouse') {
+    if (this.#targetType === 'mouse') {
       window.addEventListener(
         'mousemove',
-        this.#updateObservedPositionViaMouse,
+        this.#updateWatchPositionViaMouse,
       );
     }
     const nextRaf = () => {
-      if (this.#checkObserverDomVisibility()) {
-        this.#updateObserverPosition();
-        if (this.#observedType === 'dom') {
-          this.#updateObservedPositionViaDom();
+      if (this.#checkWatcherDomVisibility()) {
+        this.#updateWatcherPosition();
+        if (this.#targetType === 'dom') {
+          this.#updateWatchPositionViaDom();
         }
-        if (this.#observedType === 'input') {
-          this.#updateObservedPositionViaInput();
+        if (this.#targetType === 'input') {
+          this.#updateWatchPositionViaInput();
         }
         this.#render();
       }
@@ -361,9 +318,9 @@ class Gazer {
     cancelAnimationFrame(this.#rafId || 0);
     window.removeEventListener(
       'mousemove',
-      this.#updateObservedPositionViaMouse,
+      this.#updateWatchPositionViaMouse,
     );
-    if (this.#observerDom) {
+    if (this.#watcherDom) {
       if (this.#customRender) {
         this.#customRender(ORIGIN_TRANSFORM);
       } else {
@@ -377,17 +334,14 @@ class Gazer {
   };
 }
 
-export default Gazer;
+export default WatchingYou;
 export type {
-  GazerObservedMouse,
-  GazerObservedDom,
-  GazerObservedInput,
-  GazerRenderTransform,
-  GazerRender,
-  GazerObserver,
-  GazerObserved,
-  GazerObservedType,
-  GazerPower,
-  Coordinate as GazerCoordinate,
-  GazerProps,
+  WatchingYouRenderTransform,
+  WatchingYouRender,
+  WatchingYouWatcher,
+  WatchingYouTarget,
+  WatchingYouTargetType,
+  WatchingYouPower,
+  Coordinate as WatchingYouCoordinate,
+  WatchingYouOptions,
 };
