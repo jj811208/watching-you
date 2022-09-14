@@ -205,8 +205,11 @@ class Gazer {
     if (!this.#observerPosition) return result;
     if (!this.#observedPosition) return result;
     if (!this.#movable && !this.#rotatable) return result;
-    const deltaX = this.#observedPosition.x - this.#observerPosition.x;
-    const deltaY = this.#observedPosition.y - this.#observerPosition.y;
+    const deltaX =
+      this.#observedPosition.x - this.#observerPosition.x;
+    const deltaY =
+      this.#observedPosition.y - this.#observerPosition.y;
+
     const symbolX = deltaX >= 0 ? 1 : -1;
     const symbolY = deltaY >= 0 ? 1 : -1;
     if (this.#movable) {
