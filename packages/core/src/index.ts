@@ -144,18 +144,23 @@ class WatchingYou {
     const boundaryY = this.#powerY * 2;
     const boundaryX = this.#powerX * 2;
     const top = rect.top - boundaryY;
-    const left = rect.left - boundaryX;
+    // early return, saving efficiency
+    if (
+      top >
+      (window.innerHeight || document.documentElement.clientHeight)
+    )
+      return false;
     const bottom = rect.bottom + boundaryY;
+    if (bottom < 0) return false;
+    const left = rect.left - boundaryX;
+    if (
+      left >
+      (window.innerWidth || document.documentElement.clientWidth)
+    )
+      return false;
     const right = rect.right + boundaryX;
-    return (
-      top <=
-        (window.innerHeight ||
-          document.documentElement.clientHeight) &&
-      left <=
-        (window.innerWidth || document.documentElement.clientWidth) &&
-      bottom >= 0 &&
-      right >= 0
-    );
+    if (right < 0) return false;
+    return true;
   };
 
   #calculateTransform = (): Parameters<WatchingYouRender>[0] => {
