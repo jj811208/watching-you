@@ -1,6 +1,6 @@
 {
   "name": "watching-you",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "license": "ISC",
   "type": "module",
   "main": "./dist/watching-you.umd.cjs",
