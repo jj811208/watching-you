@@ -1,6 +1,6 @@
 // the `domTransform` format we get from our test environment is different from the browser's format, which is a compatibility writing method
 const splitRegex = /px\) rotate\(|translate\(|deg\)|px,/;
-function getDomTranslateProp(dom: HTMLElement) {
+function getDomTranslateProp(dom: Element) {
   const domTransform = getComputedStyle(dom).transform;
   if (domTransform === 'none') return { x: 0, y: 0 };
   if (domTransform.includes('translate')) {

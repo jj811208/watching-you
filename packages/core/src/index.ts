@@ -19,8 +19,8 @@ interface WatchingYouRenderTransform {
 type WatchingYouRender = (
   transform: WatchingYouRenderTransform,
 ) => void;
-type WatchingYouWatcher = string | HTMLElement;
-type WatchingYouTarget = string | HTMLElement;
+type WatchingYouWatcher = string | Element;
+type WatchingYouTarget = string | Element;
 type WatchingYouTargetType = 'mouse' | 'dom' | 'input';
 type WatchingYouPower = number | { x?: number; y?: number };
 interface WatchingYouOptions {
@@ -154,9 +154,11 @@ class WatchingYou {
   #checkWatcherDomVisibility = (): boolean => {
     if (!this.#watcherDom) return false;
     const rect = this.#watcherDom.getBoundingClientRect();
+    // not exact, but very efficient
     const boundaryY = this.#powerY * 2;
     const boundaryX = this.#powerX * 2;
     const top = rect.top - boundaryY;
+
     // early return, saving efficiency
     if (
       top >
@@ -236,7 +238,6 @@ class WatchingYou {
   };
 
   #render = (): void => {
-    if (!this.#needRender()) return;
     const transform = this.#calculateTransform();
     if (this.#customRender) {
       this.#customRender(transform);
@@ -248,10 +249,12 @@ class WatchingYou {
   };
 
   setWatcher = (watcher?: WatchingYouWatcher): void => {
-    if (watcher) {
-      this.#watcherDom = isHtmlElement(watcher)
-        ? watcher
-        : document.querySelector(watcher);
+    if (isHtmlElement(watcher)) {
+      this.#watcherDom = watcher;
+    } else if (typeof watcher === 'string') {
+      this.#watcherDom = document.querySelector(watcher);
+    } else {
+      log(`Unexpected watcher: ${JSON.stringify(watcher)}`, 'warn');
     }
   };
 
@@ -286,18 +289,18 @@ class WatchingYou {
         ? target
         : document.querySelector(target);
     } else {
-      // @ts-ignore: static type checking, prevent human error
-      const x: never = targetProps;
-      log(`Unexpected target: ${JSON.stringify(x)}`, 'error');
+      log(
+        `Unexpected target: ${JSON.stringify(targetProps)}`,
+        'warn',
+      );
     }
-
     if (this.#targetType === 'mouse' && this.#rafId !== null) {
       WatchingYou.#mouseObserverCount++;
     }
   };
 
   setCustomRender = (render?: WatchingYouRender): void => {
-    if (render) {
+    if (render !== undefined) {
       this.#customRender = render;
     }
   };
@@ -315,7 +318,7 @@ class WatchingYou {
   };
 
   start = (): void => {
-    this.cancel();
+    if (this.#rafId !== null) return;
     if (this.#targetType === 'mouse') {
       if (WatchingYou.#mouseObserverCount === 0) {
         window.addEventListener(
@@ -334,16 +337,18 @@ class WatchingYou {
         if (this.#targetType === 'input') {
           this.#updateWatchPositionViaInput();
         }
-        this.#render();
+        if (this.#needRender()) {
+          this.#render();
+        }
       }
       this.#rafId = requestAnimationFrame(nextRaf);
     };
     nextRaf();
   };
 
-  cancel = (): void => {
+  stop = (): void => {
     if (this.#rafId === null) return;
-    if (this.#targetType === 'mouse' && this.#rafId !== null) {
+    if (this.#targetType === 'mouse') {
       WatchingYou.#mouseObserverCount--;
     }
     if (WatchingYou.#mouseObserverCount === 0) {

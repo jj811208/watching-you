@@ -13,7 +13,7 @@ interface WatchingYouReactHocProps extends WatchingYouReactHookProps {
   children: React.ReactNode;
 }
 
-const useWatchingYou = (props: WatchingYouReactHookProps) => {
+const useWatchingYou = (props: WatchingYouReactHookProps = {}) => {
   const {
     target,
     targetType,
@@ -22,7 +22,7 @@ const useWatchingYou = (props: WatchingYouReactHookProps) => {
     movable,
     active = true,
   } = props;
-  const watcherRef = useRef<any>(null);
+  const watcherRef = useRef(null);
   const [transform, setTransform] =
     useState<WatchingYouRenderTransform>({
       translate: { x: 0, y: 0 },
@@ -52,20 +52,22 @@ const useWatchingYou = (props: WatchingYouReactHookProps) => {
     watchingYouRef.current.setMovable(movable);
   }, [movable]);
   useEffect(() => {
-    watchingYouRef.current.setWatcher(watcherRef.current || undefined);
+    watchingYouRef.current.setWatcher(
+      watcherRef.current || undefined,
+    );
   }, [watchingYouRef]);
   useEffect(() => {
     if (active) {
       watchingYouRef.current.start();
-      return watchingYouRef.current.cancel;
+      return watchingYouRef.current.stop;
     } else {
-      watchingYouRef.current.cancel();
+      watchingYouRef.current.stop();
       return;
     }
   }, [active]);
   useEffect(() => {
     watchingYouRef.current.start();
-    return watchingYouRef.current.cancel;
+    return watchingYouRef.current.stop;
   }, []);
   const watchingYouWatcherProps = useMemo(() => {
     return {
