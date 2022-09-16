@@ -39,11 +39,20 @@ const ORIGIN_TRANSFORM = {
 };
 
 class WatchingYou {
+  static #mousePosition: Coordinate | null = null;
+  static #mouseObserverCount: number = 0;
+  static #updateWatchPositionViaMouse = (e: MouseEvent): void => {
+    WatchingYou.#mousePosition = {
+      x: round(e.clientX),
+      y: round(e.clientY),
+    };
+  };
+
   #customRender: WatchingYouRender | null = null;
   #watcherDom: HTMLElement | null = null;
   #targetDom: HTMLElement | null = null;
   #watcherPosition: Coordinate | null = null;
-  #targetPosition: Coordinate | null = null;
+  #_targetPosition: Coordinate | null = null;
   #lastRenderingWatcherPosition: Coordinate | null = null;
   #lastRenderingTargetPosition: Coordinate | null = null;
   #rotatable: boolean = true;
@@ -53,6 +62,17 @@ class WatchingYou {
   #powerY = DEFAULT_POWER;
   #fakeInputDom: HTMLElement | null = null;
   #rafId: number | null = null;
+
+  get #targetPosition() {
+    if (this.#targetType === 'mouse')
+      return WatchingYou.#mousePosition;
+    return this.#_targetPosition;
+  }
+  set #targetPosition(newPosition) {
+    if (this.#targetType === 'mouse')
+      WatchingYou.#mousePosition = newPosition;
+    this.#_targetPosition = newPosition;
+  }
 
   constructor(
     watcher?: WatchingYouWatcher,
@@ -76,13 +96,6 @@ class WatchingYou {
     const x = round(rect.left - translate.x + rect.width / 2);
     const y = round(rect.top - translate.y + rect.height / 2);
     this.#watcherPosition = { x, y };
-  };
-
-  #updateWatchPositionViaMouse = (e: MouseEvent): void => {
-    this.#targetPosition = {
-      x: round(e.clientX),
-      y: round(e.clientY),
-    };
   };
 
   #updateWatchPositionViaDom = (): void => {
@@ -173,7 +186,6 @@ class WatchingYou {
     if (!this.#movable && !this.#rotatable) return result;
     const deltaX = this.#targetPosition.x - this.#watcherPosition.x;
     const deltaY = this.#targetPosition.y - this.#watcherPosition.y;
-
     const symbolX = deltaX >= 0 ? 1 : -1;
     const symbolY = deltaY >= 0 ? 1 : -1;
     if (this.#movable) {
@@ -255,6 +267,9 @@ class WatchingYou {
     target?: WatchingYouTarget;
     targetType?: WatchingYouTargetType;
   }): void => {
+    if (this.#targetType === 'mouse' && this.#rafId !== null) {
+      WatchingYou.#mouseObserverCount--;
+    }
     if (isTargetMouse(targetProps)) {
       this.#targetType = 'mouse';
       this.#targetDom = null;
@@ -274,6 +289,10 @@ class WatchingYou {
       // @ts-ignore: static type checking, prevent human error
       const x: never = targetProps;
       log(`Unexpected target: ${JSON.stringify(x)}`, 'error');
+    }
+
+    if (this.#targetType === 'mouse' && this.#rafId !== null) {
+      WatchingYou.#mouseObserverCount++;
     }
   };
 
@@ -298,10 +317,13 @@ class WatchingYou {
   start = (): void => {
     this.cancel();
     if (this.#targetType === 'mouse') {
-      window.addEventListener(
-        'mousemove',
-        this.#updateWatchPositionViaMouse,
-      );
+      if (WatchingYou.#mouseObserverCount === 0) {
+        window.addEventListener(
+          'mousemove',
+          WatchingYou.#updateWatchPositionViaMouse,
+        );
+      }
+      WatchingYou.#mouseObserverCount++;
     }
     const nextRaf = () => {
       if (this.#checkWatcherDomVisibility()) {
@@ -320,11 +342,19 @@ class WatchingYou {
   };
 
   cancel = (): void => {
+    if (this.#rafId === null) return;
+    if (this.#targetType === 'mouse' && this.#rafId !== null) {
+      WatchingYou.#mouseObserverCount--;
+    }
+    if (WatchingYou.#mouseObserverCount === 0) {
+      window.removeEventListener(
+        'mousemove',
+        WatchingYou.#updateWatchPositionViaMouse,
+      );
+    }
+
     cancelAnimationFrame(this.#rafId || 0);
-    window.removeEventListener(
-      'mousemove',
-      this.#updateWatchPositionViaMouse,
-    );
+    this.#rafId = null;
     if (this.#watcherDom) {
       if (this.#customRender) {
         this.#customRender(ORIGIN_TRANSFORM);
