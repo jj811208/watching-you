@@ -59,6 +59,10 @@
   animation-fill-mode: forwards;
 }
 
+.hello-textarea{
+  resize: none;
+}
+
 @keyframes run {
   0% {
     transform: translate(0, 0);

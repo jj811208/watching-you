@@ -70,10 +70,27 @@ function App() {
               target=".hello-input"
               targetType="input"
             >
-              <div className="transition">O</div>
+              <div className="transition">1</div>
             </WatchingYou>
           </div>
-          <input className="hello-input" />
+          <input style={{
+            padding:"24px"
+          }} className="hello-input" />
+        </div>
+      </div>
+      <div className="section">
+        <h2>Watching the textarea value</h2>
+        <div className="section_content">
+          <div className="eye">
+            <WatchingYou
+              power={commonPower}
+              target=".hello-textarea"
+              targetType="input"
+            >
+              <div className="transition">1</div>
+            </WatchingYou>
+          </div>
+          <textarea className="hello-textarea" />
         </div>
       </div>
     </div>

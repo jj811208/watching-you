@@ -119,43 +119,80 @@ class WatchingYou {
     if (!this.#targetDom) return;
     if (!this.#fakeInputDom) {
       this.#createFakeInput();
-      return;
     }
+    const fakeInputDom = this.#fakeInputDom!;
     const thisWatchDom = this.#targetDom as HTMLInputElement;
-    if (this.#fakeInputDom.innerText !== thisWatchDom.value)
-      this.#fakeInputDom.innerText = thisWatchDom.value;
 
+    if (fakeInputDom.innerText !== thisWatchDom.value) {
+      fakeInputDom.innerText = thisWatchDom.value;
+    }
     if (thisWatchDom.value === '') {
       this.#targetPosition = null;
       return;
     }
 
+    const {
+      font,
+      letterSpacing,
+      width,
+      lineHeight,
+      paddingLeft,
+    } = getComputedStyle(this.#targetDom);
+    const paddingLeftNumber = Number(paddingLeft.slice(0, -2));
+    const targetTagName = this.#targetDom.tagName;
+    const isInput = targetTagName === 'INPUT';
+    const isTextarea = targetTagName === 'TEXTAREA';
     const inputRect = this.#targetDom.getBoundingClientRect();
-    const fakeInputRect = this.#fakeInputDom.getBoundingClientRect();
-    const x = round(inputRect.left + fakeInputRect.width);
-    const y = round(inputRect.top + fakeInputRect.height);
-    this.#targetPosition = { x, y };
+    const fakeInputRect = fakeInputDom.getBoundingClientRect();
+    if (isInput) {
+      fakeInputDom.setAttribute(
+        'style',
+        `
+          position: absolute;
+          opacity: 0;
+          top: 0;
+          left: -100%;
+          pointer-events: none;
+          display: inline-block;
+          line-height: ${lineHeight};
+          font: ${font};
+          max-width: ${width};
+          letter-spacing: ${letterSpacing};
+          `,
+      );
+      const x = round(
+        inputRect.left + fakeInputRect.width + paddingLeftNumber,
+      );
+      const y = round(inputRect.top + fakeInputRect.height / 2);
+      this.#targetPosition = { x, y };
+    }
+    if (isTextarea) {
+      fakeInputDom.setAttribute(
+        'style',
+        `
+          position: absolute;
+          opacity: 0;
+          top: 0;
+          left: -100%;
+          pointer-events: none;
+          display: inline-block;
+          word-break: keep-all;
+          line-height: ${lineHeight};
+          font: ${font};
+          letter-spacing: ${letterSpacing};
+        `,
+      );
+      const widthNumber = Number(width.slice(0, -2));
+      const fakeWidth = fakeInputRect.width % widthNumber;
+      const x = round(inputRect.left + fakeWidth + paddingLeftNumber);
+      const y = round(inputRect.top + inputRect.height / 2);
+      this.#targetPosition = { x, y };
+    }
   };
 
   #createFakeInput = (): void => {
     if (!this.#targetDom) return;
     this.#fakeInputDom = document.createElement('div');
-    const { font, letterSpacing, padding, width } = getComputedStyle(
-      this.#targetDom,
-    );
-    this.#fakeInputDom.setAttribute(
-      'style',
-      `
-        position: absolute;
-        opacity: 0;
-        pointer-events: none;
-        display: inline-block;
-        font: ${font};
-        max-width: ${width};
-        letter-spacing: ${letterSpacing};
-        padding: ${padding};
-      `,
-    );
     document.querySelector('body')?.append(this.#fakeInputDom); //XXX: Maybe we should let the users decide?
   };
 
