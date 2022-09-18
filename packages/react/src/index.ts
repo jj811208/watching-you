@@ -29,7 +29,7 @@ const useWatchingYou = (props: WatchingYouReactHookProps = {}) => {
       rotate: 0,
     });
   const watchingYouRef = useRef(
-    new WatchingYouBase('', {
+    new WatchingYouBase({
       ...props,
       render: (newTransform) => {
         setTransform(newTransform);

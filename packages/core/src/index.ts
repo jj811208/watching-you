@@ -75,9 +75,17 @@ class WatchingYou {
   }
 
   constructor(
-    watcher?: WatchingYouWatcher,
-    options: WatchingYouOptions = {},
+    watcherOrOptions?: WatchingYouWatcher | WatchingYouOptions,
+    optionsBase: WatchingYouOptions = {},
   ) {
+    const options =
+      typeof watcherOrOptions === 'object'
+        ? (watcherOrOptions as WatchingYouOptions)
+        : optionsBase;
+    const watcher =
+      typeof watcherOrOptions === 'object'
+        ? undefined
+        : (watcherOrOptions as WatchingYouWatcher);
     // TODO: Don't trust the parameters given by the user
     const { power, rotatable, movable, render, ...targetProps } =
       options;
@@ -249,6 +257,7 @@ class WatchingYou {
   };
 
   setWatcher = (watcher?: WatchingYouWatcher): void => {
+    if (watcher === undefined) return;
     if (isHtmlElement(watcher)) {
       this.#watcherDom = watcher;
     } else if (typeof watcher === 'string') {
