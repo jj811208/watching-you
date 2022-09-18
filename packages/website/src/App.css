@@ -54,7 +54,7 @@
 
 .running-gazer {
   animation-name: run2;
-  animation-duration: 8s;
+  animation-duration: 4s;
   animation-iteration-count: infinite;
   animation-fill-mode: forwards;
 }
@@ -97,12 +97,12 @@
 
 @keyframes run2 {
   0% {
-    transform: translate(-400px, 0);
+    transform: translate(-150px, 0);
   }
   50% {
-    transform: translate(400px, 0);
+    transform: translate(150px, 0);
   }
   100% {
-    transform: translate(-400px, 0);
+    transform: translate(-150px, 0);
   }
 }
