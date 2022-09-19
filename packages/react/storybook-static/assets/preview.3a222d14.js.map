@@ -1,0 +1,1 @@
+{"version":3,"file":"preview.3a222d14.js","sources":["../../.storybook/preview.cjs"],"sourcesContent":["export const parameters = {\n  actions: { argTypesRegex: '^on[A-Z].*' },\n  controls: {\n    expanded: true,\n  },\n};\n"],"names":["parameters"],"mappings":"AAAY,MAACA,EAAa,CACxB,QAAS,CAAE,cAAe,YAAc,EACxC,SAAU,CACR,SAAU,EACX,CACH"}
