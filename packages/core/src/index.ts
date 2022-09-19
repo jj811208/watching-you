@@ -78,14 +78,15 @@ class WatchingYou {
     watcherOrOptions?: WatchingYouWatcher | WatchingYouOptions,
     optionsBase: WatchingYouOptions = {},
   ) {
-    const options =
-      typeof watcherOrOptions === 'object'
-        ? (watcherOrOptions as WatchingYouOptions)
-        : optionsBase;
-    const watcher =
-      typeof watcherOrOptions === 'object'
-        ? undefined
-        : (watcherOrOptions as WatchingYouWatcher);
+    const isFirstParamOptions =
+      typeof watcherOrOptions === 'object' &&
+      !isHtmlElement(watcherOrOptions);
+    const options = isFirstParamOptions
+      ? (watcherOrOptions as WatchingYouOptions)
+      : optionsBase;
+    const watcher = isFirstParamOptions
+      ? undefined
+      : (watcherOrOptions as WatchingYouWatcher);
     // TODO: Don't trust the parameters given by the user
     const { power, rotatable, movable, render, ...targetProps } =
       options;
@@ -131,13 +132,8 @@ class WatchingYou {
       return;
     }
 
-    const {
-      font,
-      letterSpacing,
-      width,
-      lineHeight,
-      paddingLeft,
-    } = getComputedStyle(this.#targetDom);
+    const { font, letterSpacing, width, lineHeight, paddingLeft } =
+      getComputedStyle(this.#targetDom);
     const paddingLeftNumber = Number(paddingLeft.slice(0, -2));
     const targetTagName = this.#targetDom.tagName;
     const isInput = targetTagName === 'INPUT';
