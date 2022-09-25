@@ -17,7 +17,7 @@ export default {
         step: 10,
         default: 123,
       },
-      description: 'power',
+      description: 'Maximum distance to move from the origin (px).',
       defaultValue: {
         summary: 50,
       },
@@ -26,7 +26,7 @@ export default {
       control: {
         type: 'boolean',
       },
-      description: 'movable',
+      description: 'Ability to move',
       defaultValue: {
         summary: true,
       },
@@ -35,7 +35,7 @@ export default {
       control: {
         type: 'boolean',
       },
-      description: 'rotatable',
+      description: 'Ability to rotate',
       defaultValue: {
         summary: true,
       },

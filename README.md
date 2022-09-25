@@ -13,7 +13,9 @@ Watching-you is a javascript library for building animations that watch anything
 
 ## Storybook
 
-<a href="https://jj811208.github.io/watching-you" target="_blank">Storybook</a>
+watching-you's storybook using the react version, but all versions can do the same thing!
+
+<a href="https://jj811208.github.io/watching-you" target="_blank">https://jj811208.github.io/watching-you</a>
 
 ## Todo
 
