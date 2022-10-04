@@ -2,7 +2,21 @@
 
 <a href="https://www.npmjs.com/package/react-watching-you"><img src="https://badge.fury.io/js/react-watching-you.svg" alt="npm version" height="18"></a>
 
+Watching-you is a javascript library for building animations that watch anything on DOM.
+
+![watching your mouse](https://github.com/jj811208/watching-you/blob/main/static/1.gif)(watching your mouse)
+
+![watching your input value](https://github.com/jj811208/watching-you/blob/main/static/2.gif)(watching your input value)
+
 ## Installation
+
+### npm
+
+```
+npm install react-watching-you
+```
+
+### yarn
 
 ```
 yarn add react-watching-you
@@ -10,16 +24,27 @@ yarn add react-watching-you
 
 ## Quickstart
 
-To Be Done
+```javascript
+import WatchingYou from 'watching-you';
+
+// HOC
+const App = () => {
+  return (
+    <WatchingYou>
+      <span>O</span>
+    </WatchingYou>
+  );
+};
+
+// hook
+const App2 = () => {
+  const [watchingYouWatcherProps] = useWatchingYou(watchingYouProps);
+  return (
+    <span {...watchingYouWatcherProps}>O</span>
+  );
+};
+```
 
 ## API Reference
 
-To Be Done
-
-## Compatibility
-
-To Be Done
-
-<!-- |           | Chrome | Firefox | Safari |   IE  | Edge | iOS Safari/Chrome | Android Chrome |
-|-----------|:------:|:-------:|:------:|:-----:|:----:|:-----------------:|:--------------:|
-| Supported |  ✔ 10+ |   ✔ 4+  | ✔ 6.1+ | ✔ 10+ |   ✔  |       ✔ 6.1+      |        ✔       | -->
+<a href="https://jj811208.github.io/watching-you" target="_blank">https://jj811208.github.io/watching-you</a>
