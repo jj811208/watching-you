@@ -19,6 +19,7 @@ interface WatchingYouRenderTransform {
 type WatchingYouRender = (
   transform: WatchingYouRenderTransform,
 ) => void;
+
 type WatchingYouWatcher = string | Element;
 type WatchingYouTarget = string | Element;
 type WatchingYouTargetType = 'mouse' | 'dom' | 'input';
@@ -27,7 +28,7 @@ interface WatchingYouOptions {
   target?: WatchingYouTarget;
   targetType?: WatchingYouTargetType;
   power?: WatchingYouPower;
-  render?: WatchingYouRender;
+  customRender?: WatchingYouRender;
   rotatable?: boolean;
   movable?: boolean;
 }
@@ -88,9 +89,14 @@ class WatchingYou {
       ? undefined
       : (watcherOrOptions as WatchingYouWatcher);
     // TODO: Don't trust the parameters given by the user
-    const { power, rotatable, movable, render, ...targetProps } =
-      options;
-    this.setCustomRender(render);
+    const {
+      power,
+      rotatable,
+      movable,
+      customRender,
+      ...targetProps
+    } = options;
+    this.setCustomRender(customRender);
     this.setWatcher(watcher);
     this.setTarget(targetProps);
     this.setPower(power);
@@ -347,7 +353,7 @@ class WatchingYou {
     }
   };
 
-  setPower = (power?: WatchingYouPower) => {
+  setPower = (power?: WatchingYouPower): void => {
     if (power !== undefined) {
       if (typeof power === 'number') {
         this.#powerX = power;

@@ -31,7 +31,7 @@ const useWatchingYou = (props: WatchingYouReactHookProps = {}) => {
   const watchingYouRef = useRef(
     new WatchingYouBase({
       ...props,
-      render: (newTransform) => {
+      customRender: (newTransform) => {
         setTransform(newTransform);
       },
     }),
