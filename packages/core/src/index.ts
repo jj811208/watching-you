@@ -296,7 +296,7 @@ class WatchingYou {
   };
 
   setWatcher = (watcher?: WatchingYouWatcher): void => {
-    if (watcher === undefined) return;
+    if (!watcher) return;
     if (isHtmlElement(watcher)) {
       this.#watcherDom = watcher;
     } else if (typeof watcher === 'string') {
@@ -327,13 +327,17 @@ class WatchingYou {
     } else if (isTargetDom(targetProps)) {
       const { target } = targetProps;
       this.#targetType = 'dom';
-      this.#targetDom = isHtmlElement(target)
+      this.#targetDom = !target
+        ? null
+        : isHtmlElement(target)
         ? target
         : document.querySelector(target);
     } else if (isTargetInput(targetProps)) {
       const { target } = targetProps;
       this.#targetType = 'input';
-      this.#targetDom = isHtmlElement(target)
+      this.#targetDom = !target
+        ? null
+        : isHtmlElement(target)
         ? target
         : document.querySelector(target);
     } else {
