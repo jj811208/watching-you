@@ -43,19 +43,19 @@ yarn add watching-you
 
 ### JavaScript
 
-#### UMD
+#### ESM
 
 ```javascript
-const WatchingYou = window['watching-you'];
+import WatchingYou from 'watching-you';
 
 const watcher = new WatchingYou('.eye');
 watcher.start();
 ```
 
-#### ESM
+#### UMD
 
 ```javascript
-import WatchingYou from 'watching-you';
+const WatchingYou = window['watching-you'];
 
 const watcher = new WatchingYou('.eye');
 watcher.start();
