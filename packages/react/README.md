@@ -27,7 +27,7 @@ yarn add react-watching-you
 ```javascript
 import WatchingYou from 'watching-you';
 
-// HOC
+// render props
 const App = () => {
   return (
     <WatchingYou>
@@ -37,7 +37,7 @@ const App = () => {
 };
 
 // hook
-const App2 = () => {
+const App = () => {
   const [watchingYouWatcherProps] = useWatchingYou(watchingYouProps);
   return (
     <span {...watchingYouWatcherProps}>O</span>
