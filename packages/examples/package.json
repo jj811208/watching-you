@@ -1,5 +1,5 @@
 {
-  "name": "watching-you-website",
+  "name": "watching-you-examples",
   "version": "0.0.1",
   "license": "ISC",
   "private": true,
@@ -13,12 +13,19 @@
   "devDependencies": {
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
+    "@types/styled-components": "^5",
     "@vitejs/plugin-react": "^2.0.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
     "typescript": "^4.6.4",
     "vite": "^3.1.0",
     "vite-tsconfig-paths": "^3.5.0"
   },
-  "author": "Ryan Chu <jj811208@gmail.com> (https://github.com/jj811208)"
+  "author": "Ryan Chu <jj811208@gmail.com> (https://github.com/jj811208)",
+  "dependencies": {
+    "@fontsource/roboto": "^4.5.8",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.4.2",
+    "react-watching-you": "workspace:^",
+    "styled-components": "^5.3.6"
+  }
 }
