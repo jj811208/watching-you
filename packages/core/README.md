@@ -38,7 +38,7 @@ yarn add watching-you
 ### HTML
 
 ```html
-<span class="eye">O</span>
+<div class="eye">O</div>
 ```
 
 ### JavaScript

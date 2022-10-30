@@ -31,7 +31,7 @@ import WatchingYou, { useWatchingYou } from 'react-watching-you';
 const App = () => {
   return (
     <WatchingYou>
-      <span>O</span>
+      <div>O</div>
     </WatchingYou>
   );
 };
@@ -39,7 +39,7 @@ const App = () => {
 // hook
 const App = () => {
   const [watchingYouWatcherProps] = useWatchingYou(watchingYouProps);
-  return <span {...watchingYouWatcherProps}>O</span>;
+  return <div {...watchingYouWatcherProps}>O</div>;
 };
 ```
 

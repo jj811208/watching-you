@@ -4,6 +4,7 @@
 <a href="https://github.com/jj811208/watching-you/actions/workflows/deploy-storybook.yml"><img src="https://github.com/jj811208/watching-you/actions/workflows/deploy-storybook.yml/badge.svg" alt="deploy-storybook" height="18"></a>
 <a href="https://github.com/jj811208/watching-you/actions/workflows/npm-publish-core.yml"><img src="https://github.com/jj811208/watching-you/actions/workflows/npm-publish-core.yml/badge.svg" alt="npm-publish-core" height="18"></a>
 <a href="https://github.com/jj811208/watching-you/actions/workflows/npm-publish-react.yml"><img src="https://github.com/jj811208/watching-you/actions/workflows/npm-publish-react.yml/badge.svg" alt="npm-publish-react" height="18"></a>
+<a href="https://github.com/jj811208/watching-you/actions/workflows/npm-publish-vue.yml"><img src="https://github.com/jj811208/watching-you/actions/workflows/npm-publish-vue.yml/badge.svg" alt="npm-publish-vue" height="18"></a>
 
 Watching-you is a javascript library for building animations that watch anything on DOM.
 
@@ -19,8 +20,7 @@ watching-you's storybook using the react version, but all versions can do the sa
 
 ## Todo
 
-- [ ] readme
-- [ ] vue watching-you
+- [ ] more test
 - [ ] more demo
 
 ## Features
@@ -36,8 +36,7 @@ watching-you's storybook using the react version, but all versions can do the sa
 
 - [Vanilla.js](https://github.com/jj811208/watching-you/tree/main/packages/core)
 - [React](https://github.com/jj811208/watching-you/tree/main/packages/react)
-- Vue (Todo)
-<!-- - [Vue](https://github.com/jj811208/watching-you/blob/main/packages/vue) -->
+- [Vue](https://github.com/jj811208/watching-you/tree/main/packages/vue)
 
 ## Known limitations
 

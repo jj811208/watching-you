@@ -32,12 +32,12 @@ import WatchingYou from 'vue-watching-you';
 
 <template>
   <WatchingYou :active="true"  v-slot="watchingYouProps"> <!-- another options...-->
-    <span
+    <div
       :className="watchingYouProps.className"
       :style="watchingYouProps.style"
     >
       O
-    </span>
+    </div>
   </WatchingYou>
 </template>
 
@@ -49,12 +49,12 @@ const watchingYou = useWatchingYou(watchingYouOptions);
 </script>
 
 <template>
-  <span
+  <div
     :className="watchingYou.className"
     :style="watchingYou.style"
   >
     O
-  </span>
+  </div>
 </template>
 ```
 
