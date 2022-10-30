@@ -29,7 +29,6 @@ jobs:
           node-version: 16
       - run: yarn workspace react-watching-you install --immutable
       - run: yarn workspace react-watching-you build
-      - run: cd packages/core
       - run: yarn workspace react-watching-you npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
