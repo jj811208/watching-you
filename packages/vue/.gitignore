@@ -12,9 +12,6 @@ dist
 dist-ssr
 *.local
 
-# github page
-!packages/website/dist 
-
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -25,18 +22,3 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-
-
-# yarn-berry
-.pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/sdks
-!.yarn/versions 
-
-# still under development
-/packages/test-cra/*
-/packages/test-vite/*
-/ignore-folder/*
