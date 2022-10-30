@@ -42,7 +42,7 @@ const ORIGIN_TRANSFORM = {
 class WatchingYou {
   static #mousePosition: Coordinate | null = null;
   static #mouseObserverCount: number = 0;
-  static #updateWatchPositionViaMouse = (e: MouseEvent): void => {
+  static #updateTargetPositionViaMouse = (e: MouseEvent): void => {
     WatchingYou.#mousePosition = {
       x: round(e.clientX),
       y: round(e.clientY),
@@ -50,6 +50,7 @@ class WatchingYou {
   };
 
   #customRender: WatchingYouRender | null = null;
+  #watcherSelector: string | null = null;
   #watcherDom: HTMLElement | null = null;
   #targetDom: HTMLElement | null = null;
   #watcherPosition: Coordinate | null = null;
@@ -105,7 +106,14 @@ class WatchingYou {
   }
 
   #updateWatcherPosition = (): void => {
-    if (this.#watcherDom === null) return;
+    if (this.#watcherDom === null) {
+      if (this.#watcherSelector !== null)
+        this.#watcherDom = document.querySelector(
+          this.#watcherSelector,
+        );
+
+      return;
+    }
     const rect = this.#watcherDom.getBoundingClientRect();
     const translate = getDomTranslateProp(this.#watcherDom);
     const x = round(rect.left - translate.x + rect.width / 2);
@@ -113,7 +121,7 @@ class WatchingYou {
     this.#watcherPosition = { x, y };
   };
 
-  #updateWatchPositionViaDom = (): void => {
+  #updateTargetPositionViaDom = (): void => {
     if (!this.#targetDom) return;
     const rect = this.#targetDom.getBoundingClientRect();
     // XXX: Only return the center position of the dom now
@@ -122,7 +130,7 @@ class WatchingYou {
     this.#targetPosition = { x, y };
   };
 
-  #updateWatchPositionViaInput = (): void => {
+  #updateTargetPositionViaInput = (): void => {
     if (!this.#targetDom) return;
     if (!this.#fakeInputDom) {
       this.#createFakeInput();
@@ -300,6 +308,7 @@ class WatchingYou {
     if (isHtmlElement(watcher)) {
       this.#watcherDom = watcher;
     } else if (typeof watcher === 'string') {
+      this.#watcherSelector = watcher;
       this.#watcherDom = document.querySelector(watcher);
     } else {
       log(`Unexpected watcher: ${JSON.stringify(watcher)}`, 'warn');
@@ -375,7 +384,7 @@ class WatchingYou {
       if (WatchingYou.#mouseObserverCount === 0) {
         window.addEventListener(
           'mousemove',
-          WatchingYou.#updateWatchPositionViaMouse,
+          WatchingYou.#updateTargetPositionViaMouse,
         );
       }
       WatchingYou.#mouseObserverCount++;
@@ -384,10 +393,10 @@ class WatchingYou {
       if (this.#checkWatcherDomVisibility()) {
         this.#updateWatcherPosition();
         if (this.#targetType === 'dom') {
-          this.#updateWatchPositionViaDom();
+          this.#updateTargetPositionViaDom();
         }
         if (this.#targetType === 'input') {
-          this.#updateWatchPositionViaInput();
+          this.#updateTargetPositionViaInput();
         }
         if (this.#needRender()) {
           this.#render();
@@ -406,7 +415,7 @@ class WatchingYou {
     if (WatchingYou.#mouseObserverCount === 0) {
       window.removeEventListener(
         'mousemove',
-        WatchingYou.#updateWatchPositionViaMouse,
+        WatchingYou.#updateTargetPositionViaMouse,
       );
     }
 
