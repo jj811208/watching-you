@@ -1,7 +1,6 @@
 
 <script setup lang="ts">
 import useWatchingYou from './hook';
-import { defineProps } from 'vue';
 import { WatchingYouTarget, WatchingYouTargetType, WatchingYouPower } from '../../core/src';
 
 // vue does not seem to work on defineProps in this way

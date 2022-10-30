@@ -1,6 +1,6 @@
 {
   "name": "vue-watching-you",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "ISC",
   "type": "module",
   "main": "./dist/vue-watching-you.umd.cjs",

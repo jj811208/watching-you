@@ -15,7 +15,7 @@ interface WatchingYouVueProps
 }
 
 function useWatchingYou(props: WatchingYouVueProps) {
-  const className = `watching-you--watcher--${Math.random()}${Math.random()}`;
+  const className = `watching-you--watcher--${Math.random()}${Math.random()}`.split('.').join('');
   const style = reactive({
     transform: `translate(0px,0px) rotate(0deg)`,
   });
