@@ -6,7 +6,7 @@ import WatchingYouBase, {
 import { concatObject } from './util';
 
 interface WatchingYouReactHookProps
-  extends Omit<WatchingYouOptions, 'render'> {
+  extends Omit<WatchingYouOptions, 'customRender'> {
   active?: boolean;
 }
 interface WatchingYouReactHocProps extends WatchingYouReactHookProps {
