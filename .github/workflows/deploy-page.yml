@@ -1,5 +1,5 @@
 # Simple workflow for deploying static content to GitHub Pages
-name: Deploy Storybook
+name: Deploy Page
 
 on:
   workflow_dispatch:
@@ -23,10 +23,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Setup Pages
-        uses: actions/configure-pages@v2
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - run: yarn install --immutable
+      - run: yarn workspace react-watching-you build # examples-watching-you needs
       - run: OUT_DIR=../../dist yarn workspace examples-watching-you build
       - run: yarn workspace react-watching-you build-storybook -o ../../dist/storybook
+      - name: Setup Pages
+        uses: actions/configure-pages@v2
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
