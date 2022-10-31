@@ -1,7 +1,7 @@
 # Watching-you
 
 <a href="https://www.npmjs.com/package/watching-you"><img src="https://badge.fury.io/js/watching-you.svg" alt="npm version" height="18"></a>
-<a href="https://github.com/jj811208/watching-you/actions/workflows/deploy-storybook.yml"><img src="https://github.com/jj811208/watching-you/actions/workflows/deploy-storybook.yml/badge.svg" alt="deploy-storybook" height="18"></a>
+<a href="https://github.com/jj811208/watching-you/actions/workflows/deploy-page.yml"><img src="https://github.com/jj811208/watching-you/actions/workflows/deploy-page.yml/badge.svg" alt="deploy-page" height="18"></a>
 <a href="https://github.com/jj811208/watching-you/actions/workflows/npm-publish-core.yml"><img src="https://github.com/jj811208/watching-you/actions/workflows/npm-publish-core.yml/badge.svg" alt="npm-publish-core" height="18"></a>
 <a href="https://github.com/jj811208/watching-you/actions/workflows/npm-publish-react.yml"><img src="https://github.com/jj811208/watching-you/actions/workflows/npm-publish-react.yml/badge.svg" alt="npm-publish-react" height="18"></a>
 <a href="https://github.com/jj811208/watching-you/actions/workflows/npm-publish-vue.yml"><img src="https://github.com/jj811208/watching-you/actions/workflows/npm-publish-vue.yml/badge.svg" alt="npm-publish-vue" height="18"></a>
@@ -16,12 +16,17 @@ Watching-you is a javascript library for building animations that watch anything
 
 watching-you's storybook using the react version, but all versions can do the same thing!
 
-<a href="https://jj811208.github.io/watching-you" target="_blank">https://jj811208.github.io/watching-you</a>
+<a href="https://jj811208.github.io/watching-you/storybook" target="_blank">https://jj811208.github.io/watching-you/storybook</a>
+
+## Example
+
+- <a href="https://jj811208.github.io/watching-you/#/example/login" target="_blank">Login Form</a>
+- <a href="https://jj811208.github.io/watching-you/#/example/snake" target="_blank">Red Snake</a>
+- <a href="https://jj811208.github.io/watching-you/#/example/cena" target="_blank">Cena is watching you</a>
 
 ## Todo
 
-- [ ] more test
-- [ ] more demo
+- [ ] test
 
 ## Features
 
