@@ -11,13 +11,13 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "@types/react": "^18.0.17",
-    "@types/react-dom": "^18.0.6",
-    "@types/styled-components": "^5",
-    "@vitejs/plugin-react": "^2.0.1",
+    "@types/react": "^18.0.24",
+    "@types/react-dom": "^18.0.8",
+    "@types/styled-components": "^5.1.26",
+    "@vitejs/plugin-react": "^2.2.0",
     "typescript": "^4.6.4",
-    "vite": "^3.1.0",
-    "vite-tsconfig-paths": "^3.5.0"
+    "vite": "^3.2.1",
+    "vite-tsconfig-paths": "^3.5.2"
   },
   "author": "Ryan Chu <jj811208@gmail.com> (https://github.com/jj811208)",
   "dependencies": {
