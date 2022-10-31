@@ -11,10 +11,9 @@ const Rect = styled.div`
   flex-direction: column;
   justify-content: space-between;
   background: red;
-  border: solid 1px;
   width: 10px;
   height: 50px;
-  transition: 0.1s transform;
+  transition: 0.04s transform;
 `;
 
 const Stick = forwardRef(({ number, ...rest }: any, ref) => {
@@ -28,9 +27,6 @@ const Stick = forwardRef(({ number, ...rest }: any, ref) => {
 function Login() {
   return (
     <Container>
-      <WatchingYou power={1000}>
-        <Stick number={19} />
-      </WatchingYou>
       {Array(19)
         .fill('')
         .map((_, i) => {
@@ -38,13 +34,16 @@ function Login() {
             <WatchingYou
               target={`.stick-${i + 1}-tail`}
               targetType="dom"
-              power={1000}
+              power={40 * (i + 1)}
               key={i}
             >
               <Stick number={i} />
             </WatchingYou>
           );
         })}
+      <WatchingYou power={800}>
+        <Stick number={19} />
+      </WatchingYou>
     </Container>
   );
 }
