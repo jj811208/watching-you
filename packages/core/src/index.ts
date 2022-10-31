@@ -141,10 +141,6 @@ class WatchingYou {
     if (fakeInputDom.innerText !== thisWatchDom.value) {
       fakeInputDom.innerText = thisWatchDom.value;
     }
-    if (thisWatchDom.value === '') {
-      this.#targetPosition = null;
-      return;
-    }
 
     const { font, letterSpacing, width, lineHeight, paddingLeft } =
       getComputedStyle(this.#targetDom);
