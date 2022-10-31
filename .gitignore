@@ -11,9 +11,7 @@ node_modules
 dist
 dist-ssr
 *.local
-
-# github page
-!packages/website/dist 
+storybook-static
 
 # Editor directories and files
 .vscode/*
@@ -35,8 +33,3 @@ dist-ssr
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions 
-
-# still under development
-/packages/test-cra/*
-/packages/test-vite/*
-/ignore-folder/*
