@@ -5,6 +5,9 @@ import styled from 'styled-components';
 const Container = styled.div`
   position: relative;
   min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 const Rect = styled.div`
   display: inline-flex;
@@ -12,8 +15,9 @@ const Rect = styled.div`
   justify-content: space-between;
   background: red;
   width: 10px;
-  height: 50px;
-  transition: 0.04s transform;
+  height: 20px;
+  transition: 0.03s transform;
+  position:absolute;
 `;
 
 const Stick = forwardRef(({ number, ...rest }: any, ref) => {
@@ -27,22 +31,22 @@ const Stick = forwardRef(({ number, ...rest }: any, ref) => {
 function Login() {
   return (
     <Container>
-      {Array(19)
+      {Array(24)
         .fill('')
         .map((_, i) => {
           return (
             <WatchingYou
               target={`.stick-${i + 1}-tail`}
               targetType="dom"
-              power={40 * (i + 1)}
+              power={20 * (i + 1)}
               key={i}
             >
               <Stick number={i} />
             </WatchingYou>
           );
         })}
-      <WatchingYou power={800}>
-        <Stick number={19} />
+      <WatchingYou power={500}>
+        <Stick number={24} />
       </WatchingYou>
     </Container>
   );
