@@ -8,7 +8,7 @@ const Container = styled.div`
   align-items: center;
   flex-direction: column;
   min-height: 100vh;
-  gap: 40px;
+  gap: 16px;
 `;
 const Face = styled.div`
   border: solid 2px;
@@ -17,20 +17,20 @@ const Face = styled.div`
   justify-content: center;
   padding: 30px;
   gap: 30px;
-  width: 240px;
-  height: 240px;
+  width: 120px;
+  height: 80px;
   background: #fff7e7;
 `;
 const Eyes = styled.div`
   display: flex;
   justify-content: center;
-  gap: 80px;
+  gap: 40px;
 `;
 const Eye = styled.div<{ needToClose: boolean }>`
-  border: solid 2px;
+  border: solid 1px;
   border-radius: 50%;
-  width: 90px;
-  height: 50px;
+  width: 45px;
+  height: 25px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -48,14 +48,14 @@ const Eyeball = styled.div`
   display: inline-block;
   border-radius: 50%;
   background: #000;
-  width: 18px;
-  height: 18px;
+  width: 9px;
+  height: 9px;
   transition: 0.1s transform;
 `;
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 12px;
 `;
 const Label = styled.label`
   display: flex;
@@ -64,8 +64,8 @@ const Label = styled.label`
 const Username = styled.input``;
 const Password = styled.input.attrs({ type: 'password' })``;
 const eyesPower = {
-  x: 40,
-  y: 20,
+  x: 20,
+  y: 10,
 };
 
 function Login() {
