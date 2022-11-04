@@ -48,6 +48,12 @@ class WatchingYou {
       y: round(e.clientY),
     };
   };
+  static #updateTargetPositionViaTouch = (e: TouchEvent): void => {
+    WatchingYou.#mousePosition = {
+      x: round(e.touches[0].clientX),
+      y: round(e.touches[0].clientY),
+    };
+  };
 
   #customRender: WatchingYouRender | null = null;
   #watcherSelector: string | null = null;
@@ -382,6 +388,10 @@ class WatchingYou {
           'mousemove',
           WatchingYou.#updateTargetPositionViaMouse,
         );
+        window.addEventListener(
+          'touchmove',
+          WatchingYou.#updateTargetPositionViaTouch,
+        );
       }
       WatchingYou.#mouseObserverCount++;
     }
@@ -412,6 +422,10 @@ class WatchingYou {
       window.removeEventListener(
         'mousemove',
         WatchingYou.#updateTargetPositionViaMouse,
+      );
+      window.removeEventListener(
+        'touchmove',
+        WatchingYou.#updateTargetPositionViaTouch,
       );
     }
 
