@@ -5,8 +5,8 @@ import cenaUrl from './cena.webp';
 const Container = styled.div`
   position: relative;
   min-height: 100vh;
-  overflow: hidden;
   background: #444;
+  overflow: hidden;
 `;
 const CenaWrapper = styled.div`
   position: absolute;

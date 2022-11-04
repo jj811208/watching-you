@@ -8,6 +8,7 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 `;
 const Rect = styled.div`
   display: inline-flex;
@@ -16,7 +17,7 @@ const Rect = styled.div`
   background: red;
   width: 10px;
   height: 20px;
-  transition: 0.03s transform;
+  transition: 0.02s transform;
   position:absolute;
 `;
 
@@ -28,10 +29,10 @@ const Stick = forwardRef(({ number, ...rest }: any, ref) => {
     </Rect>
   );
 });
-function Login() {
+function Snake() {
   return (
     <Container>
-      {Array(24)
+      {Array(10)
         .fill('')
         .map((_, i) => {
           return (
@@ -45,11 +46,11 @@ function Login() {
             </WatchingYou>
           );
         })}
-      <WatchingYou power={500}>
-        <Stick number={24} />
+      <WatchingYou power={220}>
+        <Stick number={10} />
       </WatchingYou>
     </Container>
   );
 }
 
-export default Login;
+export default Snake;

@@ -9,6 +9,7 @@ const Container = styled.div`
   flex-direction: column;
   min-height: 100vh;
   gap: 16px;
+  overflow: hidden;
 `;
 const Face = styled.div`
   border: solid 2px;
