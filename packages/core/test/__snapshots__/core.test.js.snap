@@ -1,5 +1,5 @@
 // Vitest Snapshot v1
 
-exports[`WatchingYou core test > It should be watching mouse 1`] = `"translate(22.4px,44.7px) rotate(153.4deg)"`;
+exports[`WatchingYou core test > It should be watching mouse 1`] = `"translate3d(29.3px,40.5px,0px) rotate(144.1deg)"`;
 
-exports[`WatchingYou core test > It should be watching mouse 2`] = `"translate(35.2px,35.5px) rotate(135.2deg)"`;
+exports[`WatchingYou core test > It should be watching mouse 2`] = `"translate3d(37.2px,33.5px,0px) rotate(132deg)"`;
