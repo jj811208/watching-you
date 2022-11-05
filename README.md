@@ -27,7 +27,7 @@
 ## Example
 
 - <a href="https://jj811208.github.io/watching-you/#/example/login" target="_blank">Login Form</a>
-- <a href="https://jj811208.github.io/watching-you/#/example/snake" target="_blank">Red Snake</a>
+- <a href="https://jj811208.github.io/watching-you/#/example/iron-chain" target="_blank">Iron Chain</a>
 - <a href="https://jj811208.github.io/watching-you/#/example/cena" target="_blank">Cena is watching you</a>
 
 ## Storybook

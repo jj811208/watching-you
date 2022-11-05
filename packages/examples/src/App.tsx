@@ -5,7 +5,7 @@ import {
 } from 'react-router-dom';
 import Login from './pages/login';
 import Cena from './pages/cena';
-import Snake from './pages/snake';
+import IronChain from './pages/iron-chain';
 import styled from 'styled-components';
 const ExampleList = styled.div`
   display: flex;
@@ -29,9 +29,9 @@ const exampleList = [
     element: <Cena />,
   },
   {
-    name: 'snake',
-    path: '/example/snake',
-    element: <Snake />,
+    name: 'iron-chain',
+    path: '/example/iron-chain',
+    element: <IronChain />,
   },
 ];
 const router = createHashRouter([

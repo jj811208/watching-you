@@ -1,4 +1,3 @@
-import { forwardRef } from 'react';
 import WatchingYou from 'react-watching-you';
 import styled from 'styled-components';
 
@@ -11,26 +10,18 @@ const Container = styled.div`
   align-items: center;
   overflow: hidden;
 `;
-const Rect = styled.div`
+const Circle = styled.div`
   display: inline-flex;
   flex-direction: column;
   justify-content: space-between;
-  background: red;
-  width: 10px;
+  background: #555;
+  width: 20px;
   height: 20px;
-  transition: 0.02s transform;
+  border-radius: 50%;
   position:absolute;
 `;
 
-const Stick = forwardRef(({ number, ...rest }: any, ref) => {
-  return (
-    <Rect ref={ref} {...rest}>
-      <div className={`stick-${number}-head`} />
-      <div className={`stick-${number}-tail`} />
-    </Rect>
-  );
-});
-function Snake() {
+function IronChain() {
   return (
     <Container>
       {Array(10)
@@ -38,20 +29,21 @@ function Snake() {
         .map((_, i) => {
           return (
             <WatchingYou
-              target={`.stick-${i + 1}-tail`}
+              target={`.stick-${i + 1}`}
               targetType="dom"
+              rotatable={false}
               power={20 * (i + 1)}
               key={i}
             >
-              <Stick number={i} />
+              <Circle className={`stick-${i}`}/>
             </WatchingYou>
           );
         })}
       <WatchingYou power={220}>
-        <Stick number={10} />
+        <Circle className="stick-10" />
       </WatchingYou>
     </Container>
   );
 }
 
-export default Snake;
+export default IronChain;
