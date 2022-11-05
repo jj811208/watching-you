@@ -4,7 +4,8 @@ import cenaUrl from './cena.webp';
 
 const Container = styled.div`
   position: relative;
-  min-height: 100vh;
+  height: 100%;
+  width: 100%;
   background: #444;
   overflow: hidden;
 `;

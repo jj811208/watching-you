@@ -7,7 +7,8 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  min-height: 100vh;
+  height: 100%;
+  width: 100%;
   gap: 16px;
   overflow: hidden;
 `;
