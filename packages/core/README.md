@@ -2,12 +2,6 @@
 
 <a href="https://www.npmjs.com/package/watching-you"><img src="https://badge.fury.io/js/watching-you.svg" alt="npm version" height="18"></a>
 
-Watching-you is a javascript library for building animations that watch anything on DOM.
-
-![watching your mouse](https://github.com/jj811208/watching-you/blob/main/static/1.gif)(watching your mouse)
-
-![watching your input value](https://github.com/jj811208/watching-you/blob/main/static/2.gif)(watching your input value)
-
 ## Installation
 
 ### ESM
@@ -48,7 +42,8 @@ yarn add watching-you
 ```javascript
 import WatchingYou from 'watching-you';
 
-const watcher = new WatchingYou('.eye');
+const options = {/* options */};
+const watcher = new WatchingYou('.eye', options);
 watcher.start();
 ```
 
@@ -57,36 +52,38 @@ watcher.start();
 ```javascript
 const WatchingYou = window['watching-you'];
 
-const watcher = new WatchingYou('.eye');
+const options = {/* options */};
+const watcher = new WatchingYou('.eye', options);
 watcher.start();
 ```
 
 ## API Reference
 
-```typescript
-type WatchingYouWatcher = string | Element;
-type WatchingYouTarget = string | Element;
-type WatchingYouTargetType = 'mouse' | 'dom' | 'input';
-type WatchingYouPower = number | { x?: number; y?: number };
+### Initialize
 
-interface WatchingYouOptions {
-  target?: WatchingYouTarget;
-  targetType?: WatchingYouTargetType;
-  power?: WatchingYouPower;
-  render?: WatchingYouRender;
-  rotatable?: boolean;
-  movable?: boolean;
-}
-
-class WatchingYou{
-   constructor (watcherOrOptions?: WatchingYouWatcher | WatchingYouOptions,optionsBase: WatchingYouOptions = {}){}
-   setWatcher = (watcher?: WatchingYouWatcher): void
-   setRotatable = (rotatable: boolean = true): void
-   setMovable = (movable: boolean = true): void
-   setTarget = (targetProps?: { target?: WatchingYouTarget; targetType?: WatchingYouTargetType; }): void
-   setCustomRender = (render?: WatchingYouRender): void
-   setPower = (power?: WatchingYouPower):void
-   start = (): void
-   stop = (): void
-}
+```javascript
+new WatchingYou(watcher, restOptions);
+new WatchingYou(options);
 ```
+
+### Options
+
+|name|type|default|description|
+|----|----|-------|-----------|
+|watcher| string \| HtmlElement | undefined | The DOM that becomes the eye, i.e. the DOM that is given the css transform |
+|target| string \| HtmlElement | undefined | The DOM being watched |
+|targetType| 'mouse' \| 'dom' \| 'input' | 'mouse' | `watching-you` determines the subsequent behavior based on the `targetType`. |
+|power| number \| {x: number, y: number} | 50 | The maximum displacement distance of the watcher, which is always a circle |
+|rotatable| boolean | true | Does Watcher rotate|
+|movable| boolean | true | Does Watcher move |
+
+### Method
+|name|type|description|
+|----|----|-----------|
+|start| (): void | Start watching |
+|stop| (): void | Stop watching |
+|setWatcher| (watcher?: string \| HtmlElement): void |Change `watcher` property |
+|setTarget| (targetProps?: {target?: string \| HtmlElement; targetType?: 'mouse' \| 'dom' \| 'input'; }): void | Change `target` and `targetType` properties |
+|setPower| (power: number \| {x: number, y: number}):void | Change `power` property |
+|setRotatable| (rotatable: boolean = true): void | Change `rotatable` property |
+|setMovable| (movable: boolean = true): void | Change `movable` property |

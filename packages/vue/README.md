@@ -2,12 +2,6 @@
 
 <a href="https://www.npmjs.com/package/vue-watching-you"><img src="https://badge.fury.io/js/vue-watching-you.svg" alt="npm version" height="18"></a>
 
-Watching-you is a javascript library for building animations that watch anything on DOM.
-
-![watching your mouse](https://github.com/jj811208/watching-you/blob/main/static/1.gif)(watching your mouse)
-
-![watching your input value](https://github.com/jj811208/watching-you/blob/main/static/2.gif)(watching your input value)
-
 ## Installation
 
 ### npm
@@ -31,7 +25,7 @@ import WatchingYou from 'vue-watching-you';
 </script>
 
 <template>
-  <WatchingYou :active="true"  v-slot="watchingYouProps"> <!-- another options...-->
+  <WatchingYou v-slot="watchingYouProps" :active="true"> <!-- another options...-->
     <div
       :className="watchingYouProps.className"
       :style="watchingYouProps.style"
@@ -59,6 +53,19 @@ const watchingYou = useWatchingYou(watchingYouOptions);
 ```
 
 ## API Reference
+
+### Props
+
+|name|type|default|description|
+|----|----|-------|-----------|
+|active| boolean | true | Decide whether to start watching |
+|target| string \| HtmlElement | undefined | The DOM being watched |
+|targetType| 'mouse' \| 'dom' \| 'input' | 'mouse' | `watching-you` determines the subsequent behavior based on the `targetType`. |
+|power| number \| {x: number, y: number} | 50 | The maximum displacement distance of the watcher, which is always a circle |
+|rotatable| boolean | true | Does Watcher rotate|
+|movable| boolean | true | Does Watcher move |
+
+## Storybook
 
 This is the storybook for react but their props are exactly the same.
 

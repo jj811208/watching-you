@@ -16,12 +16,12 @@
 </p>
 
 ## Features
-
-- Zero dependency (every framework is!)
-- The size of the core code is only `3kb` after gzip compression
-- Ability to watch mouse or DOM or even input values, watch anything you want!
-- Written in typescript
+- Ability to watch mouse or another DOM or even input values, watch anything you want!
+- Because it is DOM-based, it is easy to support RWD
 - Supports multiple frameworks
+- Zero dependency (every framework is!)
+- Written in typescript
+- The size of the core code is only 3kb after gzip compression
 - If the element is not on the screen, it will automatically stop running
 
 ## Example
