@@ -5,6 +5,12 @@ import { beforeEach, describe, expect, it } from 'vitest';
 import { fireEvent } from '@testing-library/dom';
 import WatchingYou from '../src/index';
 
+const wait = async (ms) => {
+  await new Promise((r) => {
+    setTimeout(r,ms);
+  });
+};
+
 const mousemove = async (x, y) => {
   fireEvent(
     window,
@@ -14,6 +20,7 @@ const mousemove = async (x, y) => {
     }),
   );
   await window.happyDOM.whenAsyncComplete();
+  await wait(100);
 };
 
 describe('WatchingYou core test', () => {
@@ -26,14 +33,14 @@ describe('WatchingYou core test', () => {
   });
 
   it('It should be able to be initialized', () => {
-    const gazer = new WatchingYou();
-    expect(gazer instanceof WatchingYou).toBe(true);
+    const watchingYou = new WatchingYou();
+    expect(watchingYou instanceof WatchingYou).toBe(true);
   });
 
   it('It should be watching mouse', async () => {
     const eyesDom = document.querySelector('.eyes');
-    const gazer = new WatchingYou(eyesDom);
-    gazer.start();
+    const watchingYou = new WatchingYou(eyesDom);
+    watchingYou.start();
     await mousemove(100, 200);
     expect(eyesDom.style.transform).not.toBe('none');
     expect(eyesDom.style.transform).not.toBe(

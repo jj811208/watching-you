@@ -49,7 +49,7 @@ function App() {
       <div className="section">
         <h2>Everything is moving</h2>
         <div className="section_content">
-          <div className="running-gazer eye">
+          <div className="running-thing eye">
             <WatchingYou
               power={commonPower}
               target=".eye-catching2"

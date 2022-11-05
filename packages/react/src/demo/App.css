@@ -52,7 +52,7 @@
   animation-fill-mode: forwards;
 }
 
-.running-gazer {
+.running-thing {
   animation-name: run2;
   animation-duration: 4s;
   animation-iteration-count: infinite;
