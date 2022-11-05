@@ -269,7 +269,7 @@ class WatchingYou {
 
   #defaultRender: WatchingYouRender = (transform) => {
     if (!this.#watcherDom) return;
-    this.#watcherDom.style.transform = `translate(${transform.translate.x}px,${transform.translate.y}px) rotate(${transform.rotate}deg)`;
+    this.#watcherDom.style.transform = `translate3d(${transform.translate.x}px,${transform.translate.y}px,0px) rotate(${transform.rotate}deg)`;
   };
 
   #needRender = (): boolean => {

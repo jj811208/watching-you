@@ -17,14 +17,14 @@ interface WatchingYouVueProps
 function useWatchingYou(props: WatchingYouVueProps) {
   const className = `watching-you--watcher--${Math.random()}${Math.random()}`.split('.').join('');
   const style = reactive({
-    transform: `translate(0px,0px) rotate(0deg)`,
+    transform: `translate3d(0px,0px,0px) rotate(0deg)`,
   });
 
   const instance = ref(
     new WatchingYouBase(`.${className}`, {
       ...props,
       customRender: (newTransform) => {
-        style.transform = `translate(${newTransform.translate.x}px,${newTransform.translate.y}px) rotate(${newTransform.rotate}deg)`;
+        style.transform = `translate3d(${newTransform.translate.x}px,${newTransform.translate.y}px,0px) rotate(${newTransform.rotate}deg)`;
       },
     }),
   );

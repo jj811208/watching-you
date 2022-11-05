@@ -73,7 +73,7 @@ const useWatchingYou = (props: WatchingYouReactHookProps = {}) => {
     return {
       ref: watcherRef,
       style: {
-        transform: `translate(${transform.translate.x}px,${transform.translate.y}px) rotate(${transform.rotate}deg)`,
+        transform: `translate3d(${transform.translate.x}px,${transform.translate.y}px,0px) rotate(${transform.rotate}deg)`,
       },
     };
   }, [
