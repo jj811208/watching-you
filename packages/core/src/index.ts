@@ -211,7 +211,7 @@ class WatchingYou {
 
   #createFakeInput = (): void => {
     if (!this.#targetDom) return;
-    this.#fakeInputDom = document.createElement('div');
+    this.#fakeInputDom = document.createElement('pre');
     document.querySelector('body')?.append(this.#fakeInputDom); //XXX: Maybe we should let the users decide?
   };
 
