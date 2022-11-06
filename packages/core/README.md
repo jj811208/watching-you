@@ -23,7 +23,7 @@ yarn add watching-you
 ```html
 <!--HTML-->
 <head>
-  <script src="https://cdn.jsdelivr.net/npm/watching-you@0.0.5/dist/watching-you.umd.cjs"></script>
+  <script src="https://cdn.jsdelivr.net/npm/watching-you/dist/watching-you.umd.cjs"></script>
 </head>
 ```
 
