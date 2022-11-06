@@ -1,0 +1,5 @@
+// Vitest Snapshot v1
+
+exports[`core test > Targets > It should be watching mouse 1`] = `"translate3d(28.8px,40.9px,0px) rotate(144.8deg)"`;
+
+exports[`core test > Targets > It should be watching mouse 2`] = `"translate3d(37.2px,33.4px,0px) rotate(132deg)"`;
