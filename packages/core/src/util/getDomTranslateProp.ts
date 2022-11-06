@@ -13,7 +13,7 @@ function getDomTranslateProp(dom: Element) {
     .split(', ')
     .slice(-2)
     .map(Number);
-  return { x: result[0], y: result[1] };
+  return { x: result[0] || 0, y: result[1] || 0 };
 }
 
 export default getDomTranslateProp;
