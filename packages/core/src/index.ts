@@ -83,17 +83,24 @@ class WatchingYou {
   }
 
   constructor(
-    watcherOrOptions?: WatchingYouWatcher | WatchingYouOptions,
+    watcherOrOptions?:
+      | WatchingYouWatcher
+      | (WatchingYouOptions & { watcher?: WatchingYouWatcher }),
     optionsBase: WatchingYouOptions = {},
   ) {
     const isFirstParamOptions =
       typeof watcherOrOptions === 'object' &&
       !isHtmlElement(watcherOrOptions);
-    const options = isFirstParamOptions
-      ? (watcherOrOptions as WatchingYouOptions)
-      : optionsBase;
+    const options =
+      (isFirstParamOptions
+        ? (watcherOrOptions as WatchingYouOptions)
+        : optionsBase) || {};
     const watcher = isFirstParamOptions
-      ? undefined
+      ? (
+          watcherOrOptions as WatchingYouOptions & {
+            watcher?: WatchingYouWatcher;
+          }
+        ).watcher
       : (watcherOrOptions as WatchingYouWatcher);
     // TODO: Don't trust the parameters given by the user
     const {
