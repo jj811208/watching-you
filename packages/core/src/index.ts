@@ -312,6 +312,37 @@ class WatchingYou {
     this.#lastRenderingTargetPosition = this.#targetPosition;
   };
 
+  // To avoid internal state modification by users, so the attributes should be a new object.
+  getState = () => {
+    const state = {
+      mousePosition: {
+        x: WatchingYou.#mousePosition?.x || 0,
+        y: WatchingYou.#mousePosition?.y || 0,
+      },
+      mouseWatcherCount: WatchingYou.#mouseWatcherCount,
+      watcherDom: this.#watcherDom,
+      targetDom: this.#targetDom,
+      watcherPosition: {
+        x: this.#watcherPosition?.x || 0,
+        y: this.#watcherPosition?.y || 0,
+      },
+      targetPosition: {
+        x: this.#targetPosition?.x || 0,
+        y: this.#targetPosition?.y || 0,
+      },
+      rotatable: this.#rotatable,
+      movable: this.#movable,
+      targetType: this.#targetType,
+      power: {
+        x: this.#powerX,
+        y: this.#powerY,
+      },
+      fakeInputDom: this.#fakeInputDom,
+      rafId: this.#rafId,
+    };
+    return state;
+  };
+
   setWatcher = (watcher?: WatchingYouWatcher): void => {
     if (!watcher) return;
     if (isHtmlElement(watcher)) {
