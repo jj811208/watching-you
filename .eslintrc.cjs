@@ -45,6 +45,6 @@ module.exports = {
     '@typescript-eslint/no-non-null-assertion': 'warn',
     'prefer-const': 'warn',
     'no-case-declarations': 'warn',
-    '@typescript-eslint/explicit-function-return-type': 'warn',
+    '@typescript-eslint/explicit-function-return-type': 'off',
   },
 };

@@ -10,27 +10,24 @@
     "prepare": "husky install",
     "pre-commit": "lint-staged",
     "build": "yarn workspaces foreach run build",
-    "test": "vitest",
+    "test": "yarn workspace tests-watching-you run test",
     "format": "prettier --write '**/**.{ts,tsx,js,cjs,mjs}'",
     "tsc": "tsc --noEmit",
     "lint": "eslint '**/*.{ts,tsx,js,cjs,mjs}' --max-warnings=0"
   },
   "devDependencies": {
-    "@testing-library/dom": "^8.19.0",
     "@types/node": "^18.11.8",
     "eslint": "^8.26.0",
     "eslint-config-react-app": "^7.0.1",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-react": "^7.31.10",
-    "happy-dom": "^7.6.6",
     "husky": "8.0.1",
     "lint-staged": "13.0.3",
     "prettier": "^2.7.1",
     "typescript": "^4.6.4",
     "vite": "^3.2.1",
     "vite-plugin-dts": "^1.6.6",
-    "vite-tsconfig-paths": "^3.5.2",
-    "vitest": "^0.24.3"
+    "vite-tsconfig-paths": "^3.5.2"
   },
   "lint-staged": {
     "*.{ts,tsx,js,cjs,mjs}": [

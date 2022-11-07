@@ -1,7 +1,0 @@
-// Vitest Snapshot v1
-
-exports[`Method > Its coordinates should be changed when the power is changed 1`] = `"translate3d(75px,66.2px,0px) rotate(131.4deg)"`;
-
-exports[`Method > Its coordinates should be changed when the power is changed 2`] = `"translate3d(7.1px,7px,0px) rotate(134.6deg)"`;
-
-exports[`Method > Its coordinates should be changed when the power is changed 3`] = `"translate3d(70.7px,0px,0px) rotate(135deg)"`;

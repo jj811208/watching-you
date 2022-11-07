@@ -15028,6 +15028,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"tests-watching-you@workspace:packages/tests":
+  version: 0.0.0-use.local
+  resolution: "tests-watching-you@workspace:packages/tests"
+  dependencies:
+    "@testing-library/dom": "npm:^8.19.0"
+    happy-dom: "npm:^7.6.6"
+    react-watching-you: "workspace:^"
+    typescript: "npm:^4.6.4"
+    vite: "npm:^3.2.1"
+    vite-tsconfig-paths: "npm:^3.5.2"
+    vitest: "npm:^0.24.3"
+    vue-watching-you: "workspace:^"
+    watching-you: "workspace:^"
+  languageName: unknown
+  linkType: soft
+
 "text-table@npm:^0.2.0":
   version: 0.2.0
   resolution: "text-table@npm:0.2.0"
@@ -15974,7 +15990,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vue-watching-you@workspace:packages/vue":
+"vue-watching-you@workspace:^, vue-watching-you@workspace:packages/vue":
   version: 0.0.0-use.local
   resolution: "vue-watching-you@workspace:packages/vue"
   dependencies:
@@ -16014,13 +16030,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "watching-you-repo@workspace:."
   dependencies:
-    "@testing-library/dom": "npm:^8.19.0"
     "@types/node": "npm:^18.11.8"
     eslint: "npm:^8.26.0"
     eslint-config-react-app: "npm:^7.0.1"
     eslint-plugin-import: "npm:^2.26.0"
     eslint-plugin-react: "npm:^7.31.10"
-    happy-dom: "npm:^7.6.6"
     husky: "npm:8.0.1"
     lint-staged: "npm:13.0.3"
     prettier: "npm:^2.7.1"
@@ -16028,11 +16042,10 @@ __metadata:
     vite: "npm:^3.2.1"
     vite-plugin-dts: "npm:^1.6.6"
     vite-tsconfig-paths: "npm:^3.5.2"
-    vitest: "npm:^0.24.3"
   languageName: unknown
   linkType: soft
 
-"watching-you@workspace:packages/core":
+"watching-you@workspace:^, watching-you@workspace:packages/core":
   version: 0.0.0-use.local
   resolution: "watching-you@workspace:packages/core"
   dependencies:

@@ -1,12 +1,12 @@
 import { fireEvent } from '@testing-library/dom';
 
-const wait = async (ms) => {
+const wait = async (ms: number) => {
   await new Promise((r) => {
     setTimeout(r, ms);
   });
 };
 
-const mousemove = async (x, y) => {
+const mousemove = async (x: number, y: number) => {
   fireEvent(
     window,
     new MouseEvent('mousemove', {
