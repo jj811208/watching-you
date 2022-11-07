@@ -18,7 +18,7 @@ const Circle = styled.div`
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  position:absolute;
+  position: absolute;
 `;
 
 function IronChain() {
@@ -35,7 +35,7 @@ function IronChain() {
               power={20 * (i + 1)}
               key={i}
             >
-              <Circle className={`stick-${i}`}/>
+              <Circle className={`stick-${i}`} />
             </WatchingYou>
           );
         })}

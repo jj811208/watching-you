@@ -18,7 +18,7 @@ module.exports = {
       name: '@storybook/addon-essentials',
       options: {
         actions: false,
-        interactions: false
+        interactions: false,
       },
     },
     // '@storybook/addon-interactions',

@@ -1,9 +1,7 @@
-
 import { defineConfig, mergeConfig } from 'vite';
-import vue from '@vitejs/plugin-vue'
+import vue from '@vitejs/plugin-vue';
 import { resolve } from 'path';
 import rootViteConfig from '../../vite.config';
-
 
 // https://vitejs.dev/config/
 export default mergeConfig(

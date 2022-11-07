@@ -11,9 +11,9 @@ const ExampleList = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
-  padding:24px;
+  padding: 24px;
 
-  a{
+  a {
     font-size: 32px;
   }
 `;

@@ -73,9 +73,12 @@ function App() {
               <div className="transition">1</div>
             </WatchingYou>
           </div>
-          <input style={{
-            padding:"24px"
-          }} className="hello-input" />
+          <input
+            style={{
+              padding: '24px',
+            }}
+            className="hello-input"
+          />
         </div>
       </div>
       <div className="section">

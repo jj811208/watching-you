@@ -1,4 +1,3 @@
-
 import { addons } from '@storybook/addons';
 import watchYouTheme from './theme';
 
