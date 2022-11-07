@@ -15034,12 +15034,10 @@ __metadata:
   dependencies:
     "@testing-library/dom": "npm:^8.19.0"
     happy-dom: "npm:^7.6.6"
-    react-watching-you: "workspace:^"
     typescript: "npm:^4.6.4"
     vite: "npm:^3.2.1"
     vite-tsconfig-paths: "npm:^3.5.2"
     vitest: "npm:^0.24.3"
-    vue-watching-you: "workspace:^"
     watching-you: "workspace:^"
   languageName: unknown
   linkType: soft
@@ -15990,7 +15988,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vue-watching-you@workspace:^, vue-watching-you@workspace:packages/vue":
+"vue-watching-you@workspace:packages/vue":
   version: 0.0.0-use.local
   resolution: "vue-watching-you@workspace:packages/vue"
   dependencies:
