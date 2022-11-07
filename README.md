@@ -47,6 +47,15 @@ watching-you's storybook using react, but every framework can do the same thing!
 - When watching `input`, the `text-align` attribute must be `left`
 - Only `px` are supported
 
+## Compatibility
+
+|           | Chrome | Firefox | Safari | Edge | Opera | iOS Safari/Chrome | Android Chrome |
+|-----------|--------|---------|--------|------|-------|-------------------|----------------|
+| Supported |   70+  |   73+   |  14.1+ |  80+ |  70+  |        14.1+      |        ✔       |
+
+
+Changing build settings or adding polyfill should result in better compatibility, but for now, I think that's enough, and I don't want its bundle size to get any bigger.
+
 ## Contributions
 
 If anyone wants to contribute, please open a issue and let me know, I'd be happy to write `CONTRIBUTING.md`.
