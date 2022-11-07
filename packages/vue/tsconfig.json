@@ -3,5 +3,10 @@
   "include": [
     "src",
     "../core/src"
+  ],
+  "references": [
+    {
+      "path": "../../tsconfig.node.json"
+    }
   ]
 }
