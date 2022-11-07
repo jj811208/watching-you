@@ -41,7 +41,7 @@ const ORIGIN_TRANSFORM = {
 
 class WatchingYou {
   static #mousePosition: Coordinate | null = null;
-  static #mouseObserverCount: number = 0;
+  static #mouseWatcherCount: number = 0;
   static #updateTargetPositionViaMouse = (e: MouseEvent): void => {
     WatchingYou.#mousePosition = {
       x: round(e.clientX),
@@ -337,7 +337,7 @@ class WatchingYou {
     targetType?: WatchingYouTargetType;
   }): void => {
     if (this.#targetType === 'mouse' && this.#rafId !== null) {
-      WatchingYou.#mouseObserverCount--;
+      WatchingYou.#mouseWatcherCount--;
     }
     if (isTargetMouse(targetProps)) {
       this.#targetType = 'mouse';
@@ -365,7 +365,7 @@ class WatchingYou {
       );
     }
     if (this.#targetType === 'mouse' && this.#rafId !== null) {
-      WatchingYou.#mouseObserverCount++;
+      WatchingYou.#mouseWatcherCount++;
     }
   };
 
@@ -390,7 +390,7 @@ class WatchingYou {
   start = (): void => {
     if (this.#rafId !== null) return;
     if (this.#targetType === 'mouse') {
-      if (WatchingYou.#mouseObserverCount === 0) {
+      if (WatchingYou.#mouseWatcherCount === 0) {
         window.addEventListener(
           'mousemove',
           WatchingYou.#updateTargetPositionViaMouse,
@@ -400,7 +400,7 @@ class WatchingYou {
           WatchingYou.#updateTargetPositionViaTouch,
         );
       }
-      WatchingYou.#mouseObserverCount++;
+      WatchingYou.#mouseWatcherCount++;
     }
     const nextRaf = () => {
       if (this.#checkWatcherDomVisibility()) {
@@ -423,9 +423,9 @@ class WatchingYou {
   stop = (): void => {
     if (this.#rafId === null) return;
     if (this.#targetType === 'mouse') {
-      WatchingYou.#mouseObserverCount--;
+      WatchingYou.#mouseWatcherCount--;
     }
-    if (WatchingYou.#mouseObserverCount === 0) {
+    if (WatchingYou.#mouseWatcherCount === 0) {
       window.removeEventListener(
         'mousemove',
         WatchingYou.#updateTargetPositionViaMouse,
