@@ -9,7 +9,7 @@
   "scripts": {
     "prepare": "husky install",
     "pre-commit": "lint-staged",
-    "build": "yarn workspace watching-you run build",
+    "build": "yarn workspaces foreach run build",
     "test": "yarn workspace tests-watching-you run test",
     "format": "prettier --write '**/**.{ts,tsx,js,cjs,mjs}'",
     "tsc": "tsc --noEmit",

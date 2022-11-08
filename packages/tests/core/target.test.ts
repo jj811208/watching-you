@@ -1,9 +1,6 @@
-/**
- * @vitest-environment happy-dom
- */
 import { beforeEach, describe, expect, it } from 'vitest';
-import WatchingYou from 'watching-you';
-import { mousemove } from './util';
+import WatchingYou from '../../core';//'watching-you';
+import { mousemove } from '../utils';
 
 describe('Target', () => {
   beforeEach(() => {

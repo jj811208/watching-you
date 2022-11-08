@@ -13,5 +13,7 @@ jobs:
         with:
           node-version: 16
       - run: yarn install --immutable
-      - run: yarn build
+      - run: yarn workspace watching-you run build
+      - run: yarn workspace react-watching-you run build
+      - run: yarn workspace vue-watching-you run build
       - run: yarn test
