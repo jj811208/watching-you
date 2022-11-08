@@ -1,5 +1,5 @@
 :root {
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-family: roboto, Avenir, Helvetica, Arial, sans-serif;
   font-size: 16px;
   line-height: 24px;
   font-weight: 400;
@@ -15,7 +15,9 @@
   -webkit-text-size-adjust: 100%;
 }
 
-html,body,#root,.App {
+html,
+body,
+#root {
   margin: 0;
   padding: 0;
   height: 100%;

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import WatchingYou from 'react-watching-you';
 import styled, { css } from 'styled-components';
+import GitHubLinkIcon from '../../GitHubLinkIcon';
 
 const Container = styled.div`
   display: flex;
@@ -77,6 +78,7 @@ function Login() {
 
   return (
     <Container>
+      <GitHubLinkIcon />
       <Face>
         <Eyes>
           <Eye needToClose={needToClose}>

@@ -1,12 +1,13 @@
 import WatchingYou from 'react-watching-you';
 import styled from 'styled-components';
+import GitHubLinkIcon from '../../GitHubLinkIcon';
 import cenaUrl from './cena.webp';
 
 const Container = styled.div`
   position: relative;
   height: 100%;
   width: 100%;
-  background: #444;
+  background: #999;
   overflow: hidden;
 `;
 const CenaWrapper = styled.div`
@@ -14,7 +15,7 @@ const CenaWrapper = styled.div`
   bottom: -80px;
   left: 0;
 `;
-const Cena = styled.img.attrs({
+const CenaImage = styled.img.attrs({
   src: cenaUrl,
 })`
   position: relative;
@@ -65,9 +66,10 @@ const RightEyeball = styled(Eyeball)`
   top: 64px;
   left: 160px;
 `;
-function Login() {
+function Cena() {
   return (
     <Container>
+      <GitHubLinkIcon />
       <CenaWrapper>
         <WhitesOfEyes />
         <WatchingYou rotatable={false} power={eyesPower}>
@@ -76,10 +78,10 @@ function Login() {
         <WatchingYou rotatable={false} power={eyesPower}>
           <RightEyeball />
         </WatchingYou>
-        <Cena />
+        <CenaImage />
       </CenaWrapper>
     </Container>
   );
 }
 
-export default Login;
+export default Cena;

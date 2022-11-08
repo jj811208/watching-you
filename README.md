@@ -22,7 +22,7 @@
 - Zero dependency (every framework is!)
 - Written in typescript
 - The size of the core code is only 3kb after gzip compression
-- If the element is not on the screen, it will automatically stop running
+- If the element is not on the screen, it will automatically stop watching
 
 ## Example
 
