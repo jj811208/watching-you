@@ -8201,26 +8201,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"examples-watching-you@workspace:packages/examples":
-  version: 0.0.0-use.local
-  resolution: "examples-watching-you@workspace:packages/examples"
-  dependencies:
-    "@fontsource/roboto": "npm:^4.5.8"
-    "@types/react": "npm:^18.0.24"
-    "@types/react-dom": "npm:^18.0.8"
-    "@types/styled-components": "npm:^5.1.26"
-    "@vitejs/plugin-react": "npm:^2.2.0"
-    react: "npm:^18.2.0"
-    react-dom: "npm:^18.2.0"
-    react-router-dom: "npm:^6.4.2"
-    react-watching-you: "workspace:^"
-    styled-components: "npm:^5.3.6"
-    typescript: "npm:^4.6.4"
-    vite: "npm:^3.2.1"
-    vite-tsconfig-paths: "npm:^3.5.2"
-  languageName: unknown
-  linkType: soft
-
 "exec-sh@npm:^0.3.2":
   version: 0.3.6
   resolution: "exec-sh@npm:0.3.6"
@@ -16256,6 +16236,26 @@ __metadata:
   checksum: d6416e650775ec1ac2087daa1f0db738a07bd709b1ab2784d902d4add2d75bdbfa1c6103ce1191ddc11aaa08ad99cc99c49bfcf885a4b89553286716c3c1a9b4
   languageName: node
   linkType: hard
+
+"website-watching-you@workspace:packages/website":
+  version: 0.0.0-use.local
+  resolution: "website-watching-you@workspace:packages/website"
+  dependencies:
+    "@fontsource/roboto": "npm:^4.5.8"
+    "@types/react": "npm:^18.0.24"
+    "@types/react-dom": "npm:^18.0.8"
+    "@types/styled-components": "npm:^5.1.26"
+    "@vitejs/plugin-react": "npm:^2.2.0"
+    react: "npm:^18.2.0"
+    react-dom: "npm:^18.2.0"
+    react-router-dom: "npm:^6.4.2"
+    react-watching-you: "workspace:^"
+    styled-components: "npm:^5.3.6"
+    typescript: "npm:^4.6.4"
+    vite: "npm:^3.2.1"
+    vite-tsconfig-paths: "npm:^3.5.2"
+  languageName: unknown
+  linkType: soft
 
 "whatwg-encoding@npm:^2.0.0":
   version: 2.0.0

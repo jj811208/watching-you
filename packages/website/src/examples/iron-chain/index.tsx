@@ -1,5 +1,6 @@
 import WatchingYou from 'react-watching-you';
 import styled from 'styled-components';
+import GitHubLinkIcon from '../../GitHubLinkIcon';
 
 const Container = styled.div`
   position: relative;
@@ -24,6 +25,7 @@ const Circle = styled.div`
 function IronChain() {
   return (
     <Container>
+      <GitHubLinkIcon />
       {Array(10)
         .fill('')
         .map((_, i) => {
