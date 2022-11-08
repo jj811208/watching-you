@@ -5,3 +5,6 @@ package.json
 .git/
 build/
 coverage/
+dist/
+storybook-static/
+.yarn/

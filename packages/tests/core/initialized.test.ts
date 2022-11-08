@@ -1,8 +1,5 @@
-/**
- * @vitest-environment happy-dom
- */
 import { describe, expect, it } from 'vitest';
-import WatchingYou from 'watching-you';
+import WatchingYou from '../../core';//'watching-you';
 
 describe('Initialized', () => {
   it('It should be able to be initialized', () => {

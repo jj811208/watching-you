@@ -1571,6 +1571,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/runtime@npm:^7.15.4":
+  version: 7.20.1
+  resolution: "@babel/runtime@npm:7.20.1"
+  dependencies:
+    regenerator-runtime: "npm:^0.13.10"
+  checksum: dab09323346ef2e0db0571a8d9af3bf01d290f0e97100da0874106e4aff794292755716745b593153b9436dc7471e059391cc0bd7ec9e2ec55f03c462247391e
+  languageName: node
+  linkType: hard
+
 "@babel/runtime@npm:~7.5.4":
   version: 7.5.5
   resolution: "@babel/runtime@npm:7.5.5"
@@ -3508,7 +3517,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/dom@npm:^8.19.0, @testing-library/dom@npm:^8.3.0":
+"@testing-library/dom@npm:^8.19.0, @testing-library/dom@npm:^8.3.0, @testing-library/dom@npm:^8.5.0":
   version: 8.19.0
   resolution: "@testing-library/dom@npm:8.19.0"
   dependencies:
@@ -3524,6 +3533,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@testing-library/react@npm:^13.4.0":
+  version: 13.4.0
+  resolution: "@testing-library/react@npm:13.4.0"
+  dependencies:
+    "@babel/runtime": "npm:^7.12.5"
+    "@testing-library/dom": "npm:^8.5.0"
+    "@types/react-dom": "npm:^18.0.0"
+  peerDependencies:
+    react: ^18.0.0
+    react-dom: ^18.0.0
+  checksum: 2030d32070b3d43bc374843e9989192be2bdc44d7280aebe17c9223637134b4f769c7077f704d5771cd29174b3f28b91dfae09a95a5d2b5d5db2a5ee689ef67f
+  languageName: node
+  linkType: hard
+
 "@testing-library/user-event@npm:^13.2.1":
   version: 13.5.0
   resolution: "@testing-library/user-event@npm:13.5.0"
@@ -3532,6 +3555,20 @@ __metadata:
   peerDependencies:
     "@testing-library/dom": ">=7.21.4"
   checksum: eee79128a258098d694bc722f87593bdf7508f46306f8cbac3a146c83bc13a22e865d930c2712ac9b9dc87a6b4d10ca9f2b586b690d472af4d12e6c48a650d91
+  languageName: node
+  linkType: hard
+
+"@testing-library/vue@npm:^6.6.1":
+  version: 6.6.1
+  resolution: "@testing-library/vue@npm:6.6.1"
+  dependencies:
+    "@babel/runtime": "npm:^7.15.4"
+    "@testing-library/dom": "npm:^8.5.0"
+    "@vue/test-utils": "npm:^2.0.0"
+  peerDependencies:
+    "@vue/compiler-sfc": ">= 3"
+    vue: ">= 3"
+  checksum: d8369fed68098e2d0e24cfa73f715a98b4ac1500c06c335b3c6f182b94122f99f38d222be895b07eaeabe28ec875f448bbd61d16a2319e2e63784c5cee569eda
   languageName: node
   linkType: hard
 
@@ -3854,7 +3891,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:^18.0.8":
+"@types/react-dom@npm:^18.0.0, @types/react-dom@npm:^18.0.8":
   version: 18.0.8
   resolution: "@types/react-dom@npm:18.0.8"
   dependencies:
@@ -4299,6 +4336,15 @@ __metadata:
   version: 3.2.41
   resolution: "@vue/shared@npm:3.2.41"
   checksum: c6947d270f4395fc16f24dc54c99d2f228ed6446756bfff363943ac28dbbd3719d3d490e97657f88acb021aebbd4bcbef99182492343e46138199e871c0fd02a
+  languageName: node
+  linkType: hard
+
+"@vue/test-utils@npm:^2.0.0":
+  version: 2.2.1
+  resolution: "@vue/test-utils@npm:2.2.1"
+  peerDependencies:
+    vue: ^3.0.1
+  checksum: e7017a3c7a6c355c0000782b7db0adf8f65c0aaf75f3ef6190a1ea53b365cf644e6183cfe2c5b8413df33f02babe60f24ea8d22a741b3a96c348cedd6449a527
   languageName: node
   linkType: hard
 
@@ -13403,6 +13449,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"regenerator-runtime@npm:^0.13.10":
+  version: 0.13.10
+  resolution: "regenerator-runtime@npm:0.13.10"
+  checksum: ac83ab4691a061519703e622ee817a0a517a80235d0c76a49ef32848c0d0946d97797d244806490f8f94e05a4b180a295869299b2e44c6f1c625b835703666a6
+  languageName: node
+  linkType: hard
+
 "regenerator-runtime@npm:^0.13.2, regenerator-runtime@npm:^0.13.4, regenerator-runtime@npm:^0.13.7":
   version: 0.13.9
   resolution: "regenerator-runtime@npm:0.13.9"
@@ -15013,12 +15066,18 @@ __metadata:
   resolution: "tests-watching-you@workspace:packages/tests"
   dependencies:
     "@testing-library/dom": "npm:^8.19.0"
+    "@testing-library/react": "npm:^13.4.0"
+    "@testing-library/vue": "npm:^6.6.1"
+    "@types/react": "npm:^18.0.24"
+    "@vitejs/plugin-react": "npm:^2.2.0"
+    "@vitejs/plugin-vue": "npm:^3.2.0"
     happy-dom: "npm:^7.6.6"
+    react: "npm:^18.2.0"
     typescript: "npm:^4.6.4"
     vite: "npm:^3.2.1"
     vite-tsconfig-paths: "npm:^3.5.2"
     vitest: "npm:^0.24.3"
-    watching-you: "workspace:^"
+    vue: "npm:^3.2.41"
   languageName: unknown
   linkType: soft
 
@@ -16023,7 +16082,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"watching-you@workspace:^, watching-you@workspace:packages/core":
+"watching-you@workspace:packages/core":
   version: 0.0.0-use.local
   resolution: "watching-you@workspace:packages/core"
   dependencies:

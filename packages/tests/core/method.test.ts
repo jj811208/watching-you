@@ -1,8 +1,5 @@
-/**
- * @vitest-environment happy-dom
- */
 import { describe, expect, it } from 'vitest';
-import WatchingYou from 'watching-you';
+import WatchingYou from '../../core';//'watching-you';
 
 describe('Method', () => {
   it('It should start watching something, when the start method is call', async () => {

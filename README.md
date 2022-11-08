@@ -63,7 +63,3 @@ If anyone wants to contribute, please open a issue and let me know, I'd be happy
 ## License
 
 [ISC](https://github.com/jj811208/watching-you/blob/main/LICENSE.md)
-
-## Todo
-
-- [ ] more test
