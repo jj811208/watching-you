@@ -53,8 +53,7 @@ watching-you's storybook using react, but every framework can do the same thing!
 |-----------|--------|---------|--------|------|-------|-------------------|----------------|
 | Supported |   70+  |   73+   |  14.1+ |  80+ |  70+  |        14.1+      |        ✔       |
 
-
-Changing build settings or adding polyfill should result in better compatibility, but for now, I think that's enough, and I don't want its bundle size to get any bigger.
+Changing the build settings or adding polyfill would have better compatibility, but for now, I think that's enough and I don't want it to get any bigger in bundle size.
 
 ## Contributions
 
