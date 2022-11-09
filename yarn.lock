@@ -6230,6 +6230,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"ci-info@npm:^3.5.0":
+  version: 3.5.0
+  resolution: "ci-info@npm:3.5.0"
+  checksum: d80d63d9c549c277a9feebb83cb300df5b8dbc2a799d35a413af4aaa31f6c1635216cdc52b3232846501d31eff0684c583cf24db3c770cdf2f0fcfcac4835d86
+  languageName: node
+  linkType: hard
+
 "cipher-base@npm:^1.0.0, cipher-base@npm:^1.0.1, cipher-base@npm:^1.0.3":
   version: 1.0.4
   resolution: "cipher-base@npm:1.0.4"
@@ -15071,6 +15078,7 @@ __metadata:
     "@types/react": "npm:^18.0.24"
     "@vitejs/plugin-react": "npm:^2.2.0"
     "@vitejs/plugin-vue": "npm:^3.2.0"
+    ci-info: "npm:^3.5.0"
     happy-dom: "npm:^7.6.6"
     react: "npm:^18.2.0"
     typescript: "npm:^4.6.4"

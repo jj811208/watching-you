@@ -1,0 +1,11 @@
+// Vitest Snapshot v1
+
+exports[`Target > It should be watching dom 1`] = `"translate3d(38.7px,31.7px,0px) rotate(129.4deg)"`;
+
+exports[`Target > It should be watching input 1`] = `"translate3d(44.9px,22.1px,0px) rotate(116.2deg)"`;
+
+exports[`Target > It should be watching input 2`] = `"translate3d(45.4px,20.9px,0px) rotate(114.7deg)"`;
+
+exports[`Target > It should be watching mouse 1`] = `"translate3d(0px,0px,0px) rotate(0deg)"`;
+
+exports[`Target > It should be watching mouse 2`] = `"translate3d(37.2px,33.4px,0px) rotate(131.9deg)"`;

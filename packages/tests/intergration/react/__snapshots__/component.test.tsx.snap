@@ -1,0 +1,17 @@
+// Vitest Snapshot v1
+
+exports[`Components > It should work 1`] = `
+<div
+  style="transform: translate3d(39.7px,30.4px,0px) rotate(127.5deg);"
+>
+  O
+</div>
+`;
+
+exports[`Components > It should work 2`] = `
+<div
+  style="transform: translate3d(39.7px,30.4px,0px) rotate(127.5deg);"
+>
+  O
+</div>
+`;

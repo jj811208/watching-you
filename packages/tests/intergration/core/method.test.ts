@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import WatchingYou from '../../core';//'watching-you';
+import { WatchingYou } from '../../watchingYou';
 
 describe('Method', () => {
   it('It should start watching something, when the start method is call', async () => {
@@ -84,17 +84,15 @@ describe('Method', () => {
 
   it('It should change target, when the setTarget is call', async () => {
     document.body.innerHTML = `
-      <div class="eyes">
-        <div>O</div>
-      </div>
+      <div id="watcher"></div>
     `;
     const watchingYou = new WatchingYou();
-    const targetSelector = '.eyes';
+    const targetSelector = '#watcher';
     watchingYou.setTarget({ target: targetSelector });
     const expectedDom = document.querySelector(targetSelector);
     expect(watchingYou.getState().targetDom).toBe(expectedDom);
 
-    if (!expectedDom) throw Error('eyes is notFound');
+    if (!expectedDom) throw Error('watcher is notFound');
     watchingYou.setTarget({ target: expectedDom, targetType: 'dom' });
     expect(watchingYou.getState().targetDom).toBe(expectedDom);
   });

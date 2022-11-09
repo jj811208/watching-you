@@ -1,7 +1,7 @@
 import { render } from '@testing-library/vue';
 import { describe, expect, it } from 'vitest';
-import WatchingYou from '../../vue'; //'vue-watching-you';
-import { mousemove } from '../utils';
+import { VueWatchingYou as WatchingYou } from '../../watchingYou';
+import { mousemove } from '../../utils';
 
 describe('Components', () => {
   it('It should work', async () => {

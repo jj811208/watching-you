@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import WatchingYou from '../../core';//'watching-you';
+import { WatchingYou } from '../../watchingYou';
 
 describe('Initialized', () => {
   it('It should be able to be initialized', () => {
@@ -9,13 +9,11 @@ describe('Initialized', () => {
 
   it('It should set the initialization settings correctly - watcher', () => {
     document.body.innerHTML = `
-      <div class="eyes">
-        <div>O</div>
-      </div>
+      <div id="watcher"></div>
     `;
-    const watcherSelector = '.eyes';
+    const watcherSelector = '#watcher';
     const expectedDom = document.querySelector(watcherSelector);
-    if (!expectedDom) throw Error('eyesDom is notFound');
+    if (!expectedDom) throw Error('watcherDom is notFound');
     expect(
       new WatchingYou(watcherSelector).getState().watcherDom,
     ).toBe(expectedDom);
@@ -33,13 +31,11 @@ describe('Initialized', () => {
 
   it('It should set the initialization settings correctly - target', () => {
     document.body.innerHTML = `
-      <div class="eyes">
-        <div>O</div>
-      </div>
+      <div id="watcher"></div>
     `;
-    const targetSelector = '.eyes';
+    const targetSelector = '#watcher';
     const expectedDom = document.querySelector(targetSelector);
-    if (!expectedDom) throw Error('eyesDom is notFound');
+    if (!expectedDom) throw Error('watcherDom is notFound');
     expect(
       new WatchingYou({ target: targetSelector }).getState()
         .targetDom,
