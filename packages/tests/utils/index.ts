@@ -1,5 +1,4 @@
 import { fireEvent } from '@testing-library/dom';
-
 const wait = async (ms: number) => {
   await new Promise((r) => {
     setTimeout(r, ms);
@@ -7,14 +6,14 @@ const wait = async (ms: number) => {
 };
 
 const mousemove = async (x: number, y: number) => {
-  fireEvent(
+  await fireEvent(
     window,
     new MouseEvent('mousemove', {
       clientX: x,
       clientY: y,
     }),
   );
-  await wait(100);
+  await wait(50);
 };
 
 export { wait, mousemove };
