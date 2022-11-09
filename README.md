@@ -44,11 +44,6 @@ watching-you's storybook using react, but every framework can do the same thing!
 - [React](https://github.com/jj811208/watching-you/tree/main/packages/react)
 - [Vue](https://github.com/jj811208/watching-you/tree/main/packages/vue)
 
-## Known limitations
-
-- When watching `input`, the `text-align` attribute must be `left`
-- Only `px` are supported
-
 ## Compatibility
 
 |           | Chrome | Firefox | Safari | Edge | Opera | iOS Safari/Chrome | Android Chrome |
@@ -56,6 +51,11 @@ watching-you's storybook using react, but every framework can do the same thing!
 | Supported |   70+  |   73+   |  14.1+ |  80+ |  70+  |        14.1+      |        ✔       |
 
 Changing the build settings or adding polyfill would have better compatibility, but for now, I think that's enough and I don't want it to get any bigger in bundle size.
+
+## Known limitations
+
+- When watching `input`, the `text-align` attribute must be `left`
+- Only `px` are supported
 
 ## Contributions
 
