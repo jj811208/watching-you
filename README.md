@@ -54,7 +54,7 @@ If you use `watching-you` directly without any compiler(babel), (e.g. Wordpress 
 |-----------|--------|---------|--------|------|-------|-------------------|----------------|
 | Supported |   70+  |   73+   |  14.1+ |  80+ |  70+  |        14.1+      |        ✔       |
 
-But if you use a compiler like babel and import polyfill, I think it can even support IE11
+But if you use a compiler like babel and import polyfill, it can even support IE11
 
 Some references: <br/>
 https://babeljs.io/ <br/>
