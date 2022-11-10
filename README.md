@@ -48,7 +48,7 @@ watching-you's storybook using react, but every framework can do the same thing!
 
 ## Compatibility
 
-If you use `watching-you` directly without any compiler(babel), (e.g. Wordpress project using CDN import `watching-you`)
+If you use `watching-you` directly without any compiler(babel), (e.g. Wordpress project using [CDN](https://cdn.jsdelivr.net/npm/watching-you/dist/watching-you.umd.cjs) import `watching-you`)
 
 |           | Chrome | Firefox | Safari | Edge | Opera | iOS Safari/Chrome | Android Chrome |
 |-----------|--------|---------|--------|------|-------|-------------------|----------------|
