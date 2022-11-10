@@ -59,28 +59,28 @@ function Landing() {
 
         {/* <ExamplesTitle>Examples</ExamplesTitle> */}
         <ExampleLink
-          href="/#/example/login"
+          href="./#/example/login"
           target="_blank"
           rel="noreferrer"
         >
           Example 1. Login Form
         </ExampleLink>
         <ExampleLink
-          href="/#/example/iron-chain"
+          href="./#/example/iron-chain"
           target="_blank"
           rel="noreferrer"
         >
           Example 2. Iron Chain
         </ExampleLink>
         <ExampleLink
-          href="/#/example/cena"
+          href="./#/example/cena"
           target="_blank"
           rel="noreferrer"
         >
           Example 3. Cena is watching you
         </ExampleLink>
         <ExampleLink
-          href="/#/example/svg-path"
+          href="./#/example/svg-path"
           target="_blank"
           rel="noreferrer"
         >
