@@ -9,7 +9,7 @@ const Container = styled.div`
   flex-direction: column;
   height: 100%;
   width: 100%;
-  padding: 24px;
+  padding: 24px 0;
   gap: 16px;
   overflow: hidden;
 `;
