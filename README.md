@@ -30,6 +30,7 @@
 - <a href="https://jj811208.github.io/watching-you/#/example/login" target="_blank">Login Form</a>
 - <a href="https://jj811208.github.io/watching-you/#/example/iron-chain" target="_blank">Iron Chain</a>
 - <a href="https://jj811208.github.io/watching-you/#/example/cena" target="_blank">Cena is watching you</a>
+- <a href="https://jj811208.github.io/watching-you/#/example/svg-path" target="_blank">Svg Path Watcher</a>
 
 The source code can be found <a href="https://github.com/jj811208/watching-you/blob/main/packages/website/README.md" target="_blank">here</a>
 
