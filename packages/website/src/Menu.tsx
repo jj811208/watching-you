@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import githubIconUrl from './PNG/github-icon.png';
+import githubIconUrl from './assets/github-icon.png';
 
 const Logo = styled.a`
   font-size: 32px;

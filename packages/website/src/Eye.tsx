@@ -6,25 +6,55 @@ const StyledEye = styled.div`
   justify-content: center;
   align-items: center;
   height: 80px;
-  width: 64px;
+  width: 54px;
   border-radius: 50%;
-  border: #000 solid 2px;
+  box-shadow: inset 0px 0px 6px #000;
   background: #fff;
 `;
 const EyeBall = styled.div`
-  display: inline-block;
-  height: 12px;
-  width: 12px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  height: 24px;
+  width: 24px;
   border-radius: 50%;
-  background: #000;
+  background: rgb(112, 56, 0);
+  background: linear-gradient(
+    135deg,
+    rgba(112, 56, 0, 1) 40%,
+    rgba(242, 201, 0, 1) 100%
+  );
 `;
-const power = { x: 24, y: 32 };
+const EyeBall1 = styled.div`
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  height: 18px;
+  width: 18px;
+  border-radius: 50%;
+  background: #2f1100;
+`;
+const EyeBall2 = styled.div`
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 8px;
+  width: 8px;
+  border-radius: 50%;
+  background: #fff;
+`;
+const power = { x: 15, y: 26 };
 
 function Eye() {
   return (
     <StyledEye>
-      <WatchingYou power={power}>
-        <EyeBall />
+      <WatchingYou power={power} rotatable={false}>
+        <EyeBall>
+          <EyeBall1>
+            <EyeBall2 />
+          </EyeBall1>
+        </EyeBall>
       </WatchingYou>
     </StyledEye>
   );

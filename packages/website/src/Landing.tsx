@@ -72,13 +72,19 @@ function Landing() {
         >
           Example 2. Iron Chain
         </ExampleLink>
-
         <ExampleLink
           href="/#/example/cena"
           target="_blank"
           rel="noreferrer"
         >
           Example 3. Cena is watching you
+        </ExampleLink>
+        <ExampleLink
+          href="/#/example/svg-path"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Example 4. Svg path watcher
         </ExampleLink>
       </HeroContent>
     </Hero>
