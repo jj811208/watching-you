@@ -65,10 +65,6 @@ https://github.com/vitejs/vite/tree/main/packages/plugin-legacy
 - When watching `input`, the `text-align` attribute must be `left`
 - Only `px` are supported
 
-## Contributions
-
-If anyone wants to contribute, please open a issue and let me know, I'd be happy to write `CONTRIBUTING.md`.
-
 ## License
 
 [ISC](https://github.com/jj811208/watching-you/blob/main/LICENSE.md)
