@@ -11,8 +11,8 @@
 </p>
 
 <p align="center">
-  <img alt="watching your mouse" src="https://github.com/jj811208/watching-you/blob/main/static/1.gif" height="320" />
-  <img alt="watching your input value" src="https://github.com/jj811208/watching-you/blob/main/static/2.gif" height="320" />
+  <img alt="watching your mouse" src="https://github.com/jj811208/watching-you/blob/main/.github/static/1.gif" height="320" />
+  <img alt="watching your input value" src="https://github.com/jj811208/watching-you/blob/main/.github/static/2.gif" height="320" />
 </p>
 
 ## Features
