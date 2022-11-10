@@ -16,7 +16,8 @@
 </p>
 
 ## Features
-- Ability to watch mouse or another DOM or even input values, watch anything you want!
+
+- Be able to watch the mouse or another DOM, or even input values, watch anything you want!
 - Because it is DOM-based, it is easy to support RWD
 - Supports multiple frameworks
 - Zero dependency (every framework is!)
@@ -46,11 +47,17 @@ watching-you's storybook using react, but every framework can do the same thing!
 
 ## Compatibility
 
+If you use `watching-you` directly without any compiler(babel), (e.g. Wordpress project using CDN import `watching-you`)
+
 |           | Chrome | Firefox | Safari | Edge | Opera | iOS Safari/Chrome | Android Chrome |
 |-----------|--------|---------|--------|------|-------|-------------------|----------------|
 | Supported |   70+  |   73+   |  14.1+ |  80+ |  70+  |        14.1+      |        ✔       |
 
-Changing the build settings or adding polyfill would have better compatibility, but for now, I think that's enough and I don't want it to get any bigger in bundle size.
+But if you use a compiler like babel and import polyfill, I think it can even support IE11
+
+Some references: <br/>
+https://babeljs.io/ <br/>
+https://github.com/vitejs/vite/tree/main/packages/plugin-legacy
 
 ## Known limitations
 
