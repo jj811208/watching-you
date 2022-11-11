@@ -69,6 +69,7 @@ class WatchingYou {
   #powerX = DEFAULT_POWER;
   #powerY = DEFAULT_POWER;
   #fakeInputDom: HTMLElement | null = null;
+  #targetInputValue: string = '';
   #rafId: number | null = null;
 
   get #targetPosition() {
@@ -149,19 +150,55 @@ class WatchingYou {
       this.#createFakeInput();
     }
     const fakeInputDom = this.#fakeInputDom!;
-    const thisWatchDom = this.#targetDom as HTMLInputElement;
-
-    if (fakeInputDom.innerText !== thisWatchDom.value) {
-      fakeInputDom.innerText = thisWatchDom.value;
-    }
-
-    const { font, letterSpacing, width, lineHeight, paddingLeft } =
-      getComputedStyle(this.#targetDom);
-    const paddingLeftNumber = Number(paddingLeft.slice(0, -2));
-    const targetTagName = this.#targetDom.tagName;
+    const targetDom = this.#targetDom as HTMLInputElement;
+    const targetTagName = targetDom.tagName;
     const isInput = targetTagName === 'INPUT';
     const isTextarea = targetTagName === 'TEXTAREA';
-    const inputRect = this.#targetDom.getBoundingClientRect();
+    const { font, letterSpacing, width, lineHeight, paddingLeft } =
+      getComputedStyle(targetDom);
+    const paddingLeftNumber = Number(paddingLeft.slice(0, -2));
+
+    if (this.#targetInputValue !== targetDom.value) {
+      this.#targetInputValue = targetDom.value;
+      if (isInput) {
+        fakeInputDom.innerText = targetDom.value;
+      } else if (isTextarea) {
+        const allLine = targetDom.value.split('\n');
+        const lastLine = allLine[allLine.length - 1];
+        const tempDom = document.createElement('pre');
+        tempDom.setAttribute(
+          'style',
+          `
+            display: inline-block;
+            width: ${targetDom.clientWidth}px;
+            white-space: pre-wrap;
+            overflow-wrap: break-word;
+            word-break: normal;
+            line-height: ${lineHeight};
+            min-height: 1em;
+            height: auto;
+            font: ${font};
+            letter-spacing: ${letterSpacing};
+          `,
+        );
+        document.querySelector('body')?.append(tempDom); //XXX: Maybe we should let the users decide?
+        let oneRowHeight: number = 0;
+        lastLine.split('').forEach((char) => {
+          tempDom.innerText += char;
+          if (!oneRowHeight) oneRowHeight = tempDom.clientHeight;
+          if (tempDom.clientHeight !== oneRowHeight) {
+            if (char === ' ') return;
+            const allWord = tempDom.innerText.split(' ');
+            const lastWord = allWord[allWord.length - 1];
+
+            tempDom.innerText = lastWord;
+          }
+        });
+        fakeInputDom.innerText = tempDom.innerText.trimEnd();
+        tempDom.remove();
+      }
+    }
+    const inputRect = targetDom.getBoundingClientRect();
     const fakeInputRect = fakeInputDom.getBoundingClientRect();
     if (isInput) {
       fakeInputDom.setAttribute(
@@ -177,7 +214,7 @@ class WatchingYou {
           font: ${font};
           max-width: ${width};
           letter-spacing: ${letterSpacing};
-          `,
+        `,
       );
       const x = round(
         inputRect.left + fakeInputRect.width + paddingLeftNumber,
@@ -202,7 +239,10 @@ class WatchingYou {
         `,
       );
       const widthNumber = Number(width.slice(0, -2));
-      const fakeWidth = fakeInputRect.width % widthNumber;
+
+      let fakeWidth = fakeInputRect.width % widthNumber; //targetDom.clientWidth;
+      if (fakeWidth === 0)
+        fakeWidth = fakeInputDom.innerText ? widthNumber : 0;
       const x = round(inputRect.left + fakeWidth + paddingLeftNumber);
       const y = round(inputRect.top + inputRect.height / 2);
       this.#targetPosition = { x, y };
