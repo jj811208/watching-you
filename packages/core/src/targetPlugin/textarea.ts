@@ -31,8 +31,8 @@ class TextareaTarget implements Target {
 
   // To be optimized
   update() {
-    if (!this.target) return { x: 0, y: 0 };
-    if (!this.#fakeTextarea) return { x: 0, y: 0 };
+    if (!this.target) return null;
+    if (!this.#fakeTextarea) return null;
 
     const {
       font,

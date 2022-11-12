@@ -19,7 +19,7 @@ class DomTarget implements Target {
   setup() {}
   cleanup() {}
   update() {
-    if (!this.target) return { x: 0, y: 0 };
+    if (!this.target) return null;
 
     const rect = this.target.getBoundingClientRect();
 

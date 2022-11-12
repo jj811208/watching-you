@@ -28,8 +28,8 @@ class InputTarget implements Target {
     this.#fakeInput = null;
   }
   update() {
-    if (!this.target) return { x: 0, y: 0 };
-    if (!this.#fakeInput) return { x: 0, y: 0 };
+    if (!this.target) return null;
+    if (!this.#fakeInput) return null;
 
     if (this.#fakeInput.innerText !== this.target.value) {
       this.#fakeInput.innerText = this.target.value;
