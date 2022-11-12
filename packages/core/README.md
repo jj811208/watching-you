@@ -72,7 +72,7 @@ new WatchingYou(options);
 |----|----|-------|-----------|
 |watcher| string \| HtmlElement | undefined | The DOM that becomes the eye, i.e. the DOM that is given the css transform |
 |target| string \| HtmlElement | undefined | The DOM being watched |
-|targetType| 'mouse' \| 'dom' \| 'input' | 'mouse' | `watching-you` determines the subsequent behavior based on the `targetType`. |
+|targetType| 'mouse' \| 'dom' \| 'input' \| 'textarea' | 'mouse' | `watching-you` determines the subsequent behavior based on the `targetType`. |
 |power| number \| {x: number, y: number} | 50 | The maximum displacement distance of the watcher, which is always a circle |
 |rotatable| boolean | true | Does Watcher rotate|
 |movable| boolean | true | Does Watcher move |
@@ -83,7 +83,7 @@ new WatchingYou(options);
 |start| (): void | Start watching |
 |stop| (): void | Stop watching |
 |setWatcher| (watcher?: string \| HtmlElement): void |Change `watcher` property |
-|setTarget| (targetProps?: {target?: string \| HtmlElement; targetType?: 'mouse' \| 'dom' \| 'input'; }): void | Change `target` and `targetType` properties |
+|setTarget| (targetProps?: {target?: string \| HtmlElement; targetType?: 'mouse' \| 'dom' \| 'input' \| 'textarea'; }): void | Change `target` and `targetType` properties |
 |setPower| (power: number \| {x: number, y: number}):void | Change `power` property |
 |setRotatable| (rotatable: boolean = true): void | Change `rotatable` property |
 |setMovable| (movable: boolean = true): void | Change `movable` property |
