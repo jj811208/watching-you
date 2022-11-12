@@ -60,10 +60,11 @@ Some references: <br/>
 https://babeljs.io/ <br/>
 https://github.com/vitejs/vite/tree/main/packages/plugin-legacy
 
-## Known limitations
+## Note
 
-- When watching `input`, the `text-align` attribute must be `left`
-- Only `px` are supported
+- When watching `input` or `textarea`, the `text-align` attribute must be `left`
+- Some inline elements ignore the `transform` attribute (let's say `span`), so you have to give them the `display` attribute to work properly.
+- You may need something like `transition: transform .1s` depending on your needs
 
 ## License
 
