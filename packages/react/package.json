@@ -1,6 +1,6 @@
 {
   "name": "react-watching-you",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "license": "ISC",
   "type": "module",
   "main": "./dist/react-watching-you.umd.cjs",
