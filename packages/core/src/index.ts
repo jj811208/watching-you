@@ -1,13 +1,8 @@
 import { Coordinate } from './type/Coordinate';
 import getDomTranslateProp from './util/getDomTranslateProp';
-import log from './util/log';
 import { round } from './util/math';
-import {
-  isTargetDom,
-  isTargetInput,
-  isTargetMouse,
-} from './util/target';
 import { isHtmlElement } from './util/type';
+import TargetPlugins from './targetPlugin';
 
 interface WatchingYouRenderTransform {
   translate: {
@@ -22,7 +17,7 @@ type WatchingYouRender = (
 
 type WatchingYouWatcher = string | Element;
 type WatchingYouTarget = string | Element;
-type WatchingYouTargetType = 'mouse' | 'dom' | 'input';
+type WatchingYouTargetType = 'mouse' | 'dom' | 'input' | 'textarea';
 type WatchingYouPower = number | { x?: number; y?: number };
 interface WatchingYouOptions {
   target?: WatchingYouTarget;
@@ -33,55 +28,26 @@ interface WatchingYouOptions {
   movable?: boolean;
 }
 const DEFAULT_POWER = 50;
-const DEFAULT_OBSERVED_TYPE = 'mouse';
+const DEFAULT_TARGET_TYPE = 'mouse';
 const ORIGIN_TRANSFORM = {
   translate: { x: 0, y: 0 },
   rotate: 0,
 };
 
 class WatchingYou {
-  static #mousePosition: Coordinate | null = null;
-  static #mouseWatcherCount: number = 0;
-  static #updateTargetPositionViaMouse = (e: MouseEvent): void => {
-    WatchingYou.#mousePosition = {
-      x: round(e.clientX),
-      y: round(e.clientY),
-    };
-  };
-  static #updateTargetPositionViaTouch = (e: TouchEvent): void => {
-    WatchingYou.#mousePosition = {
-      x: round(e.touches[0].clientX),
-      y: round(e.touches[0].clientY),
-    };
-  };
-
-  #customRender: WatchingYouRender | null = null;
   #watcherSelector: string | null = null;
-  #watcherDom: HTMLElement | null = null;
-  #targetDom: HTMLElement | null = null;
+  #watcher: HTMLElement | null = null;
   #watcherPosition: Coordinate | null = null;
-  #_targetPosition: Coordinate | null = null;
+  #targetPosition: Coordinate | null = null;
+  #activeTargetPlugin: any = null;
   #lastRenderingWatcherPosition: Coordinate | null = null;
   #lastRenderingTargetPosition: Coordinate | null = null;
   #rotatable: boolean = true;
   #movable: boolean = true;
-  #targetType: WatchingYouTargetType = DEFAULT_OBSERVED_TYPE;
   #powerX = DEFAULT_POWER;
   #powerY = DEFAULT_POWER;
-  #fakeInputDom: HTMLElement | null = null;
-  #targetInputValue: string = '';
+  #customRender: WatchingYouRender | null = null;
   #rafId: number | null = null;
-
-  get #targetPosition() {
-    if (this.#targetType === 'mouse')
-      return WatchingYou.#mousePosition;
-    return this.#_targetPosition;
-  }
-  set #targetPosition(newPosition) {
-    if (this.#targetType === 'mouse')
-      WatchingYou.#mousePosition = newPosition;
-    this.#_targetPosition = newPosition;
-  }
 
   constructor(
     watcherOrOptions?:
@@ -120,144 +86,26 @@ class WatchingYou {
   }
 
   #updateWatcherPosition = (): void => {
-    if (this.#watcherDom === null) {
+    if (this.#watcher === null) {
       if (this.#watcherSelector !== null)
-        this.#watcherDom = document.querySelector(
-          this.#watcherSelector,
-        );
+        this.#watcher = document.querySelector(this.#watcherSelector);
 
       return;
     }
-    const rect = this.#watcherDom.getBoundingClientRect();
-    const translate = getDomTranslateProp(this.#watcherDom);
+    const rect = this.#watcher.getBoundingClientRect();
+    const translate = getDomTranslateProp(this.#watcher);
     const x = round(rect.left - translate.x + rect.width / 2);
     const y = round(rect.top - translate.y + rect.height / 2);
     this.#watcherPosition = { x, y };
   };
 
-  #updateTargetPositionViaDom = (): void => {
-    if (!this.#targetDom) return;
-    const rect = this.#targetDom.getBoundingClientRect();
-    // XXX: Only return the center position of the dom now
-    const x = round(rect.left + rect.width / 2);
-    const y = round(rect.top + rect.height / 2);
-    this.#targetPosition = { x, y };
+  #updateTargetPosition = (): void => {
+    this.#targetPosition = this.#activeTargetPlugin.update();
   };
 
-  #updateTargetPositionViaInput = (): void => {
-    if (!this.#targetDom) return;
-    if (!this.#fakeInputDom) {
-      this.#createFakeInput();
-    }
-    const fakeInputDom = this.#fakeInputDom!;
-    const targetDom = this.#targetDom as HTMLInputElement;
-    const targetTagName = targetDom.tagName;
-    const isInput = targetTagName === 'INPUT';
-    const isTextarea = targetTagName === 'TEXTAREA';
-    const { font, letterSpacing, width, lineHeight, paddingLeft } =
-      getComputedStyle(targetDom);
-    const paddingLeftNumber = Number(paddingLeft.slice(0, -2));
-
-    if (this.#targetInputValue !== targetDom.value) {
-      this.#targetInputValue = targetDom.value;
-      if (isInput) {
-        fakeInputDom.innerText = targetDom.value;
-      } else if (isTextarea) {
-        const allLine = targetDom.value.split('\n');
-        const lastLine = allLine[allLine.length - 1];
-        const tempDom = document.createElement('pre');
-        tempDom.setAttribute(
-          'style',
-          `
-            display: inline-block;
-            width: ${targetDom.clientWidth}px;
-            white-space: pre-wrap;
-            overflow-wrap: break-word;
-            word-break: normal;
-            line-height: ${lineHeight};
-            min-height: 1em;
-            height: auto;
-            font: ${font};
-            letter-spacing: ${letterSpacing};
-          `,
-        );
-        document.querySelector('body')?.append(tempDom); //XXX: Maybe we should let the users decide?
-        let oneRowHeight: number = 0;
-        lastLine.split('').forEach((char) => {
-          tempDom.innerText += char;
-          if (!oneRowHeight) oneRowHeight = tempDom.clientHeight;
-          if (tempDom.clientHeight !== oneRowHeight) {
-            if (char === ' ') return;
-            const allWord = tempDom.innerText.split(' ');
-            const lastWord = allWord[allWord.length - 1];
-
-            tempDom.innerText = lastWord;
-          }
-        });
-        fakeInputDom.innerText = tempDom.innerText.trimEnd();
-        tempDom.remove();
-      }
-    }
-    const inputRect = targetDom.getBoundingClientRect();
-    const fakeInputRect = fakeInputDom.getBoundingClientRect();
-    if (isInput) {
-      fakeInputDom.setAttribute(
-        'style',
-        `
-          position: absolute;
-          opacity: 0;
-          top: 0;
-          left: -100%;
-          pointer-events: none;
-          display: inline-block;
-          line-height: ${lineHeight};
-          font: ${font};
-          max-width: ${width};
-          letter-spacing: ${letterSpacing};
-        `,
-      );
-      const x = round(
-        inputRect.left + fakeInputRect.width + paddingLeftNumber,
-      );
-      const y = round(inputRect.top + fakeInputRect.height / 2);
-      this.#targetPosition = { x, y };
-    }
-    if (isTextarea) {
-      fakeInputDom.setAttribute(
-        'style',
-        `
-          position: absolute;
-          opacity: 0;
-          top: 0;
-          left: -100%;
-          pointer-events: none;
-          display: inline-block;
-          word-break: keep-all;
-          line-height: ${lineHeight};
-          font: ${font};
-          letter-spacing: ${letterSpacing};
-        `,
-      );
-      const widthNumber = Number(width.slice(0, -2));
-
-      let fakeWidth = fakeInputRect.width % widthNumber; //targetDom.clientWidth;
-      if (fakeWidth === 0)
-        fakeWidth = fakeInputDom.innerText ? widthNumber : 0;
-      const x = round(inputRect.left + fakeWidth + paddingLeftNumber);
-      const y = round(inputRect.top + inputRect.height / 2);
-      this.#targetPosition = { x, y };
-    }
-  };
-
-  #createFakeInput = (): void => {
-    if (!this.#targetDom) return;
-    this.#fakeInputDom = document.createElement('pre');
-    document.querySelector('body')?.append(this.#fakeInputDom); //XXX: Maybe we should let the users decide?
-  };
-
-  #checkWatcherDomVisibility = (): boolean => {
-    if (!this.#watcherDom) return false;
-    const rect = this.#watcherDom.getBoundingClientRect();
+  #checkWatcherVisibility = (): boolean => {
+    if (!this.#watcher) return false;
+    const rect = this.#watcher.getBoundingClientRect();
     // not exact, but very efficient
     const boundaryY = this.#powerY * 2;
     const boundaryX = this.#powerX * 2;
@@ -315,8 +163,8 @@ class WatchingYou {
   };
 
   #defaultRender: WatchingYouRender = (transform) => {
-    if (!this.#watcherDom) return;
-    this.#watcherDom.style.transform = `translate3d(${transform.translate.x}px,${transform.translate.y}px,0px) rotate(${transform.rotate}deg)`;
+    if (!this.#watcher) return;
+    this.#watcher.style.transform = `translate3d(${transform.translate.x}px,${transform.translate.y}px,0px) rotate(${transform.rotate}deg)`;
   };
 
   #needRender = (): boolean => {
@@ -355,30 +203,24 @@ class WatchingYou {
   // To avoid internal state modification by users, so the attributes should be a new object.
   getState = () => {
     const state = {
-      mousePosition: {
-        x: WatchingYou.#mousePosition?.x || 0,
-        y: WatchingYou.#mousePosition?.y || 0,
-      },
-      mouseWatcherCount: WatchingYou.#mouseWatcherCount,
-      watcherDom: this.#watcherDom,
-      targetDom: this.#targetDom,
+      watcher: this.#watcher,
       watcherPosition: {
         x: this.#watcherPosition?.x || 0,
         y: this.#watcherPosition?.y || 0,
       },
+      target: this.#activeTargetPlugin.target,
       targetPosition: {
         x: this.#targetPosition?.x || 0,
         y: this.#targetPosition?.y || 0,
       },
+      targetType: this.#activeTargetPlugin.name,
       rotatable: this.#rotatable,
       movable: this.#movable,
-      targetType: this.#targetType,
       power: {
         x: this.#powerX,
         y: this.#powerY,
       },
-      fakeInputDom: this.#fakeInputDom,
-      rafId: this.#rafId,
+      active: !!this.#rafId,
     };
     return state;
   };
@@ -386,12 +228,12 @@ class WatchingYou {
   setWatcher = (watcher?: WatchingYouWatcher): void => {
     if (!watcher) return;
     if (isHtmlElement(watcher)) {
-      this.#watcherDom = watcher;
+      this.#watcher = watcher;
     } else if (typeof watcher === 'string') {
       this.#watcherSelector = watcher;
-      this.#watcherDom = document.querySelector(watcher);
+      this.#watcher = document.querySelector(watcher);
     } else {
-      log(`Unexpected watcher: ${JSON.stringify(watcher)}`, 'warn');
+      console.error(`Unexpected watcher: ${JSON.stringify(watcher)}`);
     }
   };
 
@@ -407,36 +249,29 @@ class WatchingYou {
     target?: WatchingYouTarget;
     targetType?: WatchingYouTargetType;
   }): void => {
-    if (this.#targetType === 'mouse' && this.#rafId !== null) {
-      WatchingYou.#mouseWatcherCount--;
+    if (this.#rafId !== null && this.#activeTargetPlugin !== null) {
+      this.#activeTargetPlugin.cleanup();
     }
-    if (isTargetMouse(targetProps)) {
-      this.#targetType = 'mouse';
-      this.#targetDom = null;
-    } else if (isTargetDom(targetProps)) {
-      const { target } = targetProps;
-      this.#targetType = 'dom';
-      this.#targetDom = !target
-        ? null
-        : isHtmlElement(target)
-        ? target
-        : document.querySelector(target);
-    } else if (isTargetInput(targetProps)) {
-      const { target } = targetProps;
-      this.#targetType = 'input';
-      this.#targetDom = !target
-        ? null
-        : isHtmlElement(target)
-        ? target
-        : document.querySelector(target);
-    } else {
-      log(
-        `Unexpected target: ${JSON.stringify(targetProps)}`,
-        'warn',
-      );
+
+    let targetType: WatchingYouTargetType = DEFAULT_TARGET_TYPE;
+
+    if (
+      targetProps &&
+      !targetProps.targetType &&
+      !!targetProps.target
+    ) {
+      targetType = 'dom';
+    } else if (targetProps?.targetType) {
+      targetType = targetProps.targetType;
     }
-    if (this.#targetType === 'mouse' && this.#rafId !== null) {
-      WatchingYou.#mouseWatcherCount++;
+
+    // TODO: Remove any type
+    this.#activeTargetPlugin = new TargetPlugins[targetType](
+      targetProps?.target as any,
+    );
+
+    if (this.#rafId !== null && this.#activeTargetPlugin !== null) {
+      this.#activeTargetPlugin.setup();
     }
   };
 
@@ -460,28 +295,11 @@ class WatchingYou {
 
   start = (): void => {
     if (this.#rafId !== null) return;
-    if (this.#targetType === 'mouse') {
-      if (WatchingYou.#mouseWatcherCount === 0) {
-        window.addEventListener(
-          'mousemove',
-          WatchingYou.#updateTargetPositionViaMouse,
-        );
-        window.addEventListener(
-          'touchmove',
-          WatchingYou.#updateTargetPositionViaTouch,
-        );
-      }
-      WatchingYou.#mouseWatcherCount++;
-    }
+    this.#activeTargetPlugin.setup();
     const nextRaf = () => {
-      if (this.#checkWatcherDomVisibility()) {
+      if (this.#checkWatcherVisibility()) {
         this.#updateWatcherPosition();
-        if (this.#targetType === 'dom') {
-          this.#updateTargetPositionViaDom();
-        }
-        if (this.#targetType === 'input') {
-          this.#updateTargetPositionViaInput();
-        }
+        this.#updateTargetPosition();
         if (this.#needRender()) {
           this.#render();
         }
@@ -493,32 +311,17 @@ class WatchingYou {
 
   stop = (): void => {
     if (this.#rafId === null) return;
-    if (this.#targetType === 'mouse') {
-      WatchingYou.#mouseWatcherCount--;
-    }
-    if (WatchingYou.#mouseWatcherCount === 0) {
-      window.removeEventListener(
-        'mousemove',
-        WatchingYou.#updateTargetPositionViaMouse,
-      );
-      window.removeEventListener(
-        'touchmove',
-        WatchingYou.#updateTargetPositionViaTouch,
-      );
-    }
+
+    this.#activeTargetPlugin.cleanup();
 
     cancelAnimationFrame(this.#rafId || 0);
     this.#rafId = null;
-    if (this.#watcherDom) {
+    if (this.#watcher) {
       if (this.#customRender) {
         this.#customRender(ORIGIN_TRANSFORM);
       } else {
         this.#defaultRender(ORIGIN_TRANSFORM);
       }
-    }
-    if (this.#fakeInputDom) {
-      this.#fakeInputDom.remove();
-      this.#fakeInputDom = null;
     }
   };
 }

@@ -1,18 +1,16 @@
-interface WatchingYouTargetMouse {
-  targetType?: 'mouse';
-  target?: undefined;
-}
-interface WatchingYouTargetDom {
-  targetType?: 'dom';
-  target: string | HTMLElement;
-}
-interface WatchingYouTargetInput {
-  targetType: 'input';
-  target: string | HTMLElement;
+import { Coordinate } from './Coordinate';
+
+interface Target {
+  name: string;
+
+  target: unknown;
+
+  setup(): void;
+
+  cleanup(): void;
+
+  // Try to use more efficient code, even if it is not easy to read
+  update(): Coordinate | null;
 }
 
-export type {
-  WatchingYouTargetMouse,
-  WatchingYouTargetDom,
-  WatchingYouTargetInput,
-};
+export type { Target };

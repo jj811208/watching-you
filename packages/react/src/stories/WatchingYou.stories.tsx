@@ -113,7 +113,7 @@ const TextareaTargetTemplate: ComponentStory<typeof WatchingYou> = (
   args,
 ) => (
   <div className="container">
-    <WatchingYou {...args} targetType="input" target=".target2">
+    <WatchingYou {...args} targetType="textarea" target=".target2">
       <span>1</span>
     </WatchingYou>
     <textarea className="target2"></textarea>
