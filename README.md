@@ -63,7 +63,7 @@ https://github.com/vitejs/vite/tree/main/packages/plugin-legacy
 ## Note
 
 - When watching `input` or `textarea`, the `text-align` attribute must be `left`
-- Some inline elements ignore the `transform` attribute (let's say `span`), so you have to give them the `display` attribute to work properly.
+- Some inline elements ignore the `transform` attribute (let's say `span`), so you have to give them the `display` attribute to work properly. (see: https://stackoverflow.com/questions/24961795/how-can-i-use-css3-transform-on-a-span)
 - You may need something like `transition: transform .1s` depending on your needs
 
 ## License
