@@ -1,0 +1,12 @@
+node_modules/
+__mocks__
+__tests__
+package.json
+.git/
+build/
+coverage/
+dist/
+storybook-static/
+.yarn/
+vite.config.ts
+vite-env.d.ts
