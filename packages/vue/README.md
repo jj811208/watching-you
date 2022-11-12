@@ -60,7 +60,7 @@ const watchingYou = useWatchingYou(watchingYouOptions);
 |----|----|-------|-----------|
 |active| boolean | true | Decide whether to start watching |
 |target| string \| HtmlElement | undefined | The DOM being watched |
-|targetType| 'mouse' \| 'dom' \| 'input' | 'mouse' | `watching-you` determines the subsequent behavior based on the `targetType`. |
+|targetType| 'mouse' \| 'dom' \| 'input' \| 'textarea' | 'mouse' | `watching-you` determines the subsequent behavior based on the `targetType`. |
 |power| number \| {x: number, y: number} | 50 | The maximum displacement distance of the watcher, which is always a circle |
 |rotatable| boolean | true | Does Watcher rotate|
 |movable| boolean | true | Does Watcher move |

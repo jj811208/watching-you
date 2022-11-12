@@ -14,18 +14,18 @@ describe('Initialized', () => {
     const watcherSelector = '#watcher';
     const expectedDom = document.querySelector(watcherSelector);
     if (!expectedDom) throw Error('watcherDom is notFound');
-    expect(
-      new WatchingYou(watcherSelector).getState().watcherDom,
-    ).toBe(expectedDom);
-    expect(new WatchingYou(expectedDom).getState().watcherDom).toBe(
+    expect(new WatchingYou(watcherSelector).getState().watcher).toBe(
+      expectedDom,
+    );
+    expect(new WatchingYou(expectedDom).getState().watcher).toBe(
       expectedDom,
     );
     expect(
-      new WatchingYou({ watcher: expectedDom }).getState().watcherDom,
+      new WatchingYou({ watcher: expectedDom }).getState().watcher,
     ).toBe(expectedDom);
     expect(
       new WatchingYou({ watcher: watcherSelector }).getState()
-        .watcherDom,
+        .watcher,
     ).toBe(expectedDom);
   });
 
@@ -37,11 +37,10 @@ describe('Initialized', () => {
     const expectedDom = document.querySelector(targetSelector);
     if (!expectedDom) throw Error('watcherDom is notFound');
     expect(
-      new WatchingYou({ target: targetSelector }).getState()
-        .targetDom,
+      new WatchingYou({ target: targetSelector }).getState().target,
     ).toBe(expectedDom);
     expect(
-      new WatchingYou({ target: expectedDom }).getState().targetDom,
+      new WatchingYou({ target: expectedDom }).getState().target,
     ).toBe(expectedDom);
   });
 });

@@ -1,11 +1,13 @@
 {
   "extends": "../../tsconfig",
+  "jsx": "react-jsx",
   "compilerOptions": {
     "jsx": "react-jsx"
   },
   "include": [
     "src",
-    "../core/src"
+    "../core/src",
+    "../core/demo"
   ],
   "references": [
     {

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import WatchingYou from '../component.vue'
+import WatchingYou from '../src/component.vue'
 </script>
 
 <template>

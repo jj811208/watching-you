@@ -1,5 +1,5 @@
 import './App.css';
-import WatchingYou from '../index';
+import WatchingYou from '../src/index';
 
 const commonPower = {
   x: 22,
@@ -88,7 +88,7 @@ function App() {
             <WatchingYou
               power={commonPower}
               target=".hello-textarea"
-              targetType="input"
+              targetType="textarea"
             >
               <div className="transition">1</div>
             </WatchingYou>

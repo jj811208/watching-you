@@ -2,19 +2,19 @@ import { describe, expect, it } from 'vitest';
 import { WatchingYou } from '../../watchingYou';
 
 describe('Method', () => {
-  it('It should start watching something, when the start method is call', async () => {
+  it('It should active, when the start method is call', async () => {
     const watchingYou = new WatchingYou();
-    expect(watchingYou.getState().rafId).toBeNull();
+    expect(watchingYou.getState().active).toBeFalsy();
     watchingYou.start();
-    expect(watchingYou.getState().rafId).not.toBeNull();
+    expect(watchingYou.getState().active).toBeTruthy();
   });
 
-  it('It should go back to the original point, when the stop method is call', async () => {
+  it('It shouldn\'t active, when the stop method is call', async () => {
     const watchingYou = new WatchingYou();
     watchingYou.start();
-    expect(watchingYou.getState().rafId).not.toBeNull();
+    expect(watchingYou.getState().active).toBeTruthy();
     watchingYou.stop();
-    expect(watchingYou.getState().rafId).toBeNull();
+    expect(watchingYou.getState().active).toBeFalsy();
   });
 
   it('It should change power, when the setPower is call', async () => {
@@ -90,10 +90,10 @@ describe('Method', () => {
     const targetSelector = '#watcher';
     watchingYou.setTarget({ target: targetSelector });
     const expectedDom = document.querySelector(targetSelector);
-    expect(watchingYou.getState().targetDom).toBe(expectedDom);
+    expect(watchingYou.getState().target).toBe(expectedDom);
 
     if (!expectedDom) throw Error('watcher is notFound');
     watchingYou.setTarget({ target: expectedDom, targetType: 'dom' });
-    expect(watchingYou.getState().targetDom).toBe(expectedDom);
+    expect(watchingYou.getState().target).toBe(expectedDom);
   });
 });
