@@ -1,5 +1,5 @@
 import './App.css';
-import WatchingYou from '../index';
+import WatchingYou from '../src/index';
 
 const commonPower = {
   x: 22,

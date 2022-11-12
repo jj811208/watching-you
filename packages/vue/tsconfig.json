@@ -3,7 +3,7 @@
   "include": [
     "src",
     "../core/src"
-  ],
+, "../core/demo"  ],
   "references": [
     {
       "path": "../../tsconfig.node.json"

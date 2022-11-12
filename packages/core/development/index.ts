@@ -1,4 +1,4 @@
-import WatchingYou from '../index';
+import WatchingYou from '../src/index';
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <div class="section">
