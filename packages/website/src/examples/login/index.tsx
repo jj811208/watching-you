@@ -65,7 +65,11 @@ const Label = styled.label`
   flex-direction: column;
 `;
 const Username = styled.input``;
-const Password = styled.input.attrs({ type: 'password' })``;
+const Password = styled.input`
+  -webkit-text-security: disc;
+  -moz-webkit-text-security: disc;
+  -moz-text-security: disc;
+`;
 const eyesPower = {
   x: 20,
   y: 10,
