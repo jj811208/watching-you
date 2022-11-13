@@ -49,26 +49,24 @@ class WatchingYou {
   #customRender: WatchingYouRender | null = null;
   #rafId: number | null = null;
 
+  constructor();
   constructor(
-    watcherOrOptions?:
-      | WatchingYouWatcher
-      | (WatchingYouOptions & { watcher?: WatchingYouWatcher }),
-    optionsBase: WatchingYouOptions = {},
-  ) {
+    options: WatchingYouOptions & { watcher?: WatchingYouWatcher },
+  );
+  constructor(
+    watcher: WatchingYouWatcher,
+    options: WatchingYouOptions,
+  );
+  constructor(watcherOrOptions?: any, optionsBase: any = {}) {
     const isFirstParamOptions =
       typeof watcherOrOptions === 'object' &&
       !isHtmlElement(watcherOrOptions);
-    const options =
-      (isFirstParamOptions
-        ? (watcherOrOptions as WatchingYouOptions)
-        : optionsBase) || {};
-    const watcher = isFirstParamOptions
-      ? (
-          watcherOrOptions as WatchingYouOptions & {
-            watcher?: WatchingYouWatcher;
-          }
-        ).watcher
-      : (watcherOrOptions as WatchingYouWatcher);
+    const watcher: WatchingYouWatcher = isFirstParamOptions
+      ? watcherOrOptions.watcher
+      : watcherOrOptions;
+    const options: WatchingYouOptions = isFirstParamOptions
+      ? watcherOrOptions
+      : optionsBase;
     // TODO: Don't trust the parameters given by the user
     const {
       power,
