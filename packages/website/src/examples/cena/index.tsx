@@ -1,7 +1,7 @@
 import WatchingYou from 'react-watching-you';
 import styled from 'styled-components';
 import GitHubLinkIcon from '../../GitHubLinkIcon';
-import cenaUrl from './cena.webp';
+import cenaUrl from './cena.png';
 
 const Container = styled.div`
   position: relative;
