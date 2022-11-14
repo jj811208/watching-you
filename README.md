@@ -42,6 +42,8 @@ watching-you's storybook using react, but every framework can do the same thing!
 
 ## Documents
 
+⚠️ The API is still subject to change until version 1.0.0 is released ⚠️
+
 - [Vanilla.js](https://github.com/jj811208/watching-you/tree/main/packages/core)
 - [React](https://github.com/jj811208/watching-you/tree/main/packages/react)
 - [Vue](https://github.com/jj811208/watching-you/tree/main/packages/vue)
