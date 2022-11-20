@@ -32,6 +32,12 @@
       "prettier --write"
     ]
   },
+  "resolutions": {
+    "trim": "0.0.3",
+    "loader-utils": "2.0.4",
+    "trim-newlines": "3.0.1",
+    "glob-parent": "5.1.2"
+  },
   "repository": "https://github.com/jj811208/watching-you",
   "homepage": "https://github.com/jj811208/watching-you",
   "bugs": "https://github.com/jj811208/watching-you/issues",
