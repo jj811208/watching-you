@@ -11,22 +11,22 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "@types/react": "^18.0.24",
-    "@types/react-dom": "^18.0.8",
+    "@types/react": "^18.0.25",
+    "@types/react-dom": "^18.0.9",
     "@types/styled-components": "^5.1.26",
     "@vitejs/plugin-legacy": "^2.3.1",
     "@vitejs/plugin-react": "^2.2.0",
     "terser": "^5.15.1",
     "typescript": "^4.6.4",
-    "vite": "^3.2.1",
-    "vite-tsconfig-paths": "^3.5.2"
+    "vite": "^3.2.4",
+    "vite-tsconfig-paths": "^3.6.0"
   },
   "author": "Ryan Chu <jj811208@gmail.com> (https://github.com/jj811208)",
   "dependencies": {
     "@fontsource/roboto": "^4.5.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.4.2",
+    "react-router-dom": "^6.4.3",
     "react-watching-you": "workspace:^",
     "styled-components": "^5.3.6"
   }
