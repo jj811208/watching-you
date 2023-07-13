@@ -14288,11 +14288,11 @@ __metadata:
   linkType: hard
 
 "semver@npm:2 || 3 || 4 || 5, semver@npm:^5.4.1, semver@npm:^5.5.0, semver@npm:^5.6.0":
-  version: 5.7.1
-  resolution: "semver@npm:5.7.1"
+  version: 5.7.2
+  resolution: "semver@npm:5.7.2"
   bin:
-    semver: ./bin/semver
-  checksum: e1d12140b695aeb8917978d134ff3f8fee33489a5eaf6b217111ab0b14cbf45f36753d510db4dfbdc5a6f304e053ff1a4995c5498e9734ad9bf98182e4f39704
+    semver: bin/semver
+  checksum: dda8cb5644f55174b7f7b22a197d61386ac4869b5fcdb5e3b58a789f2ea302f24639ae7ebe5e96eb08265f858cb87fc9f3cc776133964d95aacbdb9148a7c268
   languageName: node
   linkType: hard
 
