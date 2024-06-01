@@ -5930,23 +5930,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"body-parser@npm:1.20.0":
-  version: 1.20.0
-  resolution: "body-parser@npm:1.20.0"
+"body-parser@npm:1.20.2":
+  version: 1.20.2
+  resolution: "body-parser@npm:1.20.2"
   dependencies:
     bytes: "npm:3.1.2"
-    content-type: "npm:~1.0.4"
+    content-type: "npm:~1.0.5"
     debug: "npm:2.6.9"
     depd: "npm:2.0.0"
     destroy: "npm:1.2.0"
     http-errors: "npm:2.0.0"
     iconv-lite: "npm:0.4.24"
     on-finished: "npm:2.4.1"
-    qs: "npm:6.10.3"
-    raw-body: "npm:2.5.1"
+    qs: "npm:6.11.0"
+    raw-body: "npm:2.5.2"
     type-is: "npm:~1.6.18"
     unpipe: "npm:1.0.0"
-  checksum: 38cafb558592481cf3a65d1c25b1efe790283638d005bace09191e67e8495e4ae4e83dce761bef6164bde548eb64cdeccf8e81bbbad91af8c9d58a0256542ed4
+  checksum: 1584963c6e285f19b63890b10570f2e317daf8971cc8e7a603014ee14b62d29d2a1dcd3d1b896fc4f1b5b7f946bec35d7e948ba39c5cf4b4cb24fe1ffafbbf88
   languageName: node
   linkType: hard
 
@@ -6902,6 +6902,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"content-type@npm:~1.0.5":
+  version: 1.0.5
+  resolution: "content-type@npm:1.0.5"
+  checksum: aa41501a6a2040fd19cdb39ac7e077f414c269cbfa0a274dd6b2ce1ef10c8211ea11b9bf3c034ba6872fde5f16d0b234062df62ab5a773b978cce40b60e01747
+  languageName: node
+  linkType: hard
+
 "convert-source-map@npm:^1.4.0, convert-source-map@npm:^1.6.0, convert-source-map@npm:^1.7.0":
   version: 1.8.0
   resolution: "convert-source-map@npm:1.8.0"
@@ -6918,10 +6925,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cookie@npm:0.5.0":
-  version: 0.5.0
-  resolution: "cookie@npm:0.5.0"
-  checksum: 23bd6dd64f025869373c6f3c72a870b9bd0e0e6a0ffe734229c032d7aca51972ba584b39100c09141b18043e790862425aae4a60d7449fca565b21cdae0cb3c3
+"cookie@npm:0.6.0":
+  version: 0.6.0
+  resolution: "cookie@npm:0.6.0"
+  checksum: 012989bdcd82c692503540716b9ccc4fc43e6594e7ae53710467a4fbb34f998d375131ba95b875414cc660770bfc65a630df3303a8c431af6b7eb81548b0e840
   languageName: node
   linkType: hard
 
@@ -8701,15 +8708,15 @@ __metadata:
   linkType: hard
 
 "express@npm:^4.17.1":
-  version: 4.18.1
-  resolution: "express@npm:4.18.1"
+  version: 4.19.2
+  resolution: "express@npm:4.19.2"
   dependencies:
     accepts: "npm:~1.3.8"
     array-flatten: "npm:1.1.1"
-    body-parser: "npm:1.20.0"
+    body-parser: "npm:1.20.2"
     content-disposition: "npm:0.5.4"
     content-type: "npm:~1.0.4"
-    cookie: "npm:0.5.0"
+    cookie: "npm:0.6.0"
     cookie-signature: "npm:1.0.6"
     debug: "npm:2.6.9"
     depd: "npm:2.0.0"
@@ -8725,7 +8732,7 @@ __metadata:
     parseurl: "npm:~1.3.3"
     path-to-regexp: "npm:0.1.7"
     proxy-addr: "npm:~2.0.7"
-    qs: "npm:6.10.3"
+    qs: "npm:6.11.0"
     range-parser: "npm:~1.2.1"
     safe-buffer: "npm:5.2.1"
     send: "npm:0.18.0"
@@ -8735,7 +8742,7 @@ __metadata:
     type-is: "npm:~1.6.18"
     utils-merge: "npm:1.0.1"
     vary: "npm:~1.1.2"
-  checksum: 22dbd588b0c2b24786166404b9be416a4909a3e90a85f0076e7bf24a010a5d979240c79e8956c529b8cc133230a3493706a8b3648aa13cb0cd1b2c66fe08e4a8
+  checksum: f70f07fdc8ccea5573feb0badcb797879066d3b3bd2789846377dec0ce61ae901712417bf4a62634ac07d3a91e22a6db6846b04a3483790e7ca8e22a22682a62
   languageName: node
   linkType: hard
 
@@ -13455,16 +13462,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"qs@npm:6.10.3":
-  version: 6.10.3
-  resolution: "qs@npm:6.10.3"
-  dependencies:
-    side-channel: "npm:^1.0.4"
-  checksum: 69daaebb744bec0bd455ac08973c47c3dcbdb389165ceee7522dec41b2b812ecbd2015c09bcc39309efced5d955f849f07dbc4bfdb5b77a360e1ea9a65fc506a
-  languageName: node
-  linkType: hard
-
-"qs@npm:^6.10.0, qs@npm:^6.4.0":
+"qs@npm:6.11.0, qs@npm:^6.10.0, qs@npm:^6.4.0":
   version: 6.11.0
   resolution: "qs@npm:6.11.0"
   dependencies:
@@ -13527,15 +13525,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"raw-body@npm:2.5.1":
-  version: 2.5.1
-  resolution: "raw-body@npm:2.5.1"
+"raw-body@npm:2.5.2":
+  version: 2.5.2
+  resolution: "raw-body@npm:2.5.2"
   dependencies:
     bytes: "npm:3.1.2"
     http-errors: "npm:2.0.0"
     iconv-lite: "npm:0.4.24"
     unpipe: "npm:1.0.0"
-  checksum: b5e41c0e7213e078f045a2b2397eb35665e952ad5176ff7462b740f7c7730b3d47d496ab2b1dd31ed36f8ffed41291cf93b035516403e0babea72c42d039b66b
+  checksum: 409733b2b8e85008488eaec74dc09d7ae676a38cc543d3129c2696970056f733aa4819875dfc415d8f3e5e98e792c7378c9b10c2340ecc6405b74916cf33f63d
   languageName: node
   linkType: hard
 
