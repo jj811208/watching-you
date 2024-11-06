@@ -17,7 +17,7 @@
     "@vitejs/plugin-react": "^2.2.0",
     "@vitejs/plugin-vue": "^3.2.0",
     "ci-info": "^3.6.1",
-    "happy-dom": "^7.7.0",
+    "happy-dom": "^15.10.2",
     "react": "^18.2.0",
     "typescript": "^4.6.4",
     "vite": "^3.2.10",
