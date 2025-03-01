@@ -49,8 +49,8 @@
     "vite-tsconfig-paths": "^3.6.0"
   },
   "peerDependencies": {
-    "react": "^16.8.0 || ^17 || ^18",
-    "react-dom": "^16.8.0 || ^17 || ^18"
+    "react": "^16.8.0 || ^17 || ^18 || ^19",
+    "react-dom": "^16.8.0 || ^17 || ^18 || ^19"
   },
   "repository": "https://github.com/jj811208/watching-you",
   "homepage": "https://github.com/jj811208/watching-you",
