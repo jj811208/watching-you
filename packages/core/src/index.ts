@@ -17,7 +17,7 @@ type WatchingYouRender = (
 
 type WatchingYouWatcher = string | Element;
 type WatchingYouTarget = string | Element;
-type WatchingYouTargetType = 'mouse' | 'dom' | 'input' | 'textarea';
+type WatchingYouTargetType = keyof typeof TargetPlugins;
 type WatchingYouPower = number | { x?: number; y?: number };
 interface WatchingYouOptions {
   target?: WatchingYouTarget;
