@@ -42,5 +42,5 @@
   "homepage": "https://github.com/jj811208/watching-you",
   "bugs": "https://github.com/jj811208/watching-you/issues",
   "author": "Ryan Chu <jj811208@gmail.com> (https://github.com/jj811208)",
-  "packageManager": "yarn@4.0.0-rc.26"
+  "packageManager": "yarn@4.6.0"
 }

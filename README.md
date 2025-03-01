@@ -1,5 +1,5 @@
 <a href="https://github.com/jj811208/watching-you">
-  <img alt="watching-you" src="https://socialify.git.ci/jj811208/watching-you/image?description=1&descriptionEditable=Watching-you%20is%20a%20javascript%20library%20for%20building%20animations%20that%20watch%20anything%20on%20DOM.&font=Inter&language=1&logo=https%3A%2F%2Femojipedia-us.s3.dualstack.us-west-1.amazonaws.com%2Fthumbs%2F120%2Fapple%2F325%2Feyes_1f440.png&pattern=Charlie%20Brown&theme=Dark"/>
+  <img alt="watching-you" src="https://github.com/jj811208/watching-you/blob/main/.github/static/banner.png"/>
 </a>
 
 <p align="center">
